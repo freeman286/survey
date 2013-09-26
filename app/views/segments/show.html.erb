@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @segment.name %>
+</p>
+
+<p>
+  <b>Diagnostic:</b>
+  <%= @segment.diagnostic_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_segment_path(@segment) %> |
+<%= link_to 'Back', segments_path %>

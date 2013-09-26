@@ -1,4 +1,8 @@
 Survey::Application.routes.draw do
+  resources :segments
+
+  resources :diagnostics
+
   devise_for :users
 
   get "home/index"
