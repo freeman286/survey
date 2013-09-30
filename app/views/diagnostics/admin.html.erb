@@ -1,0 +1,26 @@
+<h1><%= @diagnostic.name %></h1>
+
+<table class="table admin">
+	<thead>
+	</thead>
+	<tbody>	
+		<% @diagnostic.segments.each do |segment| %>
+			<tr class='info'>
+			<td><strong><%= segment.name %></strong></td>
+			<td>actions<td>
+			</tr>
+			<% segment.questions.each do |question| %>
+			<tr>
+			<td><%= question.name %></td>
+			<td>actions<td>
+			</tr>
+				<% question.sub_questions.each do |sub_question| %>
+				<tr>
+				<td class="indent"><em><%= sub_question.name %></em></td>
+				<td>actions<td>
+				</tr>
+				<% end %>
+			<% end %>
+			
+		<% end %>
+	</tbody>
