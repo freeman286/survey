@@ -3,4 +3,5 @@ class Segment < ActiveRecord::Base
   
   belongs_to :diagnostic
   
+  has_many :questions
 end

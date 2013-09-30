@@ -1,6 +1,11 @@
 class DiagnosticsController < ApplicationController
   # GET /diagnostics
   # GET /diagnostics.json
+  
+  def admin
+     @diagnostic = Diagnostic.find(params[:diagnostic_id])
+  end
+  
   def index
     @diagnostics = Diagnostic.all
 

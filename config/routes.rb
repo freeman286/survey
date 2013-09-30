@@ -1,7 +1,13 @@
 Survey::Application.routes.draw do
+  resources :sub_questions
+
+  resources :questions
+
   resources :segments
 
-  resources :diagnostics
+  resources :diagnostics do
+      get :admin
+  end
 
   devise_for :users
 

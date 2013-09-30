@@ -19,3 +19,7 @@ body {
 .alert {
 	margin-top: 40px;
 }
+
+.admin .indent {
+	padding-left:50px;
+}
