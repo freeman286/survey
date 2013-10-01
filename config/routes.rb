@@ -1,14 +1,18 @@
 Survey::Application.routes.draw do
-  resources :sub_questions
-
-  resources :questions
-
-  resources :segments
-
+  
   resources :diagnostics do
       get :admin
   end
 
+  resources :segments
+  match "/segments/new/:diagnostic_id" => "segments#new", :as => 'new_segment'
+  
+  resources :questions
+  match "/questions/new/:segment_id" => "questions#new", :as => 'new_question'
+  
+  resources :sub_questions
+  match "/sub_questions/new/:question_id" => "sub_questions#new", :as => 'new_sub_question'
+  
   devise_for :users
 
   get "home/index"
