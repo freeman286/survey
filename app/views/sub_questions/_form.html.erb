@@ -3,7 +3,7 @@
 
   <div class="form-inputs">
     <%= f.input :name %>
-    <%= f.association :question %>
+    <input type='hidden' name='sub_question[question_id]' value = '<%= @sub_question.question.id %>'>
   </div>
 
   <div class="form-actions">

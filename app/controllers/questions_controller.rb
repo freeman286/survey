@@ -8,7 +8,6 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   def show
     @question = Question.find(params[:id])
-    end
   end
 
   # GET /questions/new
@@ -28,6 +27,7 @@ class QuestionsController < ApplicationController
     if @question.save
       redirect_to diagnostic_admin_path(@question.segment.diagnostic.id), notice: 'Question was successfully created.'
     else
+      flash.now[:alert] = 'Question was not created.'
       render action: "new"
     end
   end
@@ -36,11 +36,12 @@ class QuestionsController < ApplicationController
   def update
     @question = Question.find(params[:id])
 
-      if @question.update_attributes(params[:question])
-        redirect_to @question, notice: 'Question was successfully updated.'
-      else
-        render action: "edit"
-      end
+    if @question.update_attributes(params[:question])
+      redirect_to diagnostic_admin_path(@question.segment.diagnostic.id), notice: 'Question was successfully updated.'
+    else
+      flash.now[:alert] = 'Question was not updated.'
+      render action: "edit"
+    end
   end
 
   # DELETE /questions/1

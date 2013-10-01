@@ -28,6 +28,7 @@ class SegmentsController < ApplicationController
     if @segment.save
       redirect_to diagnostic_admin_path(@segment.diagnostic), notice: 'Segment was successfully created.' 
     else
+      flash.now[:alert] = 'Segment was not created.'
       render action: "new"
     end
   end
@@ -39,9 +40,9 @@ class SegmentsController < ApplicationController
     if @segment.update_attributes(params[:segment])
       redirect_to diagnostic_admin_path(@segment.diagnostic), notice: 'Segment was successfully updated.'
     else
-      render action: "edit", alert: "There was a problem editting the Segment"
+      flash.now[:alert] = 'Segment was not updated.'
+      render action: "edit"
     end
-
   end
 
   # DELETE /segments/1
