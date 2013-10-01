@@ -12,6 +12,21 @@
  *= require_tree .
  */
 
+a:link {
+	text-decoration:none;
+}
+
+a:visited {
+	text-decoration:none;
+}
+a:hover {
+	text-decoration:underline;
+}
+
+a:active {
+	text-decoration:underline;
+}
+
 body {
 	padding-top: 40px;
 }
@@ -22,4 +37,8 @@ body {
 
 .admin .indent {
 	padding-left:50px;
+}
+
+th:first-child {
+	width:750px;
 }
