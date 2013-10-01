@@ -33,7 +33,6 @@ class SegmentsController < ApplicationController
   end
 
   # PUT /segments/1
-  # PUT /segments/1.json
   def update
     @segment = Segment.find(params[:id])
 
@@ -46,7 +45,6 @@ class SegmentsController < ApplicationController
   end
 
   # DELETE /segments/1
-  # DELETE /segments/1.json
   def destroy
     @segment = Segment.find(params[:id])
     if @segment.destroy
