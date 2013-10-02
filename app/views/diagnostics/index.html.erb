@@ -1,11 +1,11 @@
 <h1>Listing diagnostics</h1>
 
-<table>
+<%= link_to 'New Diagnostic', new_diagnostic_path, class: 'btn'  %>
+
+<table class="table">
   <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
+    <th class="keep-left2">Name</th>
+    <th class="keep-left3">Description</th>
     <th></th>
   </tr>
 
@@ -13,13 +13,11 @@
   <tr>
     <td><%= diagnostic.name %></td>
     <td><%= diagnostic.description %></td>
-    <td><%= link_to 'Show', diagnostic %></td>
-    <td><%= link_to 'Edit', edit_diagnostic_path(diagnostic) %></td>
-    <td><%= link_to 'Destroy', diagnostic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td class="pulltoright"><%= link_to 'Edit Name and Description', edit_diagnostic_path(diagnostic) %> | 
+	<%= link_to 'Edit Content', diagnostic_admin_path(diagnostic) %> | 
+    <%= link_to 'Delete', diagnostic, method: :delete, data: { confirm: 'Are you sure? This will delete all the content of this diagnostic.' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Diagnostic', new_diagnostic_path %>

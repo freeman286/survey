@@ -3,5 +3,5 @@ class Question < ActiveRecord::Base
   
   belongs_to :segment
   
-  has_many :sub_questions
+  has_many :sub_questions, dependent: :destroy
 end

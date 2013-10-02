@@ -15,7 +15,7 @@
     <td><%= sub_question.question.name %></td>
     <td><%= link_to 'Show', sub_question %></td>
     <td><%= link_to 'Edit', edit_sub_question_path(sub_question) %></td>
-    <td><%= link_to 'Destroy', sub_question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Delete', sub_question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
