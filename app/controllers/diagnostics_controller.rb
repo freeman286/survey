@@ -2,7 +2,7 @@ class DiagnosticsController < ApplicationController
   # GET /diagnostics
   # GET /diagnostics.json
   before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_filter :check_admin, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :can_edit, only: [:new, :create, :edit, :update, :destroy]
   
   def admin
      @diagnostic = Diagnostic.find(params[:diagnostic_id])
@@ -63,7 +63,7 @@ class DiagnosticsController < ApplicationController
   end
   
   private
-	def check_admin
+  def can_edit
 	  if user_signed_in?
 	    if !current_user.is_admin?
   	    redirect_to :back, alert: "You must be admin to do that"

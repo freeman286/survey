@@ -1,5 +1,8 @@
 class SubQuestionsController < ApplicationController
   # GET /sub_questions
+  before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :can_edit, only: [:new, :create, :edit, :update, :destroy]
+
   def index
     @sub_questions = SubQuestion.all
   end
@@ -52,4 +55,13 @@ class SubQuestionsController < ApplicationController
       redirect_to diagnostic_admin_path(@sub_question.question.segment.diagnostic.id), alert: 'Question was not deleted.'
     end
   end
+  
+  private
+  def can_edit
+	  if user_signed_in?
+	    if !current_user.is_admin?
+  	    redirect_to :back, alert: "You must be admin to do that"
+  	  end
+    end
+	end
 end
