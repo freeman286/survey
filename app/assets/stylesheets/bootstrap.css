@@ -48,8 +48,7 @@ figure,
 footer,
 header,
 hgroup,
-nav,
-section {
+nav {
   display: block;
 }
 

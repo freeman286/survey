@@ -54,3 +54,15 @@ th.keep-left3:first-child {
 .table .pulltoright {
 	text-align:right;
 }
+
+.section.hover {
+	background: #F5F5F5;
+}
+
+.section .admin {
+	display: none;
+}
+
+.section.hover .admin {
+	display: inline;
+}
