@@ -1,21 +1,27 @@
 <h1>Listing diagnostics</h1>
 
+<% if current_user.is_admin?%>
 <%= link_to 'New Diagnostic', new_diagnostic_path, class: 'btn'  %>
+<% end %>
 
 <table class="table">
   <tr>
     <th class="keep-left2">Name</th>
     <th class="keep-left3">Description</th>
-    <th></th>
+    <% if current_user.is_admin?%>
+	<th></th>
+	<% end %>
   </tr>
 
 <% @diagnostics.each do |diagnostic| %>
   <tr>
     <td><%= diagnostic.name %></td>
     <td><%= diagnostic.description %></td>
-    <td class="pulltoright"><%= link_to 'Edit Name and Description', edit_diagnostic_path(diagnostic) %> | 
+    <% if current_user.is_admin?%>
+	<td class="pulltoright"><%= link_to 'Edit Name and Description', edit_diagnostic_path(diagnostic) %> | 
 	<%= link_to 'Edit Content', diagnostic_admin_path(diagnostic) %> | 
     <%= link_to 'Delete', diagnostic, method: :delete, data: { confirm: 'Are you sure? This will delete all the content of this diagnostic.' } %></td>
+	<% end %>
   </tr>
 <% end %>
 </table>

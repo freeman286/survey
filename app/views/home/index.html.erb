@@ -1,4 +1,12 @@
-<div class="page-header">
-	<h1>Home#index</h1>
+<div class="page-header pagination-centered">
+	<h1>Welcome to the Archimedes Training diagnostic tool</h1>
 </div>
-<p>Find me in app/views/home/index.html.erb</p>
+<div class="well">
+	<div class="pager">
+		Welcome to the Archimedes Training diagnostic tool. This is a tool designed to test your ability to in all fields and to help you know what you need to improve on.
+	</div>
+	<div class="pager">
+		<%= link_to "Register", new_user_registration_path, class: "btn" %>
+		<%= link_to "Log In", new_user_session_path, class: "btn" %>
+	</div>
+</div>

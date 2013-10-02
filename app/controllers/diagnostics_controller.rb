@@ -1,6 +1,8 @@
 class DiagnosticsController < ApplicationController
   # GET /diagnostics
   # GET /diagnostics.json
+  before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :check_admin, only: [:new, :create, :edit, :update, :destroy]
   
   def admin
      @diagnostic = Diagnostic.find(params[:diagnostic_id])
@@ -8,33 +10,16 @@ class DiagnosticsController < ApplicationController
   
   def index
     @diagnostics = Diagnostic.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @diagnostics }
-    end
   end
 
   # GET /diagnostics/1
-  # GET /diagnostics/1.json
   def show
     @diagnostic = Diagnostic.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @diagnostic }
-    end
   end
 
   # GET /diagnostics/new
-  # GET /diagnostics/new.json
   def new
     @diagnostic = Diagnostic.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @diagnostic }
-    end
   end
 
   # GET /diagnostics/1/edit
@@ -43,46 +28,44 @@ class DiagnosticsController < ApplicationController
   end
 
   # POST /diagnostics
-  # POST /diagnostics.json
   def create
     @diagnostic = Diagnostic.new(params[:diagnostic])
 
-    respond_to do |format|
-      if @diagnostic.save
-        format.html { redirect_to @diagnostic, notice: 'Diagnostic was successfully created.' }
-        format.json { render json: @diagnostic, status: :created, location: @diagnostic }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @diagnostic.errors, status: :unprocessable_entity }
-      end
+    if @diagnostic.save
+      redirect_to @diagnostic, notice: 'Diagnostic was successfully created.'
+    else
+      flash.now[:alert] = 'Diagnostic was not created.'
+      render action: "new"
     end
   end
 
   # PUT /diagnostics/1
-  # PUT /diagnostics/1.json
   def update
     @diagnostic = Diagnostic.find(params[:id])
 
-    respond_to do |format|
-      if @diagnostic.update_attributes(params[:diagnostic])
-        format.html { redirect_to @diagnostic, notice: 'Diagnostic was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @diagnostic.errors, status: :unprocessable_entity }
-      end
+    
+    if @diagnostic.update_attributes(params[:diagnostic])
+      redirect_to @diagnostic, notice: 'Diagnostic was successfully updated.'
+    else
+      flash.now[:alert] = 'Diagnostic was not updated.'
+      render action: "edit"
     end
   end
 
   # DELETE /diagnostics/1
-  # DELETE /diagnostics/1.json
   def destroy
     @diagnostic = Diagnostic.find(params[:id])
-    @diagnostic.destroy
-
-    respond_to do |format|
-      format.html { redirect_to diagnostics_url }
-      format.json { head :no_content }
+    if @diagnostic.destroy
+      redirect_to diagnostics_url, notice: 'Diagnostic was successfully deleted.'
+    else                         
+      redirect_to diagnostics_url, alert: 'Diagnostic was not deleted.'
     end
   end
+  
+  private
+	def check_admin
+	  if !current_user.is_admin?
+	    redirect_to :back, alert: "You must be admin to do that"
+	  end
+	end
 end
