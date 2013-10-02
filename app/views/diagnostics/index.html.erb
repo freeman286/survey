@@ -1,6 +1,6 @@
 <h1>Listing diagnostics</h1>
 
-<% if current_user.is_admin?%>
+<% if check_admin(current_user) %>
 <%= link_to 'New Diagnostic', new_diagnostic_path, class: 'btn'  %>
 <% end %>
 
@@ -8,7 +8,7 @@
   <tr>
     <th class="keep-left2">Name</th>
     <th class="keep-left3">Description</th>
-    <% if current_user.is_admin?%>
+    <% if check_admin(current_user) %>
 	<th></th>
 	<% end %>
   </tr>
@@ -17,7 +17,7 @@
   <tr>
     <td><%= diagnostic.name %></td>
     <td><%= diagnostic.description %></td>
-    <% if current_user.is_admin?%>
+    <% if check_admin(current_user) %>
 	<td class="pulltoright"><%= link_to 'Edit Name and Description', edit_diagnostic_path(diagnostic) %> | 
 	<%= link_to 'Edit Content', diagnostic_admin_path(diagnostic) %> | 
     <%= link_to 'Delete', diagnostic, method: :delete, data: { confirm: 'Are you sure? This will delete all the content of this diagnostic.' } %></td>
@@ -25,5 +25,3 @@
   </tr>
 <% end %>
 </table>
-
-<br />

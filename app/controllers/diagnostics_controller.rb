@@ -47,7 +47,7 @@ class DiagnosticsController < ApplicationController
     if @diagnostic.update_attributes(params[:diagnostic])
       redirect_to @diagnostic, notice: 'Diagnostic was successfully updated.'
     else
-      flash.now[:alert] = 'Diagnostic was not updated.'
+      flash.now[:alert] = 'Diagnostic was not udated.'
       render action: "edit"
     end
   end
@@ -64,8 +64,10 @@ class DiagnosticsController < ApplicationController
   
   private
 	def check_admin
-	  if !current_user.is_admin?
-	    redirect_to :back, alert: "You must be admin to do that"
-	  end
+	  if user_signed_in?
+	    if !current_user.is_admin?
+  	    redirect_to :back, alert: "You must be admin to do that"
+  	  end
+    end
 	end
 end

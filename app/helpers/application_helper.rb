@@ -9,4 +9,10 @@ module ApplicationHelper
 			""
 		end
 	end
+	
+	def check_admin(user)
+	  if !user.nil?
+      user.is_admin?
+    end
+	end
 end
