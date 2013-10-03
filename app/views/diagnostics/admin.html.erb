@@ -10,7 +10,7 @@
 			<td><strong><%= segment.name %></strong><br/>
 			<% if check_admin(current_user) %>
 			<%= link_to 'New Question', new_question_path(segment) %></td>
-			<td class="admin"> <%= link_to 'Edit', edit_segment_path(segment) %> | <%= link_to 'Delete', segment, method: :delete, data: { confirm: 'Are you sure?' } %><td>
+			<td><span class="admin"><%= link_to 'Edit', edit_segment_path(segment) %> | <%= link_to 'Delete', segment, method: :delete, data: { confirm: 'Are you sure?' } %></span><td>
 			<% end %>
 			</tr>
 			<% segment.questions.each do |question| %>
@@ -18,18 +18,17 @@
 			<td><%= question.name %><br/>
 			<% if check_admin(current_user) %>
 			<%= link_to 'New Sub question', new_sub_question_path(question) %></td>
-			<td class="admin"><%= link_to 'Edit', edit_question_path(question) %> | <%= link_to 'Delete', question, method: :delete, data: { confirm: 'Are you sure?' } %><td>
+			<td><span class="admin"><%= link_to 'Edit', edit_question_path(question) %> | <%= link_to 'Delete', question, method: :delete, data: { confirm: 'Are you sure?' } %></span><td>
 			</tr>
 			<% end %>
 				<% question.sub_questions.each do |sub_question| %>
 				<tr class="section">
-				<td class="indent"><em><%= sub_question.name %></em></td>
+				<td class="indent"><%= sub_question.name %><br/>
 				<% if check_admin(current_user) %>
-				<td class="admin"><%= link_to 'Edit', edit_sub_question_path(sub_question) %> | <%= link_to 'Delete', sub_question, method: :delete, data: { confirm: 'Are you sure?' } %><td>
-				</tr>
-				<% end %>
+				</td>
+				<td><span class="admin"><%= link_to 'Edit', edit_sub_question_path(sub_question) %> | <%= link_to 'Delete', sub_question, method: :delete, data: { confirm: 'Are you sure?' } %></span><td>
 				<% end %>
 			<% end %>
-			
+			<% end %>
 		<% end %>
 	</tbody>
