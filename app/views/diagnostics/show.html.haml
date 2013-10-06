@@ -1,0 +1,21 @@
+%p#notice=notice
+%p
+  %b Name:
+  =@diagnostic.name
+%p
+  %b Description:
+  =@diagnostic.description
+%table.table
+  %thead
+    %th Segments
+  -@diagnostic.segments.each do |segment|
+    %tr.section
+      %td=link_to segment.name, segment_questions_path(segment), :remote => true
+  %tbody
+
+%div.well#questions
+  click on segment
+
+=link_to 'Edit', edit_diagnostic_path(@diagnostic)
+|
+=link_to 'Back', diagnostics_path

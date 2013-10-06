@@ -6,6 +6,7 @@ Survey::Application.routes.draw do
 
   resources :segments
   match "/segments/new/:diagnostic_id" => "segments#new", :as => 'new_segment'
+  match "/segments/:segment_id/questions" => "segments#questions", :as => 'segment_questions'
   
   resources :questions
   match "/questions/new/:segment_id" => "questions#new", :as => 'new_question'

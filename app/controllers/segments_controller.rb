@@ -35,6 +35,10 @@ class SegmentsController < ApplicationController
     end
   end
 
+  def questions
+    @segment =  Segment.find(params[:segment_id])
+  end
+
   # PUT /segments/1
   def update
     @segment = Segment.find(params[:id])

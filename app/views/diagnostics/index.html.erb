@@ -13,17 +13,21 @@
 
 <% @diagnostics.each do |diagnostic| %>
   <tr class="section">
-    <td><%= diagnostic.name %></td>
+    <td><%= link_to diagnostic.name, diagnostic_path(diagnostic) %></td>
     <td><%= diagnostic.description %></td>
     <td class="pulltoright">
 	<span class="admin">
 	<% if check_admin(current_user) %>
-	<%= link_to 'Edit Name and Description', edit_diagnostic_path(diagnostic) %> | 
-	<%= link_to 'Edit Content', diagnostic_admin_path(diagnostic) %> | 
+	<%= link_to 'Edit Content', diagnostic_admin_path(diagnostic), id: 'show-content', data: { diagnostic_id: diagnostic.id } %> |
+	<%= link_to 'Edit Name and Description', edit_diagnostic_path(diagnostic) %> |  
     <%= link_to 'Delete', diagnostic, method: :delete, data: { confirm: 'Are you sure? This will delete all the content of this diagnostic.' } %> 
 	<% else %>
-	<%= link_to 'Show Content', diagnostic_admin_path(diagnostic) %>
+	<%= link_to 'Show Content', diagnostic_admin_path(diagnostic), id: 'show-content', data: { diagnostic_id: diagnostic.id } %>
 	<% end %></span></td>
   </tr>
 <% end %>
 </table>
+
+<div id="show-segments">
+	
+</div>
