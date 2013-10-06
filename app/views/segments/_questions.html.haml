@@ -1,3 +1,3 @@
 -@segment.questions.each do |question|
   %p
-    =question.name
+    =link_to question.name, question_path(question)
