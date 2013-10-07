@@ -37,6 +37,7 @@ body {
 
 .section .indent {
 	padding-left:50px;
+	width: 80px;
 }
 
 th.keep-left:first-child {
@@ -64,5 +65,5 @@ th.keep-left3:first-child {
 }
 
 .section.hover .admin {
-	display: inline;
+	display: table-cell;
 }

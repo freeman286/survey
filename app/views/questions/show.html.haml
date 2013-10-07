@@ -1,0 +1,23 @@
+%p#notice= notice
+%p
+  %h3
+    = @question.name
+  
+
+%table.table
+  %thead
+    %th
+      %b Sub-Question
+  %tbody
+    - @question.sub_questions.each do |subquestion|
+      %tr.section{:onmouseover => "tooltip.pop(this,\n'<span class=\\'red\\'>Hi</span> there')"}
+        %td
+          = subquestion.name
+        %td
+          %div.btn.btn-success
+            Yes
+        %td
+          %div.btn.btn-danger
+            No
+            
+= link_to "Back to Diagnostic", diagnostic_path(@question.segment.diagnostic)
