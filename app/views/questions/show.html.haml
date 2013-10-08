@@ -10,7 +10,7 @@
       %b Sub-Question
   %tbody
     - @question.sub_questions.each do |subquestion|
-      %tr.section{:onmouseover => "tooltip.pop(this,\n'<span class=\\'red\\'>Hi</span> there')"}
+      %tr.section{:id => "#{subquestion.id}", :'data-animation' => :true, :'data-trigger' => :hover, :'data-html' => :true, :'data-title' => "Evidence", :'data-content' => "#{subquestion.evidence}"}
         %td
           = subquestion.name
         %td
