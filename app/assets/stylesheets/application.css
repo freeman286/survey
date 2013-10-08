@@ -79,3 +79,7 @@ th.keep-left3:first-child {
 .row.header {
 	padding:18px;
 }
+
+.form-inputs input {
+	width: 850px;
+}

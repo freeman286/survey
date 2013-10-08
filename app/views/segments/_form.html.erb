@@ -1,8 +1,8 @@
-<%= simple_form_for(@segment) do |f| %>
+<%= simple_form_for(@segment, :html => { class: "well" }) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :name %>
+    <%= f.input :name, :html => { class: "label" } %>
 	<input type='hidden' name='segment[diagnostic_id]' value = '<%= @segment.diagnostic.id %>'>
   </div>
 
