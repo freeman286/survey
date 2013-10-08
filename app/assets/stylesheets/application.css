@@ -80,6 +80,6 @@ th.keep-left3:first-child {
 	padding:18px;
 }
 
-.form-inputs input {
+.form-inputs input, .form-inputs textarea {
 	width: 850px;
 }
