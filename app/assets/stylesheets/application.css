@@ -67,3 +67,15 @@ th.keep-left3:first-child {
 .section.hover .admin {
 	display: table-cell;
 }
+
+.well.section.hover {
+	background: #D1D1D1;
+}
+
+.well.info {
+	background-color: #c4e3f3;
+}
+
+.row.header {
+	padding:18px;
+}
