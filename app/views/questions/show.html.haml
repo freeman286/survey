@@ -14,10 +14,10 @@
         %td
           = subquestion.name
         %td
-          %div.btn.btn-success
+          %div.btn{:id => "yes"}
             Yes
         %td
-          %div.btn.btn-danger
+          %div.btn{:id => "no"}
             No
             
 = link_to "Back to Diagnostic", diagnostic_path(@question.segment.diagnostic)
