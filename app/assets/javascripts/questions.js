@@ -1,20 +1,25 @@
 $(document).ready(function() {
+	
+	$('.yes').click(function(event) {
+		var btn = $(this)
+		id = btn.data('id')
+		alert(id)
+		$('.yes.'+id).addClass("btn-success");
+		$('.no.'+id).removeClass("btn-danger")
+	});
+	
+	$('.no').click(function(event) {
+		var btn = $(this)
+		id = btn.data('id')
+		alert(id)
+		$('.yes.'+id).removeClass("btn-success");
+		$('.no.'+id).addClass("btn-danger")
+
+	});
 	$('.section').popover();
-  return $('.section').hover(function(event) {
+  
+	return $('.section').hover(function(event) {
     return $(this).toggleClass("hover");
   });
-	
-	$('#yes').click(function(event) {
-	  $.ajax({
-			$('#yes').html("<a href='#' class='btn btn-success'>Yes</a>");
-			$('#no').html("<a href='#' class='btn'>No</a>");
-		});
-	});
-	
-	$('#no').click(function(event) {
-	  $.ajax({
-			$('#no').html("<a href='#' class='btn btn-danger'>No</a>");
-			$('#yes').html("<a href='#' class='btn'>Yes</a>");
-		});
-	});
+
 });
