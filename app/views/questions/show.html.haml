@@ -2,7 +2,6 @@
 %p
   %h3
     = @question.name
-  
 
 %table.table
   %thead
@@ -14,10 +13,8 @@
         %td
           = subquestion.name
         %td
-          .btn.yes{:'data-id' => "#{subquestion.id}",:class => "#{subquestion.id}"}
-            Yes
+          =link_to 'Yes', sub_question_yes_path(subquestion), :remote => true, :class => "btn yes #{subquestion.id} #{'btn-success' if subquestion.yes?(current_user)}"
         %td      
-          .btn.no{:'data-id' => "#{subquestion.id}",:class => "#{subquestion.id}"}
-            No
+          =link_to 'No', sub_question_no_path(subquestion), :remote => true, :class => "btn no #{subquestion.id} #{'btn-danger' if subquestion.no?(current_user)}"
             
 = link_to "Back to Diagnostic", diagnostic_path(@question.segment.diagnostic)

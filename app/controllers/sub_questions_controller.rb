@@ -1,6 +1,6 @@
 class SubQuestionsController < ApplicationController
   # GET /sub_questions
-  before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :yes, :no]
   before_filter :can_edit, only: [:new, :create, :edit, :update, :destroy]
 
   def index
@@ -54,6 +54,20 @@ class SubQuestionsController < ApplicationController
     else
       redirect_to diagnostic_admin_path(@sub_question.question.segment.diagnostic.id), alert: 'Question was not deleted.'
     end
+  end
+  
+  # Set the sub_questions to yes for the current user
+  def yes
+    @sub_question = SubQuestion.find(params[:sub_question_id])
+    @answer = Answer.find_or_create_by_user_id_and_sub_question_id(current_user.id, @sub_question.id)
+    @answer.set_yes!(current_user) 
+  end
+
+  # Set the sub_questions to no for the current user  
+  def no
+    @sub_question = SubQuestion.find(params[:sub_question_id])
+    @answer = Answer.find_or_create_by_user_id_and_sub_question_id(current_user.id, @sub_question.id)
+    @answer.set_no!(current_user)
   end
   
   private
