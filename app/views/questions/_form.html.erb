@@ -1,7 +1,7 @@
 <% if @question.errors.any? %>
 <div class="alert alert-danger">
   <button class="close" data-dismiss="alert">x</button>
-  <h3><%= pluralize(@question.errors.count, "error") %> prevented this sub-question from being saved:</h3>
+  <h3><%= pluralize(@question.errors.count, "error") %> prevented this question from being saved:</h3>
   <ul>
 	  <% @question.errors.full_messages.each do |msg| %>
 	  <li><%= msg %></li>

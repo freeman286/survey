@@ -11,26 +11,29 @@ class SegmentsController < ApplicationController
 
   def show
     @segment = Segment.find(params[:id])
+    @crud_state = "show"
   end
 
   # GET /segments/new
   def new
     @segment = Segment.new(:diagnostic_id => params[:diagnostic_id])
+    @crud_state = "new"
   end
 
   # GET /segments/1/edit
   def edit
     @segment = Segment.find(params[:id])
+    @crud_state = "edit"
   end
 
   # POST /segments
   def create
     @segment = Segment.new(params[:segment])
+    @crud_state = "create"
 
     if @segment.save
       redirect_to diagnostic_admin_path(@segment.diagnostic), notice: 'Segment was successfully created.' 
     else
-      flash.now[:alert] = 'Segment was not created.'
       render action: "new"
     end
   end
@@ -41,12 +44,12 @@ class SegmentsController < ApplicationController
 
   # PUT /segments/1
   def update
+    @crud_state = "update"
     @segment = Segment.find(params[:id])
 
     if @segment.update_attributes(params[:segment])
       redirect_to diagnostic_admin_path(@segment.diagnostic), notice: 'Segment was successfully updated.'
     else
-      flash.now[:alert] = 'Segment was not updated.'
       render action: "edit"
     end
   end

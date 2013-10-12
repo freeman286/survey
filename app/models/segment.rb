@@ -3,5 +3,7 @@ class Segment < ActiveRecord::Base
   
   belongs_to :diagnostic
   
+  validates :name, presence: true, length: { minimum: 2}
+  
   has_many :questions
 end
