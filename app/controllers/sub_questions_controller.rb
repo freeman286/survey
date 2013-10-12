@@ -22,6 +22,7 @@ class SubQuestionsController < ApplicationController
   # GET /sub_questions/1/edit
   def edit
     @sub_question = SubQuestion.find(params[:id])
+    @crud_state = "edit"
   end
 
   # POST /sub_questions
@@ -32,7 +33,6 @@ class SubQuestionsController < ApplicationController
     if @sub_question.save
       redirect_to diagnostic_admin_path(@sub_question.question.segment.diagnostic.id), notice: 'Sub-Question was successfully created.'
     else
-      flash.now[:alert] = 'Sub-Question was not created.'
       render action: "new"
     end
   end
@@ -45,7 +45,6 @@ class SubQuestionsController < ApplicationController
     if @sub_question.update_attributes(params[:sub_question])
       redirect_to @sub_question, notice: 'Sub-Question was successfully updated.'
     else
-      flash.now[:alert] = 'Sub-Question was not updated.'
       render action: "edit"
     end
   end

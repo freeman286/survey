@@ -33,6 +33,8 @@ module ApplicationHelper
       "Creating"
     when "create"
       "Creating"
+    when "edit"
+     "Editing"
     when "update"
       "Update"
     else
