@@ -1,10 +1,10 @@
 %p#notice=notice
-%p
-  %b Name:
-  =@diagnostic.name
-%p
-  %b Description:
-  =@diagnostic.description
+.row
+  %h2.head
+    =@diagnostic.name
+.row.head
+  %h4
+    =@diagnostic.description
 %table.table
   %thead
     %th Segments
@@ -13,5 +13,5 @@
       %td=link_to segment.name, segment_questions_path(segment), :remote => true
   %tbody
 
-%div.well#questions
+%div.well
   click on segment
