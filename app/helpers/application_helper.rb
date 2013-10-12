@@ -24,4 +24,19 @@ module ApplicationHelper
     end
     html.html_safe
   end
+  
+  def crud_state_to_name(state)
+    case state
+    when "show"
+      "Showing"
+    when "new"
+      "Creating"
+    when "create"
+      "Creating"
+    when "update"
+      "Update"
+    else
+      ""
+    end
+  end
 end

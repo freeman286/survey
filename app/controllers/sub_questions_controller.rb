@@ -10,11 +10,13 @@ class SubQuestionsController < ApplicationController
   # GET /sub_questions/1
   def show
     @sub_question = SubQuestion.find(params[:id])
+    @crud_state = "show"
   end
 
   # GET /sub_questions/new
   def new
     @sub_question = SubQuestion.new(question_id: params[:question_id])
+    @crud_state = "new"
   end
 
   # GET /sub_questions/1/edit
@@ -25,6 +27,7 @@ class SubQuestionsController < ApplicationController
   # POST /sub_questions
   def create
     @sub_question = SubQuestion.new(params[:sub_question])
+    @crud_state = "create"
     
     if @sub_question.save
       redirect_to diagnostic_admin_path(@sub_question.question.segment.diagnostic.id), notice: 'Sub-Question was successfully created.'
@@ -37,7 +40,8 @@ class SubQuestionsController < ApplicationController
   # PUT /sub_questions/1
   def update
     @sub_question = SubQuestion.find(params[:id])
-
+    @crud_state = "update"
+    
     if @sub_question.update_attributes(params[:sub_question])
       redirect_to @sub_question, notice: 'Sub-Question was successfully updated.'
     else

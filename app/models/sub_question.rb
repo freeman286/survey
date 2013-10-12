@@ -6,6 +6,10 @@ class SubQuestion < ActiveRecord::Base
   
   has_many :answers
   
+  validates :name, presence: true, length: { minimum: 2}
+  
+  validates :evidence, presence: true, length: { minimum: 2}
+  
   def yes?(user)
     answer = Answer.find_by_user_id_and_sub_question_id(user, self.id)
     if answer.nil?
