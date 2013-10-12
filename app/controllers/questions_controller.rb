@@ -10,26 +10,29 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   def show
     @question = Question.find(params[:id])
+    @crud_state = "show"
   end
 
   # GET /questions/new
   def new
     @question = Question.new(:segment_id => params[:segment_id])
+    @crud_state = "new"
   end
 
   # GET /questions/1/edit
   def edit
     @question = Question.find(params[:id])
+    @crud_state = "edit"
   end
 
   # POST /questions
   def create
     @question = Question.new(params[:question])
-
+    @crud_state = "create"
+    
     if @question.save
       redirect_to diagnostic_admin_path(@question.segment.diagnostic.id), notice: 'Question was successfully created.'
     else
-      flash.now[:alert] = 'Question was not created.'
       render action: "new"
     end
   end
@@ -37,11 +40,11 @@ class QuestionsController < ApplicationController
   # PUT /questions/1
   def update
     @question = Question.find(params[:id])
+    @crud_state = "update"
 
     if @question.update_attributes(params[:question])
       redirect_to diagnostic_admin_path(@question.segment.diagnostic.id), notice: 'Question was successfully updated.'
     else
-      flash.now[:alert] = 'Question was not updated.'
       render action: "edit"
     end
   end

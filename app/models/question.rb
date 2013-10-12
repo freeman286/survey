@@ -3,5 +3,7 @@ class Question < ActiveRecord::Base
   
   belongs_to :segment
   
+  validates :name, presence: true, length: { minimum: 2}
+    
   has_many :sub_questions, dependent: :destroy
 end
