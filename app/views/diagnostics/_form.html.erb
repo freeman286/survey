@@ -1,5 +1,19 @@
+<% if @diagnostic.errors.any? %>
+<div class="alert alert-danger">
+  <button class="close" data-dismiss="alert">x</button>
+  <h3><%= pluralize(@diagnostic.errors.count, "error") %> prevented this diagnostic from being saved:</h3>
+  <ul>
+	  <% @diagnostic.errors.full_messages.each do |msg| %>
+	  <li><%= msg %></li>
+    <% end %>
+</ul>
+</div>
+<% end %>
+
+<h2><%= crud_state_to_name(@crud_state) %> diagnostic</h2>
+
 <%= simple_form_for(@diagnostic, :html => { class: "well" }) do |f| %>
-  <%= f.error_notification %>
+
 
   <div class="form-inputs">
     <%= f.input :name %>

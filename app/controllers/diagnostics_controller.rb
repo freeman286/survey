@@ -15,26 +15,29 @@ class DiagnosticsController < ApplicationController
   # GET /diagnostics/1
   def show
     @diagnostic = Diagnostic.find(params[:id])
+    @crud_state = "show"
   end
 
   # GET /diagnostics/new
   def new
     @diagnostic = Diagnostic.new
+    @crud_state = "new"
   end
 
   # GET /diagnostics/1/edit
   def edit
     @diagnostic = Diagnostic.find(params[:id])
+    @crud_state = "edit"
   end
 
   # POST /diagnostics
   def create
     @diagnostic = Diagnostic.new(params[:diagnostic])
+    @crud_state = "create"
 
     if @diagnostic.save
       redirect_to @diagnostic, notice: 'Diagnostic was successfully created.'
     else
-      flash.now[:alert] = 'Diagnostic was not created.'
       render action: "new"
     end
   end
@@ -42,12 +45,12 @@ class DiagnosticsController < ApplicationController
   # PUT /diagnostics/1
   def update
     @diagnostic = Diagnostic.find(params[:id])
+    @crud_state = "update"
 
     
     if @diagnostic.update_attributes(params[:diagnostic])
       redirect_to @diagnostic, notice: 'Diagnostic was successfully updated.'
     else
-      flash.now[:alert] = 'Diagnostic was not udated.'
       render action: "edit"
     end
   end
