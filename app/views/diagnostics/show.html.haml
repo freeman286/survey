@@ -8,9 +8,17 @@
 %table.table
   %thead
     %th Segments
-  -@diagnostic.segments.each do |segment|
-    %tr.section{ :'data-animation' => :true, :'data-trigger' => :hover, :'data-html' => :true, :'data-title' => "Percent Completed", :'data-content' => "#{percent_completed(1, 10)}%"}
-      %td=link_to segment.name, segment_questions_path(segment), :remote => true
+  -@diagnostic.segments.each do |seg|
+    -segment = seg.class.where(diagnostic_id: @diagnostic.id, id: seg.id).first
+    -segment.questions.each do |que|
+      -question = que.class.where(segment_id: segment.id, id: que.id).first
+      -question.sub_questions.each do |sub|
+        -sub_question = sub.class.where(question_id: question.id, id: sub.id).first
+        =sub_question.yes?(current_user)
+        =sub_question.no?(current_user)
+        
+    %tr.section{ :'data-animation' => :true, :'data-trigger' => :hover, :'data-html' => :true, :'data-title' => "Percent Completed", :'data-content' => "#{percent_completed(1, 100)}%"}
+      %td=link_to seg.name, segment_questions_path(seg), :remote => true
   %tbody
 
 %div.well#questions
