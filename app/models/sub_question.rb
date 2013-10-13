@@ -31,5 +31,4 @@ class SubQuestion < ActiveRecord::Base
       false
     end
   end
-  
 end

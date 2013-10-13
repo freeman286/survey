@@ -41,4 +41,9 @@ module ApplicationHelper
       ""
     end
   end
+  
+  
+  def percent_completed(x, y)
+      ((x + 0.0) / (y + 0.0) * 100).floor
+  end
 end

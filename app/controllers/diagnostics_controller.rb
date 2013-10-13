@@ -15,6 +15,11 @@ class DiagnosticsController < ApplicationController
   # GET /diagnostics/1
   def show
     @diagnostic = Diagnostic.find(params[:id])
+    @segments = Segment.where(diagnostic_id: @diagnostic.id).all
+    @questions = Question.where(segment_id: (Segment.where(diagnostic_id: @diagnostic.id))).all
+    @sub_questions = SubQuestion.where(question_id: (Question.where(segment_id: (Segment.where(diagnostic_id: @diagnostic.id))).all)).all
+    
+    
     @crud_state = "show"
   end
 

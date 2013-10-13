@@ -12,7 +12,7 @@
   </tr>
 
 <% @diagnostics.each do |diagnostic| %>
-  <tr class="section">
+  <tr class="section" data-animation="true" data-trigger="hover" data-html="true" data-title ="Percent Completed" data-content="example %">
     <td><%= link_to diagnostic.name, diagnostic_path(diagnostic) %></td>
     <td><%= diagnostic.description %></td>
     <td class="pulltoright">

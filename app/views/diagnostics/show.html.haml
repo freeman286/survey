@@ -1,17 +1,25 @@
 %p#notice=notice
-.row
+%p
   %h2.head
     =@diagnostic.name
-.row.head
-  %h4
+%p
+  %h5.head
     =@diagnostic.description
 %table.table
   %thead
     %th Segments
   -@diagnostic.segments.each do |segment|
-    %tr.section
+    %tr.section{ :'data-animation' => :true, :'data-trigger' => :hover, :'data-html' => :true, :'data-title' => "Percent Completed", :'data-content' => "#{percent_completed(1, 10)}%"}
       %td=link_to segment.name, segment_questions_path(segment), :remote => true
   %tbody
 
-%div.well
+%div.well#questions
   click on segment
+  
+=@segments
+%br
+%br
+=@questions
+%br
+%br
+=@sub_questions
