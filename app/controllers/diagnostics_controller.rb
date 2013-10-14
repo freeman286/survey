@@ -10,6 +10,28 @@ class DiagnosticsController < ApplicationController
   
   def index
     @diagnostics = Diagnostic.all
+    @completed = Hash.new(0)
+    @sums = Hash.new(0)
+    @diagnostics.each do |dia|
+      complete = 0
+      sum = 0
+      diagnostic = dia.class.where(id: dia.id).first
+      diagnostic.segments.each do |seg|
+        segment = seg.class.where(diagnostic_id: dia.id, id: seg.id).first
+        segment.questions.each do |que|
+          question = que.class.where(segment_id: segment.id, id: que.id).first
+          question.sub_questions.each do |sub|
+            sub_question = sub.class.where(question_id: question.id, id: sub.id).first
+            sum += 1
+            if sub_question.yes?(current_user) || sub_question.no?(current_user)
+              complete += 1
+            end
+          end
+        end
+      end
+      @completed[diagnostic.id] = complete
+      @sums[diagnostic.id] = sum
+    end
   end
 
   # GET /diagnostics/1
