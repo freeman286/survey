@@ -15,9 +15,26 @@ class DiagnosticsController < ApplicationController
   # GET /diagnostics/1
   def show
     @diagnostic = Diagnostic.find(params[:id])
-    @segments = Segment.where(diagnostic_id: @diagnostic.id).all
-    @questions = Question.where(segment_id: (Segment.where(diagnostic_id: @diagnostic.id))).all
-    @sub_questions = SubQuestion.where(question_id: (Question.where(segment_id: (Segment.where(diagnostic_id: @diagnostic.id))).all)).all
+    @completed = Hash.new(0)
+    @sums = Hash.new(0)
+    
+    @diagnostic.segments.each do |seg|
+      complete = 0
+      sum = 0
+      segment = seg.class.where(diagnostic_id: @diagnostic.id, id: seg.id).first
+      segment.questions.each do |que|
+        question = que.class.where(segment_id: segment.id, id: que.id).first
+        question.sub_questions.each do |sub|
+          sub_question = sub.class.where(question_id: question.id, id: sub.id).first
+          sum += 1
+          if sub_question.yes?(current_user) || sub_question.no?(current_user)
+            complete += 1
+          end
+        end
+      end
+      @completed[segment.id] = complete
+      @sums[segment.id] = sum
+    end 
     
     
     @crud_state = "show"

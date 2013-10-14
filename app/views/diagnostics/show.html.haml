@@ -9,19 +9,8 @@
   %thead
     %th Segments
   
-  -@diagnostic.segments.each do |seg|
-    -sum = 0
-    -complete = 0
-    -segment = seg.class.where(diagnostic_id: @diagnostic.id, id: seg.id).first
-    -segment.questions.each do |que|
-      -question = que.class.where(segment_id: segment.id, id: que.id).first
-      -question.sub_questions.each do |sub|
-        -sub_question = sub.class.where(question_id: question.id, id: sub.id).first
-        -sum += 1
-        -if sub_question.yes?(current_user) || sub_question.no?(current_user)
-          -complete += 1
-           
-    %tr.section{ :'data-animation' => :true, :'data-trigger' => :hover, :'data-html' => :true, :'data-title' => "Percent Complete", :'data-content' => "#{percent_completed(complete, sum)}%"}
+  -@diagnostic.segments.each do |seg|   
+    %tr.section{ :'data-animation' => :true, :'data-trigger' => :hover, :'data-html' => :true, :'data-title' => "Percent Complete", :'data-content' => "#{percent_completed(@completed[seg.id], @sums[seg.id])}%"}
       %td=link_to seg.name, segment_questions_path(seg), :remote => true
   %tbody
 
