@@ -8,6 +8,11 @@ class DiagnosticsController < ApplicationController
      @diagnostic = Diagnostic.find(params[:diagnostic_id])
   end
   
+  
+  def chart
+    @diagnostic = Diagnostic.find(params[:diagnostic_id])
+  end
+  
   def index
     @diagnostics = Diagnostic.all
     @completed = Hash.new(0)
