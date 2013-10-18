@@ -1,23 +1,48 @@
-%h1 Listing diagnostics
-- if check_admin(current_user)
-  = link_to 'New Diagnostic', new_diagnostic_path, class: 'btn'
-%table.table
-  %tr
-    %th.keep-left2 Name
-    %th.keep-left3 Description
-    %th
-  -@diagnostics.each do |diagnostic|
+%h1.head Listing diagnostics
+.row.span12
+  - if check_admin(current_user)
+    = link_to 'New Diagnostic', new_diagnostic_path, class: 'btn'
+-@diagnostics.each do |diagnostic|
+  .row.span12.well.section{ :'data-animation' => :true, :'data-trigger' => :hover, :'data-html' => :true, :'data-title' => "Percent Complete", :'data-content' => "#{percent_completed(@completed[diagnostic.id], @sums[diagnostic.id])}%"}
+    = link_to diagnostic.name, diagnostic_path(diagnostic)
+    %span.admin.pull-right
+      - if check_admin(current_user)
+        = link_to 'Edit Content', diagnostic_admin_path(diagnostic), id: 'show-content', data: { diagnostic_id: diagnostic.id }
+        |
+        \#{link_to 'Edit Name and Description', edit_diagnostic_path(diagnostic)}
+        |
+        \#{link_to 'Delete', diagnostic, method: :delete, data: { confirm: 'Are you sure? This will delete all the content of this diagnostic.' }}
+      - else
+        = link_to 'Show Content', diagnostic_admin_path(diagnostic), id: 'show-content', data: { diagnostic_id: diagnostic.id }
+    
+    = diagnostic.description
+    
+    %script{src: "http://d3js.org/d3.v3.min.js"}
+      %script{src: "assets/radar-chart.js"}
+      :javascript
+        var d = [
+                  [
+                   {axis: "strength", value: 13}, 
+                   {axis: "intelligence", value: 1}, 
+                   {axis: "charisma", value: 8},  
+                   {axis: "dexterity", value: 4},  
+                   {axis: "luck", value: 9}
+                  ],[
+                   {axis: "strength", value: 3}, 
+                   {axis: "intelligence", value: 15}, 
+                   {axis: "charisma", value: 4}, 
+                   {axis: "dexterity", value: 1},  
+                   {axis: "luck", value: 15}
+                  ],[
+                   {axis: "strength", value: 5}, 
+                   {axis: "intelligence", value: 1}, 
+                   {axis: "charisma", value: 16}, 
+                   {axis: "dexterity", value: 10},  
+                   {axis: "luck", value: 5}
+                  ]
+                ];
 
-    %tr.section{ :'data-animation' => :true, :'data-trigger' => :hover, :'data-html' => :true, :'data-title' => "Percent Complete", :'data-content' => "#{percent_completed(@completed[diagnostic.id], @sums[diagnostic.id])}%"}
-      %td= link_to diagnostic.name, diagnostic_path(diagnostic)
-      %td= diagnostic.description
-      %td.pulltoright
-        %span.admin
-          - if check_admin(current_user)
-            = link_to 'Edit Content', diagnostic_admin_path(diagnostic), id: 'show-content', data: { diagnostic_id: diagnostic.id }
-            |
-            \#{link_to 'Edit Name and Description', edit_diagnostic_path(diagnostic)}
-            |
-            \#{link_to 'Delete', diagnostic, method: :delete, data: { confirm: 'Are you sure? This will delete all the content of this diagnostic.' }}
-          - else
-            = link_to 'Show Content', diagnostic_admin_path(diagnostic), id: 'show-content', data: { diagnostic_id: diagnostic.id }
+
+        RadarChart.draw("#chart", d);
+        
+    %div{id: "chart"}
