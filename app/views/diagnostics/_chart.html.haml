@@ -14,14 +14,10 @@
     .row.head2
       = diagnostic.description
     
-    %div{id: "chart#{diagnostic.id}"}
-    
-    
-    
-    
+    %div{id: "chart#{diagnostic.id}"}    
 
-    %script{src: "http://d3js.org/d3.v3.min.js"}
-    %script{src: "../src/radar-chart-min.js"}
+    %script{src: "assets/d3.v3.js"}
+    %script{src: "assets/radar-chart.js"}
     :javascript
       var d = [
                 [
