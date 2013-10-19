@@ -11,7 +11,8 @@
       - else
         = link_to 'Show Content', diagnostic_admin_path(diagnostic), id: 'show-content', data: { diagnostic_id: diagnostic.id }
     
-    = diagnostic.description
+    .row.head2
+      = diagnostic.description
     
     %div{id: "chart#{diagnostic.id}"}
     
