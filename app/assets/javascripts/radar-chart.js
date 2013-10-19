@@ -7,7 +7,7 @@ var RadarChart = {
      factor: .95,
      factorLegend: 1,
      levels: 3,
-     maxValue: 0,
+     maxValue: 100,
      radians: 2 * Math.PI,
      opacityArea: 0.5,
      color: d3.scale.category10(),
@@ -136,7 +136,7 @@ var RadarChart = {
         .on('mouseover', function (d){
                     newX =  parseFloat(d3.select(this).attr('cx')) - 10;
                     newY =  parseFloat(d3.select(this).attr('cy')) - 5;
-                    tooltip.attr('x', newX).attr('y', newY).text(d.value).transition(200).style('opacity', 1);
+                    tooltip.attr('x', newX).attr('y', newY).text(d.value+"%").transition(200).style('opacity', 1);
                     z = "polygon."+d3.select(this).attr("class");
                     g.selectAll("polygon").transition(200).style("fill-opacity", 0.1); 
                     g.selectAll(z).transition(200).style("fill-opacity", .7);
