@@ -1,5 +1,5 @@
 -@diagnostics.each do |diagnostic|
-  .row.span12.well.section{ :'data-animation' => :true, :'data-trigger' => :hover, :'data-html' => :true, :'data-title' => "Percent Complete", :'data-content' => "#{percent_completed(@completed[diagnostic.id], @sums[diagnostic.id])}%"}
+  .row.span12.well.section.chart{ :'data-animation' => :true, :'data-trigger' => :hover, :'data-html' => :true, :'data-title' => "Percent Complete", :'data-content' => "#{percent_completed(@completed[diagnostic.id], @sums[diagnostic.id])}%"}
     = link_to diagnostic.name, diagnostic_path(diagnostic)
     %span.admin.pull-right
       - if check_admin(current_user)
@@ -24,23 +24,11 @@
     :javascript
       var d = [
                 [
-                 {axis: "strength", value: 13}, 
-                 {axis: "intelligence", value: 1}, 
-                 {axis: "charisma", value: 8},  
-                 {axis: "dexterity", value: 4},  
-                 {axis: "luck", value: 9}
-                ],[
-                 {axis: "strength", value: 3}, 
-                 {axis: "intelligence", value: 15}, 
-                 {axis: "charisma", value: 4}, 
-                 {axis: "dexterity", value: 1},  
-                 {axis: "luck", value: 15}
-                ],[
-                 {axis: "strength", value: 5}, 
-                 {axis: "intelligence", value: 1}, 
-                 {axis: "charisma", value: 16}, 
-                 {axis: "dexterity", value: 10},  
-                 {axis: "luck", value: 5}
+                  {axis: "strength", value: Math.floor((Math.random()*100)+1)}, 
+                  {axis: "intelligence", value: Math.floor((Math.random()*100)+1)}, 
+                  {axis: "charisma", value: Math.floor((Math.random()*100)+1)}, 
+                  {axis: "dexterity", value: Math.floor((Math.random()*100)+1)},  
+                  {axis: "luck", value: Math.floor((Math.random()*100)+1)}
                 ]
               ];
 
