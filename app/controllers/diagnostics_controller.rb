@@ -10,7 +10,7 @@ class DiagnosticsController < ApplicationController
   
   
   def chart
-    @diagnostic = Diagnostic.find(params[:diagnostic_id])
+    @diagnostics = Diagnostic.all
   end
   
   def index
