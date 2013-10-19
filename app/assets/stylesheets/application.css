@@ -12,6 +12,14 @@
  *= require_tree .
  */
 
+/* 
+prevents parsererrors rendering
+
+parsererror > h3,
+parsererror > div {
+	display: none;
+} */
+
 a:link {
 	text-decoration:none;
 }
