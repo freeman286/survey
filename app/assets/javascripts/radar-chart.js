@@ -145,8 +145,6 @@ var RadarChart = {
                     tooltip.transition(200).style('opacity', 0);
                     g.selectAll("polygon").transition(200).style("fill-opacity", cfg.opacityArea);
                   })
-        .append("svg:title")
-        .text(function(j){return Math.max(j.value, 0)});
 
       series++;
     });
