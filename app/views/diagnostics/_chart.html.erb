@@ -18,14 +18,9 @@
     <div id="chart<%= diagnostic.id %>"></div>
     <script>
       var d = [
-                {axis: "axis 1", value: Math.floor((Math.random()*100)+1)}, 
-                {axis: "axis 2", value: Math.floor((Math.random()*100)+1)}, 
-                {axis: "axis 3", value: Math.floor((Math.random()*100)+1)}, 
-                {axis: "axis 4", value: Math.floor((Math.random()*100)+1)},  
-                {axis: "axis 5 ", value: Math.floor((Math.random()*100)+1)},
-                {axis: "axis 6 ", value: Math.floor((Math.random()*100)+1)},
-                {axis: "axis 7 ", value: Math.floor((Math.random()*100)+1)},
-                {axis: "axis 8 ", value: Math.floor((Math.random()*100)+1)}
+                <% diagnostic.segments.each do |segment| %>
+                  {axis: "<%= segment.name %>", value: Math.floor((Math.random()*100)+1)}, 
+                <% end %>
               ];
 
 
