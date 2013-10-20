@@ -2,6 +2,5 @@
 .row.span12
   - if check_admin(current_user)
     = link_to 'New Diagnostic', new_diagnostic_path, class: 'btn'
-
-
+    
 =render "chart"
