@@ -19,7 +19,7 @@
     <script>
       var d = [
                 <% diagnostic.segments.each do |segment| %>
-                  {axis: "<%= segment.name %>", value: Math.floor((Math.random()*100)+1)}, 
+                  {axis: "<%= segment.name %>", value: "<%= percent_completed(segment.yes(current_user), segment.total(current_user)) %>"}, 
                 <% end %>
               ];
 
