@@ -18,6 +18,7 @@ class DiagnosticsController < ApplicationController
     @completed = Hash.new(0)
     @sums = Hash.new(0)
     @diagnostics.each do |dia|
+      dia.make_chart_for_user(current_user.id) if user_signed_in?
       complete = 0
       sum = 0
       diagnostic = dia.class.where(id: dia.id).first
