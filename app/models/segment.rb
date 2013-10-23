@@ -30,4 +30,26 @@ class Segment < ActiveRecord::Base
     end
     total
   end
+
+
+  def score_for_user(user_id)
+    total = total(User.where(id: user_id))
+    complete = yes(User.where(id: user_id))
+    
+    
+    
+    if complete == 0 || total == 0
+      puts self
+      puts complete
+      puts "/"
+      puts total
+      0
+    else
+      puts self
+      puts complete
+      puts "/"
+      puts total
+      (complete + 0.0) / (total + 0.0) * 100
+    end
+  end
 end
