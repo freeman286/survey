@@ -15,6 +15,11 @@ class Diagnostic < ActiveRecord::Base
     #g.theme = Gruff::Themes::THIRTYSEVEN_SIGNALS
     g.legend_font_size = 10
     g.bottom_margin = 40
+    g.theme = {
+      :colors => %w(grey),
+      :marker_color => 'black',
+      :background_colors => %w(#f5f5f5 #f5f5f5)
+    }
     if self.segments.count > 3
       g.rotation = 180/self.segments.count 
       self.segments.each do |segment|

@@ -22,17 +22,5 @@
     <% if user_signed_in? %>
       <img src="/results/<%= diagnostic.id %>-<%= current_user.id %>.png"/>
     <% end %>
-    <div id="chart<%= diagnostic.id %>"></div>
-    <script>
-      var d = [
-                <% diagnostic.segments.each do |segment| %>
-                  {axis: "<%= segment.name %>", value: "<%= percent_completed(segment.yes(current_user), segment.total(current_user)) %>"}, 
-                <% end %>
-              ];
-
-
-      RadarChart.draw("#chart<%= diagnostic.id %>", [d]);
-
-    </script>
   </div>
 <% end %>
