@@ -25,5 +25,27 @@ class Diagnostic < ActiveRecord::Base
     g.write("public/results/#{self.id}-#{user_id}.png")
   end
   
-  
+  def complete_for_user(user)
+    complete = 0
+    total = 0
+    self.segments.each do |seg|
+      segment = seg.class.where(diagnostic_id: self.id, id: seg.id).first
+      segment.questions.each do |que|
+        question = que.class.where(segment_id: segment.id, id: que.id).first
+        question.sub_questions.each do |sub|
+          sub_question = sub.class.where(question_id: question.id, id: sub.id).first
+          total += 1
+          if sub_question.yes?(user) || sub_question.no?(user)
+            complete += 1
+          end
+        end
+      end
+    end
+    if complete == 0 || total == 0
+      0
+    else
+      ((complete + 0.0) / (total + 0.0) * 100).floor
+    end
+  end
+
 end

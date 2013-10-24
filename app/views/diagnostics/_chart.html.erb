@@ -1,11 +1,8 @@
 <% @diagnostics.each do |diagnostic| %>
 
-  <% if user_signed_in? %>
-    <img src="/results/<%= diagnostic.id %>-<%= current_user.id %>.png"/>
-  <% end %>
 
 
-  <div class="row span12 well section chart" data-animation="true" data-content="<%= percent_completed(@completed[diagnostic.id], @sums[diagnostic.id]) %>%" data-html="true" data-title="Percent Complete" data-trigger="hover">
+  <div class="row span12 well section chart" data-animation="true" data-content="<%= diagnostic.complete_for_user(current_user) %>%" data-html="true" data-title="Percent Complete" data-trigger="hover">
     <%= link_to diagnostic.name, diagnostic_path(diagnostic) %>
     <span class="admin pull-right">
       <% if check_admin(current_user) %>
@@ -21,6 +18,10 @@
     <div class="row head2">
       <%= diagnostic.description %>
     </div>
+    
+    <% if user_signed_in? %>
+      <img src="/results/<%= diagnostic.id %>-<%= current_user.id %>.png"/>
+    <% end %>
     <div id="chart<%= diagnostic.id %>"></div>
     <script>
       var d = [

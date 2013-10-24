@@ -10,7 +10,7 @@
     %th Segments
   
   -@diagnostic.segments.each do |seg|   
-    %tr.section{ :'data-animation' => :true, :'data-trigger' => :hover, :'data-html' => :true, :'data-title' => "Percent Complete", :'data-content' => "#{percent_completed(@completed[seg.id], @sums[seg.id])}%"}
+    %tr.section{ :'data-animation' => :true, :'data-trigger' => :hover, :'data-html' => :true, :'data-title' => "Percent Complete", :'data-content' => "#{seg.complete_for_user(current_user)}%"}
       %td=link_to seg.name, segment_questions_path(seg), :remote => true
   %tbody
 

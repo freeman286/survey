@@ -39,17 +39,29 @@ class Segment < ActiveRecord::Base
     
     
     if complete == 0 || total == 0
-      puts self
-      puts complete
-      puts "/"
-      puts total
       0
     else
-      puts self
-      puts complete
-      puts "/"
-      puts total
       (complete + 0.0) / (total + 0.0) * 100
+    end
+  end
+  
+  def complete_for_user(user)
+    complete = 0
+    total = 0
+    self.questions.each do |que|
+      question = que.class.where(segment_id: self.id, id: que.id).first
+      question.sub_questions.each do |sub|
+        sub_question = sub.class.where(question_id: question.id, id: sub.id).first
+        total += 1
+        if sub_question.yes?(user) || sub_question.no?(user)
+          complete += 1
+        end
+      end
+    end
+    if complete == 0 || total == 0
+      0
+    else
+      ((complete + 0.0) / (total + 0.0) * 100).floor
     end
   end
 end
