@@ -15,6 +15,7 @@ class Diagnostic < ActiveRecord::Base
     #g.theme = Gruff::Themes::THIRTYSEVEN_SIGNALS
     g.legend_font_size = 10
     g.bottom_margin = 40
+    g.font = ("app/assets/fonts/HelveticaNeue.ttf")
     g.theme = {
       :colors => %w(grey),
       :marker_color => 'black',
