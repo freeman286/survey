@@ -59,7 +59,7 @@ class Segment < ActiveRecord::Base
       end
     end
     if complete == 0 || total == 0
-      0
+      100
     else
       ((complete + 0.0) / (total + 0.0) * 100).floor
     end

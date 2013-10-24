@@ -32,25 +32,16 @@ class Diagnostic < ActiveRecord::Base
   end
   
   def complete_for_user(user)
-    complete = 0
+    completed = 0
     total = 0
     self.segments.each do |seg|
-      segment = seg.class.where(diagnostic_id: self.id, id: seg.id).first
-      segment.questions.each do |que|
-        question = que.class.where(segment_id: segment.id, id: que.id).first
-        question.sub_questions.each do |sub|
-          sub_question = sub.class.where(question_id: question.id, id: sub.id).first
-          total += 1
-          if sub_question.yes?(user) || sub_question.no?(user)
-            complete += 1
-          end
-        end
-      end
+      completed += seg.complete_for_user(user)
+      total += 1
     end
-    if complete == 0 || total == 0
-      0
+    if completed == 0 || total == 0
+      100
     else
-      ((complete + 0.0) / (total + 0.0) * 100).floor
+      ((completed + 0.0) / (total + 0.0)).floor
     end
   end
 
