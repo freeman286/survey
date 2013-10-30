@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class DiagnosticsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
   setup do
     @diagnostic = diagnostics(:one)
   end

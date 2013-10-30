@@ -1,8 +1,6 @@
 class Answer < ActiveRecord::Base
   attr_accessible :id, :no, :sub_question_id, :user_id, :yes
   
-  validates :id, presence: true
-  
   validates :sub_question_id, presence: true
   
   validates :user_id, presence: true
