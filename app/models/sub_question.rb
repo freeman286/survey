@@ -10,6 +10,8 @@ class SubQuestion < ActiveRecord::Base
   
   validates :evidence, presence: true, length: { minimum: 2}
   
+  validates :question_id, presence: true
+  
   def yes?(user)
     answer = Answer.find_by_user_id_and_sub_question_id(user, self.id)
     if answer.nil?

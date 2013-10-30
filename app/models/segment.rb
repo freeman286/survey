@@ -5,6 +5,8 @@ class Segment < ActiveRecord::Base
   
   validates :name, presence: true, length: { minimum: 2}
   
+  validates :diagnostic_id, presence: true
+  
   has_many :questions
   
   def yes(user)
