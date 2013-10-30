@@ -4,9 +4,16 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
+joel:
+  first_name: "Joel"
+  last_name: "Mayer"
+  email: "joel@example.com"
+  encrypted_password: "$2a$10$ECgUuZKs4H6fI7O8lWua4emoLYnH0TBr9Zk.zsTl1FtvwqJqWrgGW"
+  admin: true
+
 jason:
   first_name: "Jason"
   last_name: "Seifer"
   email: "jason@teamtreehouse.com"
-  encrypted_password: "$2a$10$ECgUuZKs4H6fI7O8lWua4emoLYnH0TBr9Zk.zsTl1FtvwqJqWrgGW"
-
+  encrypted_password: "$2a$10$Fh/Hm8RxDsuPTeBUr6864.GARlcmt7zF2WspaXGr3BIv2C27N.osq"
+  admin: false
