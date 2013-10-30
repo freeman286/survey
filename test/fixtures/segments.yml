@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
-  diagnostic_id: 
+  name: "1"
+  diagnostic_id: 1
 
 two:
-  name: MyString
-  diagnostic_id: 
+  name: "2"
+  diagnostic_id: 1
