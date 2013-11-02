@@ -9,8 +9,6 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-config.assets.initialize_on_precompile = false
-
 module Survey
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -57,6 +55,7 @@ module Survey
 
     # Enable the asset pipeline
     config.assets.enabled = true
+    config.assets.initialize_on_precompile = false
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
