@@ -39,7 +39,7 @@ class Diagnostic < ActiveRecord::Base
       total += 1
     end
     if completed == 0 || total == 0
-      100
+      0
     else
       ((completed + 0.0) / (total + 0.0)).floor
     end
