@@ -57,7 +57,7 @@ class DiagnosticsController < ApplicationController
 
     
     if @diagnostic.update_attributes(params[:diagnostic])
-      redirect_to @diagnostic, notice: 'Diagnostic was successfully updated.'
+      redirect_to diagnostics_url, notice: 'Diagnostic was successfully updated.'
     else
       render action: "edit"
     end

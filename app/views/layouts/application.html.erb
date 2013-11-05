@@ -28,7 +28,7 @@
 	</div>
 	<div class="container">
 		<% flash.each do |type, message|%>
-			<div class="alert <%= flash_class type %>">
+			<div class="alert <%= flash_class type %> span12">
 				<button class="close" data-dismiss="alert">x</button>
 				<%= message %>
 			</div>

@@ -1,45 +1,47 @@
 %h1= @diagnostic.name
 
-.row.header
-  - if check_admin(current_user)
-    = link_to 'New Segment', new_segment_path(@diagnostic), class: 'btn'
+.row
+  .span12
+    - if check_admin(current_user)
+      = link_to 'New Segment', new_segment_path(@diagnostic), class: 'btn'
 
 
 -@diagnostic.segments.each do |segment|
-  .row.well.info.section
-    .span8
-      =segment.name
-    .span3.admin
-      - if check_admin(current_user)
-        = link_to 'Edit', edit_segment_path(segment)
-        |
-        = link_to 'Delete', segment, method: :delete, data: { confirm: 'Are you sure?' }
-    .row.span12
-      - if check_admin(current_user)
-        = link_to 'New Question', new_question_path(segment)
-    
-  - segment.questions.each do |question|
-    .row.well.section
+  .span12
+    .row.well.info.section
       .span8
-        = question.name
+        =segment.name
       .span3.admin
         - if check_admin(current_user)
-          = link_to 'Edit', edit_question_path(question)
+          = link_to 'Edit', edit_segment_path(segment)
           |
-          = link_to 'Delete', question, method: :delete, data: { confirm: 'Are you sure?' }
+          = link_to 'Delete', segment, method: :delete, data: { confirm: 'Are you sure?' }
       .row.span12
         - if check_admin(current_user)
-          = link_to 'New Sub question', new_sub_question_path(question)
+          = link_to 'New Question', new_question_path(segment)
     
-    - question.sub_questions.each do |sub_question|
+    - segment.questions.each do |question|
       .row.well.section
-        .span1
-        .span3
-          = sub_question.name
-        .span4
-          = sub_question.evidence
+        .span8
+          = question.name
         .span3.admin
           - if check_admin(current_user)
-            = link_to 'Edit', edit_sub_question_path(sub_question)
+            = link_to 'Edit', edit_question_path(question)
             |
-            = link_to 'Delete', sub_question, method: :delete, data: { confirm: 'Are you sure?' }
+            = link_to 'Delete', question, method: :delete, data: { confirm: 'Are you sure?' }
+        .row.span12
+          - if check_admin(current_user)
+            = link_to 'New Sub question', new_sub_question_path(question)
+    
+      - question.sub_questions.each do |sub_question|
+        .row.well.section
+          .span1
+          .span3
+            = sub_question.name
+          .span4
+            = sub_question.evidence
+          .span3.admin
+            - if check_admin(current_user)
+              = link_to 'Edit', edit_sub_question_path(sub_question)
+              |
+              = link_to 'Delete', sub_question, method: :delete, data: { confirm: 'Are you sure?' }

@@ -11,8 +11,6 @@
         <%= link_to 'Edit Name and Description', edit_diagnostic_path(diagnostic) %>
         |
         <%= link_to 'Delete', diagnostic, method: :delete, data: { confirm: 'Are you sure? This will delete all the content of this diagnostic.' } %>
-      <% else %>
-        <%= link_to 'Show Content', diagnostic_admin_path(diagnostic), id: 'show-content', data: { diagnostic_id: diagnostic.id } %>
       <% end %>
     </span>
     <div class="row head2">
