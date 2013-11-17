@@ -26,7 +26,8 @@
 		  </div>
 		</div>  
 	</div>
-	<div class="container">
+	<% if !(controller_name == "home") %>
+	  <div class="container">
 		<% flash.each do |type, message|%>
 			<div class="alert <%= flash_class type %> span12">
 				<button class="close" data-dismiss="alert">x</button>
@@ -34,6 +35,9 @@
 			</div>
 		<% end %>
 		<%= yield %>
-	</div>
+	  </div>
+	<% else %>
+	  <%= yield %>
+	<% end %>
 </body>
 </html>
