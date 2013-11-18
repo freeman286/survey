@@ -22,8 +22,13 @@ class DiagnosticsController < ApplicationController
 
   # GET /diagnostics/1
   def show
-    @diagnostic = Diagnostic.find(params[:id])
-    @crud_state = "show"
+    if !user_signed_in?
+	    redirect_to new_user_registration_path
+	    flash[:message] = "You need to be registered to build your own diagnostic results. It won't take long and is free!"
+	  end
+      @diagnostic = Diagnostic.find(params[:id])
+      @crud_state = "show"
+    else
   end
 
   # GET /diagnostics/new

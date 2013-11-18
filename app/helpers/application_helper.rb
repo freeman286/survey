@@ -10,6 +10,14 @@ module ApplicationHelper
 		end
 	end
 	
+	def flash_header(message)
+	  if message == "You need to be registered to build your own diagnostic results. It won't take long and is free!"
+	    "What Next?"
+	  else
+	    nil
+	  end 
+  end
+	
 	def check_admin(user)
 	  if !user.nil?
       user.is_admin?
