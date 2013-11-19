@@ -2,6 +2,7 @@ class QuestionsController < ApplicationController
   # GET /questions
   before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_filter :can_edit, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :can_take, only: [:show]
   
   def index
     @questions = Question.all
@@ -66,5 +67,13 @@ class QuestionsController < ApplicationController
   	    redirect_to :back, alert: "You must be admin to do that"
   	  end
     end
+	end
+	
+	
+	def can_take
+	  if !user_signed_in?
+	    redirect_to new_user_registration_path
+	    flash[:message] = "You need to be registered to build your own diagnostic results. It won't take long and is free!"
+	  end
 	end
 end

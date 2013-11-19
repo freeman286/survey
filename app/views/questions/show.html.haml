@@ -6,7 +6,7 @@
 %table.table
   %thead
     %th
-      %b Sub-Question
+
   %tbody
     - @question.sub_questions.each do |subquestion|
       %tr.section{:id => "#{subquestion.id}", :'data-animation' => :true, :'data-trigger' => :hover, :'data-html' => :true, :'data-title' => "Evidence", :'data-content' => "#{subquestion.evidence}"}
@@ -17,4 +17,12 @@
         %td      
           =link_to 'No', sub_question_no_path(subquestion), :remote => true, :class => "btn no #{subquestion.id} #{'btn-danger' if subquestion.no?(current_user)}"
             
-= link_to "Back to Diagnostic", diagnostic_path(@question.segment.diagnostic)
+
+
+=link_to 'Previous question', question_path(previous_id_for_question(@question)), :class => "btn btn-primary pull-left"
+ 
+
+=link_to 'Next question', question_path(next_id_for_question(@question)), :class => "btn btn-primary pull-right"
+
+.gap
+  = link_to "Back to Diagnostic", diagnostic_path(@question.segment.diagnostic)

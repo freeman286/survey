@@ -58,4 +58,36 @@ module ApplicationHelper
         ((x + 0.0) / (y + 0.0) * 100).floor
       end
   end
+  
+  def next_id_for_question(question)
+    pos = 0
+    loop_pos = 0
+    question.segment.questions.each do |que|
+      if que.id == question.id
+        pos = loop_pos
+      end
+      loop_pos += 1
+    end
+    if question.segment.questions[pos + 1].nil?
+      question.segment.questions.first.id
+    else
+      question.segment.questions[pos + 1].id
+    end
+  end
+  
+  def previous_id_for_question(question)
+    pos = 0
+    loop_pos = 0
+    question.segment.questions.each do |que|
+      if que.id == question.id
+        pos = loop_pos
+      end
+      loop_pos += 1
+    end
+    if question.segment.questions[pos - 1].nil?
+      question.segment.questions.last.id
+    else
+      question.segment.questions[pos - 1].id
+    end
+  end
 end
