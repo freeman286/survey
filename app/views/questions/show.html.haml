@@ -18,11 +18,25 @@
           =link_to 'No', sub_question_no_path(subquestion), :remote => true, :class => "btn no #{subquestion.id} #{'btn-danger' if subquestion.no?(current_user)}"
             
 
-
-=link_to 'Previous question', question_path(previous_id_for_question(@question)), :class => "btn btn-primary pull-left"
+.span2
+  =link_to 'Previous question', question_path(previous_id_for_question(@question)), :class => "btn btn-primary pull-left"
  
 
-=link_to 'Next question', question_path(next_id_for_question(@question)), :class => "btn btn-primary pull-right"
+.pad1.span7
+  -if user_signed_in? && @question.complete_for_user(current_user) > 0
+    -if @question.complete_for_user(current_user) == 100
+      .progress.progress-striped
+        .bar{:style => "width:"+"#{@question.segment.complete_for_user(current_user)}%"}
+          .black
+            ="#{@question.segment.complete_for_user(current_user)}% Complete"
+    -else     
+      .progress.progress-striped.active
+        .bar{:style => "width:"+"#{@question.segment.complete_for_user(current_user)}%"}
+          .black
+            ="#{@question.segment.complete_for_user(current_user)}% Complete"
+.span2  
+  =link_to 'Next question', question_path(next_id_for_question(@question)), :class => "btn btn-primary pull-right"
+
 
 .gap
   = link_to "Back to Diagnostic", diagnostic_path(@question.segment.diagnostic)

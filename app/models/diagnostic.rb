@@ -44,5 +44,4 @@ class Diagnostic < ActiveRecord::Base
       ((completed + 0.0) / (total + 0.0)).floor
     end
   end
-
 end

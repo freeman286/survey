@@ -7,7 +7,7 @@
     =@diagnostic.description
 %table.table
   %thead
-    %th Segments
+    %th
   
   -@diagnostic.segments.each do |seg|   
     -if user_signed_in?
@@ -23,3 +23,9 @@
   
   
 =link_to "Back to all diagnostics", diagnostics_path
+
+-if user_signed_in? && @diagnostic.complete_for_user(current_user) > 0
+  .progress.progress-striped
+    .bar{:style => "width:"+"#{@diagnostic.complete_for_user(current_user)}%"}
+      .black
+        ="#{@diagnostic.complete_for_user(current_user)}% Complete"
