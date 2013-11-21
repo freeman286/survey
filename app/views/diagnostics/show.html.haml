@@ -11,7 +11,7 @@
   
   -@diagnostic.segments.each do |seg|   
     -if user_signed_in?
-      %tr.section{ :'data-animation' => :true, :'data-trigger' => :hover, :'data-html' => :true, :'data-title' => "Percent Complete", :'data-content' => "#{seg.complete_for_user(current_user)}%"}
+      %tr.section
         %td=link_to seg.name, segment_questions_path(seg), :remote => true
     -else
       %tr.section
