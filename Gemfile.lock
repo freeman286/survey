@@ -133,6 +133,7 @@ DEPENDENCIES
   jquery-rails
   pg
   rails (= 3.2.6)
+  sass
   sass-rails (~> 3.2.3)
   shoulda
   simple_form
