@@ -143,13 +143,35 @@ th.keep-left3:first-child {
 	padding-top:3px;
 }
 
+.wheel {
+  width:500px;
+  height:500px;
+  background-color:#f5f5f5;
+  padding:30px 30px;
+  border-radius:100%;
+  position:relative;
+  margin-bottom:50px;
+  .inner {
+    position:relative;
+    #wrapper{
+      padding-top:50%;
+      padding-left:50%;
+    }
+  }
+}
+
 @for $i from 1 through 50 {
   $rotate:360 / $i;
   @for $j from 1 through $i {
     [class="#{$j}-#{$i}"] {
+      padding-left: 100px;
+      position: absolute;
       transform:rotate($rotate * $j + deg);
       -ms-transform:rotate($rotate * $j + deg);
       -webkit-transform:rotate($rotate * $j + deg);
+      transform-origin:0% 50%;
+      -ms-transform-origin:0% 50%;
+      -webkit-transform-origin:0% 50%;
     }
   }
 }

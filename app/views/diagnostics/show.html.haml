@@ -8,15 +8,15 @@
 %table.table
   %thead
     %th
-  
-  -@diagnostic.segments.each do |seg|   
-    -if user_signed_in?
-      %tr.section
-        %td=link_to seg.name, segment_questions_path(seg), :remote => true
-    -else
-      %tr.section
-        %td=link_to seg.name, segment_questions_path(seg), :remote => true
-  %tbody
+
+.wheel
+  - count = 1
+  .inner
+    #wrapper
+      -@diagnostic.segments.each do |seg|   
+        %div{:class => "#{count}-#{@diagnostic.segments.count}"}
+          - count += 1
+          =link_to seg.name, segment_questions_path(seg), :remote => true
 
 %div.well#questions
   click on segment
