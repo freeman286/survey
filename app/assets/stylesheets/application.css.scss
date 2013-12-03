@@ -45,11 +45,6 @@ body {
 	margin-top: 40px;
 }
 
-.section .indent {
-	padding-left:50px;
-	width: 80px;
-}
-
 th.keep-left:first-child {
 	width:750px;
 }
@@ -66,33 +61,49 @@ th.keep-left3:first-child {
 	text-align:right;
 }
 
-.section.hover {
-	background: #F5F5F5;
+.section {
+
+ .indent {
+	  padding-left:50px;
+	  width: 80px;
+  }
+  
+  &.hover {
+  	background: #F5F5F5;
+  }
+
+  .admin {
+  	display: none;
+  }
+
+  &.hover {
+    .admin {
+    	display: table-cell;
+    }
+
+    &.chart .admin {
+    	display: table-cell;
+    }
+  }
 }
 
-.section .admin {
-	display: none;
+.well {
+  &.section {
+    &.hover {
+    	background: #D1D1D1;
+    }
+
+    &.chart.hover {
+    	background-color: #f5f5f5;
+    }
+  }
+
+  &.info {
+  	background-color: #c4e3f3;
+  }
 }
 
-.section.hover .admin {
-	display: table-cell;
-}
 
-.well.section.hover {
-	background: #D1D1D1;
-}
-
-.section.hover.chart .admin {
-	display: table-cell;
-}
-
-.well.section.chart.hover {
-	background-color: #f5f5f5;
-}
-
-.well.info {
-	background-color: #c4e3f3;
-}
 
 .row.header {
 	padding:18px;
@@ -130,4 +141,15 @@ th.keep-left3:first-child {
 
 .pad1 {
 	padding-top:3px;
+}
+
+@for $i from 1 through 50 {
+  $rotate:360 / $i;
+  @for $j from 1 through $i {
+    [class="#{$j}-#{$i}"] {
+      transform:rotate($rotate * $j + deg);
+      -ms-transform:rotate($rotate * $j + deg);
+      -webkit-transform:rotate($rotate * $j + deg);
+    }
+  }
 }
