@@ -165,10 +165,10 @@ th.keep-left3:first-child {
   }
 }
 
-@for $i from 1 through 50 {
+@for $i from 1 through 16 {
   $rotate:360 / $i;
   @for $j from 1 through $i {
-    [class="#{$j}-#{$i}"] {
+    .s#{$j}.w#{$i} {
       padding-left: 100px;
       position: absolute;
       transform:rotate($rotate * $j + deg);
