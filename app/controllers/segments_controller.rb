@@ -16,8 +16,13 @@ class SegmentsController < ApplicationController
 
   # GET /segments/new
   def new
-    @segment = Segment.new(:diagnostic_id => params[:diagnostic_id])
-    @crud_state = "new"
+    @diagnostic = Diagnostic.find(params[:diagnostic_id])
+    if @diagnostic.segments.count > 15
+      redirect_to diagnostic_admin_path(@diagnostic.id), alert: "Diagnostics can only have 16 segments"
+    else
+      @segment = Segment.new(:diagnostic_id => params[:diagnostic_id])
+      @crud_state = "new"
+    end
   end
 
   # GET /segments/1/edit
