@@ -184,7 +184,7 @@ th.keep-left3:first-child {
     .inner {
       position:relative;
       #wrapper{
-        padding-top:182.5px;
+        padding-top:170px;
         padding-left:200px;
       }
     }
@@ -196,6 +196,7 @@ th.keep-left3:first-child {
   @for $j from 1 through $i {
     .s#{$j}.w#{$i} {
       width:157.5px;
+      height:60px;
       padding-left: 45px;
       position: absolute;
       transform:rotate($rotate * $j + deg);
@@ -206,11 +207,18 @@ th.keep-left3:first-child {
       -webkit-transform-origin:0% 50%;
       z-index:1;
       &.box {
-        width:160px;
-        height:20px;
-        padding-bottom:20px;
+        width:157.5px;
+        height:60px;
         background-color:#d5d5d5;
         z-index:-1;
+      }
+      a {
+        width:157.5px;
+        height:60px;
+        display:table-cell;
+        text-align:center;
+        vertical-align: middle;
+        padding-right: 4px;
       }
     }
   }
