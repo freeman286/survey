@@ -24,10 +24,11 @@
     .inner
       #wrapper
         -@diagnostic.segments.each do |seg|   
+          %div{:class => "s#{count} w#{@diagnostic.segments.count} box"}
           %div{:class => "s#{count} w#{@diagnostic.segments.count}"}
             - count += 1
             =link_to seg.name, segment_questions_path(seg), :remote => true
-    
+
 
 
 %div.well#questions

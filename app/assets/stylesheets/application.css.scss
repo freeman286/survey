@@ -144,48 +144,48 @@ th.keep-left3:first-child {
 }
 
 .outer {
-  width:525px;
-  height:525px;
+  width:400px;
+  height:400px;
   border: 15px solid #e5e5e5;
   margin-bottom:50px;
   border-radius:100%;
   webkit-border-radius:100%;
   moz-border-radius:100%;
-  z-index:1;
+  z-index:2;
   .circle {
-    margin-top:212.5px;
-    margin-left:212.5px;
+    margin-top:160px;
+    margin-left:162.5px;
     position: absolute;
-    width:100px;
-    height:100px;
+    width:75px;
+    height:75px;
     background-color:#e5e5e5;
     border-radius:100%;
     webkit-border-radius:100%;
     moz-border-radius:100%;
-    z-index:1;
+    z-index:2;
   }
   .background {
-    width:525px;
-    height:525px;
+    width:400px;
+    height:400px;
     border-radius:100%;
     webkit-border-radius:100%;
     moz-border-radius:100%;
     background-color:#f5f5f5;
     position: absolute;
-    z-index:-1;
+    z-index:-2;
   }
   .wheel {
-    width:525px;
-    height:525px;
+    width:400px;
+    height:400px;
     border-radius:100%;
     webkit-border-radius:100%;
     moz-border-radius:100%;
-    z-index:-2;
+    z-index:1;
     .inner {
       position:relative;
       #wrapper{
-        padding-top:252.5px;
-        padding-left:262.5px;
+        padding-top:182.5px;
+        padding-left:200px;
       }
     }
   }
@@ -195,9 +195,8 @@ th.keep-left3:first-child {
   $rotate:360 / $i;
   @for $j from 1 through $i {
     .s#{$j}.w#{$i} {
-      background-color:#d5d5d5;
-      width:215.5px;
-      padding-left: 60px;
+      width:157.5px;
+      padding-left: 45px;
       position: absolute;
       transform:rotate($rotate * $j + deg);
       -ms-transform:rotate($rotate * $j + deg);
@@ -205,7 +204,14 @@ th.keep-left3:first-child {
       transform-origin:0% 50%;
       -ms-transform-origin:0% 50%;
       -webkit-transform-origin:0% 50%;
-      z-index:-1;
+      z-index:1;
+      &.box {
+        width:160px;
+        height:20px;
+        padding-bottom:20px;
+        background-color:#d5d5d5;
+        z-index:-1;
+      }
     }
   }
 }
