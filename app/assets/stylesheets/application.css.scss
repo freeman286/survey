@@ -151,8 +151,9 @@ th.keep-left3:first-child {
   border-radius:100%;
   webkit-border-radius:100%;
   moz-border-radius:100%;
+  z-index:1;
   .circle {
-    margin-top:222.5px;
+    margin-top:212.5px;
     margin-left:212.5px;
     position: absolute;
     width:100px;
@@ -161,19 +162,30 @@ th.keep-left3:first-child {
     border-radius:100%;
     webkit-border-radius:100%;
     moz-border-radius:100%;
+    z-index:1;
+  }
+  .background {
+    width:525px;
+    height:525px;
+    border-radius:100%;
+    webkit-border-radius:100%;
+    moz-border-radius:100%;
+    background-color:#f5f5f5;
+    position: absolute;
+    z-index:-1;
   }
   .wheel {
     width:525px;
     height:525px;
-    background-color:#f5f5f5;
     border-radius:100%;
     webkit-border-radius:100%;
     moz-border-radius:100%;
+    z-index:-2;
     .inner {
       position:relative;
       #wrapper{
-        padding-top:50%;
-        padding-left:50%;
+        padding-top:252.5px;
+        padding-left:262.5px;
       }
     }
   }
@@ -183,7 +195,9 @@ th.keep-left3:first-child {
   $rotate:360 / $i;
   @for $j from 1 through $i {
     .s#{$j}.w#{$i} {
-      padding-left: 50px;
+      background-color:#d5d5d5;
+      width:215.5px;
+      padding-left: 60px;
       position: absolute;
       transform:rotate($rotate * $j + deg);
       -ms-transform:rotate($rotate * $j + deg);
@@ -191,6 +205,7 @@ th.keep-left3:first-child {
       transform-origin:0% 50%;
       -ms-transform-origin:0% 50%;
       -webkit-transform-origin:0% 50%;
+      z-index:-1;
     }
   }
 }
