@@ -1,3 +1,10 @@
+.span12.pad1
+  -if user_signed_in? && @diagnostic.complete_for_user(current_user) > 0
+    .progress.progress-striped
+      .bar{:style => "width:"+"#{@diagnostic.complete_for_user(current_user)}%"}
+        .black
+          ="#{@diagnostic.complete_for_user(current_user)}% Complete"
+
 %p#notice=notice
 %p
   %h2.head
@@ -9,23 +16,21 @@
   %thead
     %th
 
-.wheel
-  - count = 1
-  .inner
-    #wrapper
-      -@diagnostic.segments.each do |seg|   
-        %div{:class => "s#{count} w#{@diagnostic.segments.count}"}
-          - count += 1
-          =link_to seg.name, segment_questions_path(seg), :remote => true
+.outer
+  .circle
+  .wheel
+    - count = 1
+    .inner
+      #wrapper
+        -@diagnostic.segments.each do |seg|   
+          %div{:class => "s#{count} w#{@diagnostic.segments.count}"}
+            - count += 1
+            =link_to seg.name, segment_questions_path(seg), :remote => true
+    
+
 
 %div.well#questions
   click on segment
   
   
 =link_to "Back to all diagnostics", diagnostics_path
-
--if user_signed_in? && @diagnostic.complete_for_user(current_user) > 0
-  .progress.progress-striped
-    .bar{:style => "width:"+"#{@diagnostic.complete_for_user(current_user)}%"}
-      .black
-        ="#{@diagnostic.complete_for_user(current_user)}% Complete"
