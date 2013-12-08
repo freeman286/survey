@@ -172,40 +172,43 @@ th.keep-left3:first-child {
   webkit-border-radius:100%;
   moz-border-radius:100%;
   z-index:2;
-  .circle {
-    margin-top:160px;
-    margin-left:162.5px;
-    position: absolute;
-    width:75px;
-    height:75px;
-    background-color:#e5e5e5;
-    border-radius:100%;
-    webkit-border-radius:100%;
-    moz-border-radius:100%;
-    z-index:2;
-  }
-  .background {
-    width:400px;
-    height:400px;
-    border-radius:100%;
-    webkit-border-radius:100%;
-    moz-border-radius:100%;
-    background-color:#f5f5f5;
-    position: absolute;
-    z-index:-2;
-  }
-  .wheel {
-    width:400px;
-    height:400px;
-    border-radius:100%;
-    webkit-border-radius:100%;
-    moz-border-radius:100%;
-    z-index:1;
-    .inner {
-      position:relative;
-      #wrapper{
-        padding-top:170px;
-        padding-left:200px;
+  .spin {
+    z-index:-1;
+    .circle {
+      margin-top:160px;
+      margin-left:162.5px;
+      position: absolute;
+      width:75px;
+      height:75px;
+      background-color:#e5e5e5;
+      border-radius:100%;
+      webkit-border-radius:100%;
+      moz-border-radius:100%;
+      z-index:2;
+    }
+    .background {
+      width:400px;
+      height:400px;
+      border-radius:100%;
+      webkit-border-radius:100%;
+      moz-border-radius:100%;
+      background-color:#f5f5f5;
+      position: absolute;
+      z-index:-2;
+    }
+    .wheel {
+      width:400px;
+      height:400px;
+      border-radius:100%;
+      webkit-border-radius:100%;
+      moz-border-radius:100%;
+      z-index:1;
+      .inner {
+        position:relative;
+        #wrapper{
+          padding-top:170px;
+          padding-left:200px;
+        }
       }
     }
   }

@@ -15,17 +15,18 @@
 
 .span6
   .outer
-    .circle
-    .background
-    .wheel
-      - count = 1
-      .inner
-        #wrapper
-          -@diagnostic.segments.each do |seg|   
-            %div{:class => "s#{count} w#{@diagnostic.segments.count} box"}
-            %div{:class => "s#{count} w#{@diagnostic.segments.count}"}
-              - count += 1
-              =link_to seg.name, segment_questions_path(seg), :remote => true
+    .spin
+      .circle
+      .background
+      .wheel
+        - count = 1
+        .inner
+          #wrapper
+            -@diagnostic.segments.each do |seg|   
+              %div{:class => "s#{count} w#{@diagnostic.segments.count} box"}
+              %div{:class => "s#{count} w#{@diagnostic.segments.count}"}
+                - count += 1
+                =link_to seg.name, segment_questions_path(seg), :remote => true
 
 
 .fillright
