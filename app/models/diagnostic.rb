@@ -34,18 +34,74 @@ class Diagnostic < ActiveRecord::Base
   end
   
   def make_wheel
-    inner_diameter = 380
+    inner_radius = 190
+    inner_diameter = inner_radius * 2 
     border_width = 10
+    spoke_width = 70
+    hub_size = 40
+    text_pos = 100
     total_diameter = inner_diameter + (2 * border_width)
     centre = total_diameter / 2
     gc = Image.new(total_diameter, total_diameter) { self.background_color = "white" }
-    circle = Magick::Draw.new
-    circle.stroke('black')
-    circle.stroke_width(border_width)
-    circle.fill('white')
+    
+    # Draw background
+    circle = Magick::Draw.new 
+    circle.fill('#f5f5f5')
     circle.ellipse(centre, centre, (inner_diameter + border_width)  / 2, (inner_diameter + border_width) / 2, 0, 360)
     circle.draw(gc)
+    
+    # Draw spokes
+    segment_number = 0
+    if self.segments.count > 0
+      segment_gap = 360 / self.segments.count
+    else
+      segment_gap = 0
+    end
+    self.segments.each do |seg|
+      line = Magick::Draw.new
+      line.stroke('#d5d5d5')
+      line.stroke_width(50)
+      line.line(centre, centre, centre + (inner_radius + (border_width / 2)) * Math::cos(degrees_to_radians(segment_number * segment_gap)), centre + (inner_radius + (border_width / 2)) * Math::sin(degrees_to_radians(segment_number * segment_gap)))
+      puts "x=#{centre + (inner_radius + (border_width / 2)) * Math::cos(degrees_to_radians(segment_number * segment_gap))} y=#{centre + (inner_radius + (border_width / 2)) * Math::sin(degrees_to_radians(segment_number * segment_gap))}"
+      line.draw(gc)
+      segment_number += 1
+    end
+    
+    # Draw outline of circle
+    circle = Magick::Draw.new
+    circle.stroke('#e5e5e5')
+    circle.stroke_width(border_width)
+    circle.fill_opacity(0)
+    circle.ellipse(centre, centre, (inner_diameter + border_width)  / 2, (inner_diameter + border_width) / 2, 0, 360)
+    circle.draw(gc)
+
+    
+    # Draw centre hub
+    hub = Magick::Draw.new
+    hub.fill('#f5f5f5')
+    hub.ellipse(centre, centre, hub_size, hub_size, 0, 360)
+    hub.draw(gc)
+    
+    
+    # Annotate spoke with text
+    text_number = 0
+    if self.segments.count > 0
+      text_gap = 360 / self.segments.count
+    else
+      text_gap = 0
+    end
+    self.segments.each do |seg|
+      Draw.new.annotate(gc, 0,0,0,40, 'Text Sample') {
+        self.font("assets/fonts/HelveticaNeue.ttf")
+        self.text(centre + text_pos * Math::cos((text_number * text_gap) * Math::PI / 180), centre + text_pos * Math::sin((text_number * text_gap) * Math::PI / 180), seg.name)
+        self.rotate((text_gap * text_number ) - 90)
+        text_number += 1
+      }
+    end
+    
+    
     gc.write("public/wheels/wheel_#{self.id}.png")
+    
   end
   
   def complete_for_user(user)
@@ -60,5 +116,11 @@ class Diagnostic < ActiveRecord::Base
     else
       ((completed + 0.0) / (total + 0.0)).floor
     end
+  end
+  
+  private
+  
+  def degrees_to_radians(deg)
+    deg * Math::PI / 180
   end
 end
