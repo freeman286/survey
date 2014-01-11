@@ -1,4 +1,7 @@
 class Diagnostic < ActiveRecord::Base
+  
+  include Magick
+  
   attr_accessible :description, :name
   
   validates :name, presence: true, length: { minimum: 2}
@@ -28,6 +31,21 @@ class Diagnostic < ActiveRecord::Base
     end
 
     g.write("public/results/#{self.id}-#{user_id}.png")
+  end
+  
+  def make_wheel
+    inner_diameter = 380
+    border_width = 10
+    total_diameter = inner_diameter + (2 * border_width)
+    centre = total_diameter / 2
+    gc = Image.new(total_diameter, total_diameter) { self.background_color = "white" }
+    circle = Magick::Draw.new
+    circle.stroke('black')
+    circle.stroke_width(border_width)
+    circle.fill('white')
+    circle.ellipse(centre, centre, (inner_diameter + border_width)  / 2, (inner_diameter + border_width) / 2, 0, 360)
+    circle.draw(gc)
+    gc.write("public/wheels/wheel_#{self.id}.png")
   end
   
   def complete_for_user(user)
