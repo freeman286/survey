@@ -39,6 +39,7 @@ class Diagnostic < ActiveRecord::Base
     border_width = 10
     spoke_width = 70
     hub_size = 40
+    hub_margin = 10
     text_pos = 100
     total_diameter = inner_diameter + (2 * border_width)
     centre = total_diameter / 2
@@ -62,7 +63,6 @@ class Diagnostic < ActiveRecord::Base
       line.stroke('#d5d5d5')
       line.stroke_width(50)
       line.line(centre, centre, centre + (inner_radius + (border_width / 2)) * Math::cos(degrees_to_radians(segment_number * segment_gap)), centre + (inner_radius + (border_width / 2)) * Math::sin(degrees_to_radians(segment_number * segment_gap)))
-      puts "x=#{centre + (inner_radius + (border_width / 2)) * Math::cos(degrees_to_radians(segment_number * segment_gap))} y=#{centre + (inner_radius + (border_width / 2)) * Math::sin(degrees_to_radians(segment_number * segment_gap))}"
       line.draw(gc)
       segment_number += 1
     end
@@ -90,11 +90,13 @@ class Diagnostic < ActiveRecord::Base
     else
       text_gap = 0
     end
+    
     self.segments.each do |seg|
-      Draw.new.annotate(gc, 0,0,0,40, 'Text Sample') {
+      Draw.new.annotate(gc, 0, 0,centre + (hub_size + hub_margin) * Math::cos(degrees_to_radians(text_number * text_gap)), centre + (hub_size + hub_margin) * Math::sin(degrees_to_radians(text_number * text_gap)), "#{seg.name}") {
         self.font("assets/fonts/HelveticaNeue.ttf")
         self.text(centre + text_pos * Math::cos((text_number * text_gap) * Math::PI / 180), centre + text_pos * Math::sin((text_number * text_gap) * Math::PI / 180), seg.name)
-        self.rotate((text_gap * text_number ) - 90)
+        self.pointsize = 10
+        self.rotation = text_gap * text_number
         text_number += 1
       }
     end
