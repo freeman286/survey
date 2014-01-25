@@ -73,6 +73,11 @@ class DiagnosticsController < ApplicationController
     end
   end
   
+  def click
+    @diagnostic = Diagnostic.find(params[:diagnostic_id])
+    @segment = @diagnostic.segment_from_x_y(params[:x],params[:y])
+  end
+  
   private
   def can_edit
 	  if user_signed_in?

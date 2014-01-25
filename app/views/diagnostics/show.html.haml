@@ -14,19 +14,9 @@
           ="#{@diagnostic.complete_for_user(current_user)}% Complete"
 
 .span6
-  .outer
-    .spin
-      .circle
-      .background
-      .wheel
-        - count = 1
-        .inner
-          #wrapper
-            -@diagnostic.segments.each do |seg|   
-              %div{:class => "s#{count} w#{@diagnostic.segments.count} box"}
-              %div{:class => "s#{count} w#{@diagnostic.segments.count}"}
-                - count += 1
-                =link_to seg.name, segment_questions_path(seg), :remote => true
+  %div#wheel{:style => "width:400px;height:400px;clear:both"}
+    = link_to(diagnostic_click_path(@diagnostic.id, 0, 0), :remote => true, :id => 'wheel-link') do
+      %img{:src => "/wheels/wheel_#{@diagnostic.id}.png"}
 
 
 .fillright
@@ -39,3 +29,11 @@
   
 .span12 
   =link_to "Back to all diagnostics", diagnostics_path
+  
+:javascript
+    $("#wheel").mousemove(function(e){
+      var offset = $(this).offset();
+      var x = Math.floor(e.clientX - offset.left);
+      var y = Math.floor(e.clientY - offset.top);
+    	$('#wheel-link').attr("href", "/diagnostics/1/click/" + x + "/" + y)
+    });
