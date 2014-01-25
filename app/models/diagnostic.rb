@@ -120,11 +120,6 @@ class Diagnostic < ActiveRecord::Base
     end
   end
   
-  def segment_from_x_y(x,y)
-    #TODO implement logic
-    ActiveRecord::Base::Segment.find(2)
-  end
-  
   private
   
   def degrees_to_radians(deg)
