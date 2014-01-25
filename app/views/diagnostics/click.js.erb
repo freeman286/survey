@@ -1,0 +1,2 @@
+alert('hello segment <%=@segment.id%>');
+$("#questions").html('<%= escape_javascript(render('segments/questions', :segment => @segment))%>');
