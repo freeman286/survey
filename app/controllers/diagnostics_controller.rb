@@ -6,6 +6,7 @@ class DiagnosticsController < ApplicationController
   
   def admin
      @diagnostic = Diagnostic.find(params[:diagnostic_id])
+     @diagnostic.make_wheel()
   end
   
   
@@ -41,7 +42,7 @@ class DiagnosticsController < ApplicationController
   # POST /diagnostics
   def create
     @diagnostic = Diagnostic.new(params[:diagnostic])
-    @diagnostic.make_wheel
+    @diagnostic.make_wheel()
     @crud_state = "create"
 
     if @diagnostic.save
@@ -55,7 +56,7 @@ class DiagnosticsController < ApplicationController
   def update
     @diagnostic = Diagnostic.find(params[:id])
     @crud_state = "update"
-
+    @diagnostic.make_wheel()
     
     if @diagnostic.update_attributes(params[:diagnostic])
       redirect_to diagnostics_url, notice: 'Diagnostic was successfully updated.'
@@ -76,7 +77,7 @@ class DiagnosticsController < ApplicationController
   
   def click
     @diagnostic = Diagnostic.find(params[:diagnostic_id])
-    @segment = @diagnostic.segment_from_x_y_rotation(params[:x],params[:y],params[:rotation])
+    @segment = @diagnostic.segment_from_x_y_(params[:x],params[:y],params[:rotation])
   end
   
   private
