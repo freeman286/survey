@@ -106,7 +106,7 @@ class Diagnostic < ActiveRecord::Base
     
   end
   
-  def segment_from_x_y(x,y)
+  def segment_from_x_y_rotation(x,y,rotation)
     #TODO implement logic
     ActiveRecord::Base::Segment.find(2)
   end
