@@ -41,6 +41,7 @@ class DiagnosticsController < ApplicationController
   # POST /diagnostics
   def create
     @diagnostic = Diagnostic.new(params[:diagnostic])
+    @diagnostic.make_wheel
     @crud_state = "create"
 
     if @diagnostic.save
