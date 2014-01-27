@@ -111,7 +111,20 @@ class Diagnostic < ActiveRecord::Base
     x_from_centre = x.to_f - 200
     y_from_centre = 200 - y.to_f
     
-    angle = radians_to_degrees(Math::atan(y_from_centre / x_from_centre)) + rotation.to_f
+    
+    if x_from_centre >= 0 && y_from_centre >= 0
+      angle = 90 - radians_to_degrees(Math::atan(y_from_centre / x_from_centre)) + rotation.to_f
+    elsif x_from_centre >= 0 && y_from_centre < 0
+      angle = 90 - (radians_to_degrees(Math::atan(y_from_centre / x_from_centre)) + rotation.to_f)
+    elsif x_from_centre < 0 && y_from_centre < 0
+      angle = 270 - (radians_to_degrees(Math::atan(y_from_centre / x_from_centre)) + rotation.to_f)
+    elsif x_from_centre < 0 && y_from_centre >= 0
+      angle = 270 - (radians_to_degrees(Math::atan(y_from_centre / x_from_centre)) + rotation.to_f)
+    else  
+      angle = 0
+    end
+    
+    puts "ANGLE = #{angle}"
     
     if self.segments.count > 0
       segment_gap = 360 / self.segments.count
