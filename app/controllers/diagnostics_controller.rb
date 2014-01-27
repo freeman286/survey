@@ -77,7 +77,7 @@ class DiagnosticsController < ApplicationController
   
   def click
     @diagnostic = Diagnostic.find(params[:diagnostic_id])
-    @segment = @diagnostic.segment_from_x_y_(params[:x],params[:y],params[:rotation])
+    @segment = @diagnostic.segment_from_x_y_rotation(params[:x],params[:y],params[:rotation])
   end
   
   private
