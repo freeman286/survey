@@ -124,16 +124,15 @@ class Diagnostic < ActiveRecord::Base
       angle = 0
     end
     
-    puts "ANGLE = #{angle}"
     
     if self.segments.count > 0
       segment_gap = 360 / self.segments.count
     else
       segment_gap = 360
     end
-    segment_number =  (((angle - 90) + (segment_gap / 2)) / segment_gap)
-    puts segment_number
-    self.segments[segment_number]
+    segment_number =  ((angle - (segment_gap / 2)) / segment_gap).floor
+    
+    self.segments[segment_number - 1]
   end
   
   def complete_for_user(user)
@@ -156,7 +155,7 @@ class Diagnostic < ActiveRecord::Base
     deg * Math::PI / 180
   end
   
-  def radians_to_degrees(deg)
-    deg * 180 / Math::PI
+  def radians_to_degrees(rad)
+    rad * 180 / Math::PI
   end
 end
