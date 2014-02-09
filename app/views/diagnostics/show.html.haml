@@ -20,11 +20,14 @@
 
 .fillright
   %div#questions
-    .alert.small
-      %h3
-        What Next?
-      %h4
-      Click on the spokes to navigate around the various questions
+    -if @segment
+      =render('segments/questions', :segment => @segment)
+    -else
+      .alert.small
+        %h3
+          What Next?
+        %h4
+        Click on the spokes to navigate around the various questions
   
 .span12 
   =link_to "Back to all diagnostics", diagnostics_path
@@ -47,6 +50,10 @@
         history.replaceState(null, document.title, "/diagnostics/#{@diagnostic.id}/click/" + x + "/" + y + "/" + getRotationDegrees($("#wheel")) + ".html");
         e.preventDefault();
       });
+    $(window).bind("popstate", function() {
+      $.getScript(location.href);
+      $("#wheel").rotate(#{@segment.segment_roation if @segment});
+    });  
     });
   }
   
