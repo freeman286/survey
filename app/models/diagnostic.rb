@@ -43,7 +43,7 @@ class Diagnostic < ActiveRecord::Base
     text_pos = 100
     total_diameter = inner_diameter + (2 * border_width)
     centre = total_diameter / 2
-    gc = Image.new(total_diameter, total_diameter) { self.background_color = "white" }
+    gc = Image.new(total_diameter, total_diameter) { self.background_color = "transparent" }
     
     # Draw background
     circle = Magick::Draw.new 
