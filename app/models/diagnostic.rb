@@ -113,13 +113,13 @@ class Diagnostic < ActiveRecord::Base
     
     
     if x_from_centre >= 0 && y_from_centre >= 0
-      angle = 90 - radians_to_degrees(Math::atan(y_from_centre / x_from_centre)) + rotation.to_f
+      angle = 90 - radians_to_degrees(Math::atan(y_from_centre / x_from_centre)) - rotation.to_f
     elsif x_from_centre >= 0 && y_from_centre < 0
-      angle = 90 - (radians_to_degrees(Math::atan(y_from_centre / x_from_centre)) + rotation.to_f)
+      angle = 90 - radians_to_degrees(Math::atan(y_from_centre / x_from_centre)) - rotation.to_f
     elsif x_from_centre < 0 && y_from_centre < 0
-      angle = 270 - (radians_to_degrees(Math::atan(y_from_centre / x_from_centre)) + rotation.to_f)
+      angle = 270 - radians_to_degrees(Math::atan(y_from_centre / x_from_centre)) - rotation.to_f
     elsif x_from_centre < 0 && y_from_centre >= 0
-      angle = 270 - (radians_to_degrees(Math::atan(y_from_centre / x_from_centre)) + rotation.to_f)
+      angle = 270 - radians_to_degrees(Math::atan(y_from_centre / x_from_centre)) - rotation.to_f
     else  
       angle = 0
     end
