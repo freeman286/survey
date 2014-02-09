@@ -66,4 +66,27 @@ class Segment < ActiveRecord::Base
       ((complete + 0.0) / (total + 0.0) * 100).floor
     end
   end
+  
+  def segment_roation()
+    diagnostic = self.diagnostic
+    
+    if diagnostic.segments.count > 0
+      segment_gap = 360 / diagnostic.segments.count
+    else
+      segment_gap = 360
+    end
+    count = 0
+    segment_number = 0
+    diagnostic.segments.each do |seg|
+      if seg.id == self.id
+        segment_number = count
+      end
+      count += 1
+    end
+    if 360 - (segment_number * segment_gap) == 360 
+      0
+    else
+      360 - (segment_number * segment_gap)
+    end
+  end
 end
