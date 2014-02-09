@@ -34,8 +34,22 @@
     var offset = $(this).offset();
     var x = Math.floor(e.clientX - offset.left);
     var y = Math.floor(e.clientY - offset.top);
-    $('#wheel-link').attr("href", "/diagnostics/#{@diagnostic.id}/click/" + x + "/" + y + "/" + getRotationDegrees($("#wheel")))
+    $('#wheel-link').attr("href", "/diagnostics/#{@diagnostic.id}/click/" + x + "/" + y + "/" + getRotationDegrees($("#wheel")));
   });
+  
+  if (history && history.pushState) {
+    $(function() {
+      $("#wheelcontainer").on("click", function(e) {
+        $.getScript(this.href);
+        var offset = $(this).offset();
+        var x = Math.floor(e.clientX - offset.left);
+        var y = Math.floor(e.clientY - offset.top);
+        history.replaceState(null, document.title, "/diagnostics/#{@diagnostic.id}/click/" + x + "/" + y + "/" + getRotationDegrees($("#wheel")) + ".html");
+        e.preventDefault();
+      });
+    });
+  }
+  
 
   function getRotationDegrees(obj) {
       var matrix = obj.css("-webkit-transform") ||
