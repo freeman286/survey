@@ -28,13 +28,15 @@
 		  </div>
 		</div>  
 	</div>
-	<% if !(controller_name == "home") %>
+	<% if !(controller_name == "home" || (controller_name == "diagnostics" && controller.action_name == "admin")) %>
 	  <div class="container">
 		<% flash.each do |type, message|%>
-			<div class="alert <%= flash_class type %> span12">
-				<button class="close" data-dismiss="alert">x</button>
-				<h4><%= flash_header message %></h4>
-				<%= message %>
+			<div class="span12">
+  			<div class="alert alert-block <%= flash_class type %>">
+  				<button class="close" data-dismiss="alert">x</button>
+  				<h4><%= flash_header message %></h4>
+  				<div><%= message %></div>
+  			</div>
 			</div>
 		<% end %>
 		  <%= yield %>
