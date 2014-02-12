@@ -1,10 +1,10 @@
-<% if @segment.errors.any? %>
+<% if @segment.errors.any? || @segment.diagnostic.errors.any?%>
 <div class="alert alert-danger">
   <button class="close" data-dismiss="alert">x</button>
-  <h3><%= pluralize(@segment.errors.count + @diagnostic.errors.count, "error") %> prevented this segment from being saved:</h3>
+  <h3><%= pluralize(@segment.errors.count + @segment.diagnostic.errors.count, "error") %> prevented this segment from being saved:</h3>
   <ul>
-	  <% (@segment.merge!(@diagnostic)).errors.full_messages do |msg| %>
-	  <li><%= msg %></li>
+      <% (@segment.errors.full_messages + @segment.diagnostic.errors.full_messages).each do |msg| %>
+	    <li><%= msg %></li>
     <% end %>
 </ul>
 </div>

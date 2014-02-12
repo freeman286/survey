@@ -3,7 +3,7 @@ class Segment < ActiveRecord::Base
   
   belongs_to :diagnostic
   
-  validates :name, presence: true, length: { minimum: 2}
+  validates :name, presence: true, length: {minimum: 2, maximum: 16}
   
   validates :diagnostic_id, presence: true
   

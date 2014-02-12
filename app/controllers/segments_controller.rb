@@ -40,6 +40,7 @@ class SegmentsController < ApplicationController
       redirect_to diagnostic_admin_path(@segment.diagnostic), notice: 'Segment was successfully created.' 
     else
       render action: "new"
+      
     end
   end
 

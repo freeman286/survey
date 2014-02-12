@@ -42,10 +42,10 @@ class DiagnosticsController < ApplicationController
   # POST /diagnostics
   def create
     @diagnostic = Diagnostic.new(params[:diagnostic])
-    @diagnostic.make_wheel()
     @crud_state = "create"
 
     if @diagnostic.save
+      @diagnostic.make_wheel()
       redirect_to @diagnostic, notice: 'Diagnostic was successfully created.'
     else
       render action: "new"
@@ -59,6 +59,7 @@ class DiagnosticsController < ApplicationController
     @diagnostic.make_wheel()
     
     if @diagnostic.update_attributes(params[:diagnostic])
+      @diagnostic.make_wheel()
       redirect_to diagnostics_url, notice: 'Diagnostic was successfully updated.'
     else
       render action: "edit"
