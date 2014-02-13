@@ -26,16 +26,6 @@
         .row.span12
           - if check_admin(current_user)
             = link_to 'New Question', new_question_path(segment)
-
-    .modal.fade{id: "delete_segment#{segment.id}"}
-      .modal-header
-        %a.close{"data-dismiss" => "modal"} x
-        %h3 Are you sure you want to delete this segment?
-      .modal-body
-        %p If you do all its content will be lost
-      .modal-footer
-        %a.btn{"data-dismiss" => "modal", href: "#"} Close
-        = link_to 'Delete', segment, method: :delete, class: 'btn btn-primary'
                 
       - segment.questions.each do |question|
         .row.well.section
@@ -48,19 +38,8 @@
               = link_to 'Delete', question, method: :delete, method: :delete, :href => "#delete_question#{question.id}", :'data-toggle' => "modal"
           .row.span12
             - if check_admin(current_user)
-              = link_to 'New Sub question', new_sub_question_path(question)
-              
-        .modal.fade{id: "delete_question#{question.id}"}
-          .modal-header
-            %a.close{"data-dismiss" => "modal"} x
-            %h3 Are you sure you want to delete this question?
-          .modal-body
-            %p If you do all its content will be lost
-          .modal-footer
-            %a.btn{"data-dismiss" => "modal", href: "#"} Close
-            = link_to 'Delete', question, method: :delete, class: 'btn btn-primary'    
-    
-    
+              = link_to 'New Sub question', new_sub_question_path(question)   
+  
         - question.sub_questions.each do |sub_question|
           .row.well.section
             .span1
@@ -73,13 +52,37 @@
                 = link_to 'Edit', edit_sub_question_path(sub_question)
                 |
                 = link_to 'Delete', sub_question, method: :delete, :href => "#delete_sub_question#{sub_question.id}", :'data-toggle' => "modal"
-                
-          .modal.fade{id: "delete_question#{question.id}"}
-            .modal-header
-              %a.close{"data-dismiss" => "modal"} x
-              %h3 Are you sure you want to delete this question?
-            .modal-body
-              %p If you do all its content will be lost
-            .modal-footer
-              %a.btn{"data-dismiss" => "modal", href: "#"} Close
-              = link_to 'Delete', sub_question, method: :delete, class: 'btn btn-primary'
+              
+
+-@diagnostic.segments.each do |segment|
+  .modal.fade{id: "delete_segment#{segment.id}"}
+    .modal-header
+      %a.close{"data-dismiss" => "modal"} x
+      %h3 Are you sure you want to delete this segment?
+    .modal-body
+      %p If you do all its content will be lost
+    .modal-footer
+      %a.btn{"data-dismiss" => "modal", href: "#"} Close
+      = link_to 'Delete', segment, method: :delete, class: 'btn btn-primary'
+
+    -segment.questions.each do |question|
+      .modal.fade{id: "delete_question#{question.id}"}
+        .modal-header
+          %a.close{"data-dismiss" => "modal"} x
+          %h3 Are you sure you want to delete this question?
+        .modal-body
+          %p If you do all its content will be lost
+        .modal-footer
+          %a.btn{"data-dismiss" => "modal", href: "#"} Close
+          = link_to 'Delete', question, method: :delete, class: 'btn btn-primary'
+
+      -question.sub_questions.each do |sub_question|
+        .modal.fade{id: "delete_sub_question#{sub_question.id}"}
+          .modal-header
+            %a.close{"data-dismiss" => "modal"} x
+            %h3 Are you sure you want to delete this question?
+          .modal-body
+            %p If you do all its content will be lost
+          .modal-footer
+            %a.btn{"data-dismiss" => "modal", href: "#"} Close
+            = link_to 'Delete', sub_question, method: :delete, class: 'btn btn-primary'
