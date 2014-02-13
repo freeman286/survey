@@ -1,8 +1,7 @@
 Survey::Application.routes.draw do
   
-  resources :diagnostics do
-      get :admin
-  end
+  resources :diagnostics
+  match "/diagnostics/:diagnostic_id/admin" => "diagnostics#admin", :as => 'diagnostic_admin'
   match "/diagnostics/:diagnostic_id/click/:x/:y/:rotation" => "diagnostics#click", :as => 'diagnostic_click'
   
   resources :segments
