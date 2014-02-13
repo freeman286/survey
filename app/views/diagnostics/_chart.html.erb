@@ -10,7 +10,7 @@
         |
         <%= link_to 'Edit Name and Description', edit_diagnostic_path(diagnostic) %>
         |
-        <%= link_to 'Delete', diagnostic, method: :delete, data: { confirm: 'Are you sure? This will delete all the content of this diagnostic.' } %>
+        <a diagnostic href="#delete<%= diagnostic.id %>", data-toggle="modal" >Delete</a>
       <% end %>
     </span>
     <div class="row head2">
@@ -30,5 +30,19 @@
         </div>
       </div>
     <% end %>
+  </div>
+  
+  <div class="modal fade" id="delete<%= diagnostic.id %>">
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">x</a>
+      <h3>Are you sure you want do delete this diagnostic?</h3>
+    </div>
+    <div class="modal-body">
+      <p>If you do all its content will be lost</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn" data-dismiss="modal">Close</a>
+      <%= link_to 'Delete', diagnostic, method: :delete, class: 'btn btn-primary' %>
+    </div>
   </div>
 <% end %>

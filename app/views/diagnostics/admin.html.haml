@@ -35,7 +35,7 @@
             - if check_admin(current_user)
               = link_to 'Edit', edit_question_path(question)
               |
-              = link_to 'Delete', question, method: :delete, data: { confirm: 'Are you sure?' }
+              = link_to 'Delete', question
           .row.span12
             - if check_admin(current_user)
               = link_to 'New Sub question', new_sub_question_path(question)
@@ -51,4 +51,4 @@
               - if check_admin(current_user)
                 = link_to 'Edit', edit_sub_question_path(sub_question)
                 |
-                = link_to 'Delete', sub_question, method: :delete, data: { confirm: 'Are you sure?' }
+                = link_to 'Delete', sub_question
