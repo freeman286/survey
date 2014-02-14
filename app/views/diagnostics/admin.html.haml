@@ -10,7 +10,7 @@
   .row
     .span12
       - if check_admin(current_user)
-        = link_to 'New Segment', new_segment_path(@diagnostic), class: 'btn'
+        = link_to 'New Segment', new_segment_path(@diagnostic), class: 'btn btn-top'
 
 
   -@diagnostic.segments.each do |segment|
