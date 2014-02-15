@@ -1,0 +1,16 @@
+.span12
+  = devise_error_messages!
+  .page_header
+    %h2 Sign in
+  .row
+    .span4
+      = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), html: {class: "well form-vertical"}) do |f|
+        %fieldset
+          = f.input :email
+          = f.input :password
+          - if devise_mapping.rememberable?
+            = f.input :remember_me, as: :boolean, inline_label: "Remember Me", label: false
+          .form-actions
+            = f.button :submit, "Sign In", class: 'btn btn-primary btn-block'
+  %div
+    = render "devise/shared/links"
