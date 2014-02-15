@@ -92,13 +92,26 @@ class Diagnostic < ActiveRecord::Base
     end
     
     self.segments.each do |seg|
-      Draw.new.annotate(gc, 0, 0,centre + (hub_size + hub_margin) * Math::cos(degrees_to_radians(text_number * text_gap)), centre + (hub_size + hub_margin) * Math::sin(degrees_to_radians(text_number * text_gap)), "#{seg.name}") {
-        self.font("assets/fonts/HelveticaNeue.ttf")
-        self.text(centre + text_pos * Math::cos((text_number * text_gap) * Math::PI / 180), centre + text_pos * Math::sin((text_number * text_gap) * Math::PI / 180), seg.name)
-        self.pointsize = 10
-        self.rotation = text_gap * text_number
-        text_number += 1
-      }
+      line = 0
+      text = word_wrap(seg.name, 20)
+      rows = text.split("\n")
+      rows.each do |row| 
+         scratch_gc = Draw.new
+         scratch_gc.pointsize(10)
+         scratch_gc.font("assets/fonts/HelveticaNeue.ttf")
+         metrics = scratch_gc.get_type_metrics(row)
+         width = metrics.width 
+         height = (metrics.bounds.y2 - metrics.bounds.y1).round
+         indent = (inner_radius - hub_size - hub_margin - width ) / 2
+         puts "#{row} #{indent}"
+         Draw.new.annotate(gc, 0, 0,centre + (hub_margin + hub_size + indent) * Math::cos(degrees_to_radians(text_number * text_gap)), centre + (hub_margin + hub_size + indent) * Math::sin(degrees_to_radians(text_number * text_gap)), "#{row}") {
+          self.pointsize = 10
+          self.font("assets/fonts/HelveticaNeue.ttf")
+          self.rotation = text_gap * text_number
+          line += 1
+        }
+      end    
+      text_number += 1
     end
     
     
@@ -157,5 +170,11 @@ class Diagnostic < ActiveRecord::Base
   
   def radians_to_degrees(rad)
     rad * 180 / Math::PI
+  end
+  
+  def word_wrap(text, columns = 20)
+    text.split("\n").collect do |line|
+      line.length > columns ? line.gsub(/(.{1,#{columns}})(\s+|$)/, "\\1\n").strip : line
+    end * "\n"
   end
 end
