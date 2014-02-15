@@ -1,0 +1,21 @@
+- if @question.errors.any?
+  .alert.alert-danger
+    %button.close{"data-dismiss" => "alert"} x
+    %h3
+      = pluralize(@question.errors.count, "error")
+      prevented this question from being saved:
+    %ul
+      - @question.errors.full_messages.each do |msg|
+        %li= msg
+%h2
+  = crud_state_to_name(@crud_state)
+  question
+%h4
+  = crud_state_to_name(@crud_state)
+  question for #{@question.segment.name}
+= simple_form_for(@question, :html => { class: "well" }) do |f|
+  .form-inputs
+    = f.input :name, :input_html => {:rows => 5}
+    %input{name: "question[segment_id]", type: "hidden", value: @question.segment.id}/
+  .form-actions
+    = f.submit "Save", class: "btn"

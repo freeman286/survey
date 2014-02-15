@@ -8,7 +8,7 @@ Survey::Application.routes.draw do
   match "/segments/new/:diagnostic_id" => "segments#new", :as => 'new_segment'
   match "/segments/:segment_id/questions" => "segments#questions", :as => 'segment_questions'
   
-  resources :questions
+  resources :questions, :except => :index
   match "/questions/new/:segment_id" => "questions#new", :as => 'new_question'
   
   resources :sub_questions
