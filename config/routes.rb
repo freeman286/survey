@@ -4,7 +4,7 @@ Survey::Application.routes.draw do
   match "/diagnostics/:diagnostic_id/admin" => "diagnostics#admin", :as => 'diagnostic_admin'
   match "/diagnostics/:diagnostic_id/click/:x/:y/:rotation" => "diagnostics#click", :as => 'diagnostic_click'
   
-  resources :segments
+  resources :segments, :except => :index
   match "/segments/new/:diagnostic_id" => "segments#new", :as => 'new_segment'
   match "/segments/:segment_id/questions" => "segments#questions", :as => 'segment_questions'
   
