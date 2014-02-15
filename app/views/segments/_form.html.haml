@@ -1,27 +1,21 @@
-<% if @segment.errors.any? || @segment.diagnostic.errors.any?%>
-<div class="alert alert-danger">
-  <button class="close" data-dismiss="alert">x</button>
-  <h3><%= pluralize(@segment.errors.count + @segment.diagnostic.errors.count, "error") %> prevented this segment from being saved:</h3>
-  <ul>
-      <% (@segment.errors.full_messages + @segment.diagnostic.errors.full_messages).each do |msg| %>
-	    <li><%= msg %></li>
-    <% end %>
-</ul>
-</div>
-<% end %>
-
-<h2><%= crud_state_to_name(@crud_state) %> segment</h2>
-
-<h4><%= crud_state_to_name(@crud_state) %> segment for <%= @segment.diagnostic.name %></h4>
-
-<%= simple_form_for(@segment, :html => { class: "well" }) do |f| %>
-
-  <div class="form-inputs">
-    <%= f.input :name, :html => { class: "label" } %>
-	<input type='hidden' name='segment[diagnostic_id]' value = '<%= @segment.diagnostic.id %>'/>
-  </div>
-
-  <div class="form-actions">
-    <%= f.submit "Save", class: "btn"  %>
-  </div>
-<% end %>
+- if @segment.errors.any? || @segment.diagnostic.errors.any?
+  .alert.alert-danger
+    %button.close{"data-dismiss" => "alert"} x
+    %h3
+      = pluralize(@segment.errors.count + @segment.diagnostic.errors.count, "error")
+      prevented this segment from being saved:
+    %ul
+      - (@segment.errors.full_messages + @segment.diagnostic.errors.full_messages).each do |msg|
+        %li= msg
+%h2
+  = crud_state_to_name(@crud_state)
+  segment
+%h4
+  = crud_state_to_name(@crud_state)
+  segment for #{@segment.diagnostic.name}
+= simple_form_for(@segment, :html => { class: "well" }) do |f|
+  .form-inputs
+    = f.input :name, :html => { class: "label" }
+    %input{name: "segment[diagnostic_id]", type: "hidden", value: @segment.diagnostic.id}/
+  .form-actions
+    = f.submit "Save", class: "btn"
