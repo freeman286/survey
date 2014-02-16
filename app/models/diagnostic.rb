@@ -92,10 +92,10 @@ class Diagnostic < ActiveRecord::Base
     end
     
     self.segments.each do |seg|
+      line = 0
       text = word_wrap(seg.name, 20)
       rows = text.split("\n")
       if rows.count == 1
-        line = 0
         rows.each do |row| 
           scratch_gc = Draw.new
           scratch_gc.pointsize(10)
@@ -115,7 +115,6 @@ class Diagnostic < ActiveRecord::Base
         end    
         text_number += 1
       else
-        line = 0
         rows.each do |row| 
           scratch_gc = Draw.new
           scratch_gc.pointsize(10)
@@ -202,10 +201,10 @@ class Diagnostic < ActiveRecord::Base
               angle = 90 - (360 - text_gap * text_number)
               if line == 0
                 x -= (height / 2) * Math::cos(degrees_to_radians(angle))
-                y += (height / 2) * Math::sin(degrees_to_radians(angle))
+                y -= (height / 2) * Math::sin(degrees_to_radians(angle))
               elsif line == 1
                 x += (height / 2) * Math::cos(degrees_to_radians(angle))
-                y -= (height / 2) * Math::sin(degrees_to_radians(angle))
+                y += (height / 2) * Math::sin(degrees_to_radians(angle))
               end
             end
             puts "#{line} #{angle}"
