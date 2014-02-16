@@ -104,7 +104,6 @@ class Diagnostic < ActiveRecord::Base
           width = metrics.width 
           height = (metrics.bounds.y2 - metrics.bounds.y1).round
           indent = (inner_radius - hub_size - hub_margin - width ) / 2
-          puts "#{row} #{indent}"
           x = centre + (hub_margin + hub_size + indent) * Math::cos(degrees_to_radians(text_number * text_gap))
           y = centre + (hub_margin + hub_size + indent) * Math::sin(degrees_to_radians(text_number * text_gap))
           Draw.new.annotate(gc, 0, 0,x, y, "#{row}") {
@@ -125,7 +124,7 @@ class Diagnostic < ActiveRecord::Base
           width = metrics.width 
           height = (metrics.bounds.y2 - metrics.bounds.y1).round
           indent = (inner_radius - hub_size - hub_margin - width ) / 2
-          puts "#{row} #{indent}"
+          puts "#{row}"
           x = centre + (hub_margin + hub_size + indent) * Math::cos(degrees_to_radians(text_number * text_gap))
           y = centre + (hub_margin + hub_size + indent) * Math::sin(degrees_to_radians(text_number * text_gap))
             if text_gap * text_number == 0
@@ -140,13 +139,13 @@ class Diagnostic < ActiveRecord::Base
               end
             elsif text_gap * text_number == 90
               puts "90"
-              angle = 90 - (text_gap * text_number - 90)
+              angle = 90 - (text_gap * text_number)
               if line == 0
-                x -= (height / 2) * Math::cos(degrees_to_radians(angle))
-                y -= (height / 2) * Math::sin(degrees_to_radians(angle))
-              elsif line == 1         
                 x += (height / 2) * Math::cos(degrees_to_radians(angle))
                 y += (height / 2) * Math::sin(degrees_to_radians(angle))
+              elsif line == 1         
+                x -= (height / 2) * Math::cos(degrees_to_radians(angle))
+                y -= (height / 2) * Math::sin(degrees_to_radians(angle))
               end
             elsif text_gap * text_number <= 90
               puts "<90"
@@ -209,6 +208,7 @@ class Diagnostic < ActiveRecord::Base
                 y -= (height / 2) * Math::sin(degrees_to_radians(angle))
               end
             end
+            puts "#{line} #{angle}"
             line += 1  
             Draw.new.annotate(gc, 0, 0, x, y, "#{row}") {
               self.pointsize = 10
