@@ -92,26 +92,126 @@ class Diagnostic < ActiveRecord::Base
     end
     
     self.segments.each do |seg|
-      line = 0
       text = word_wrap(seg.name, 20)
       rows = text.split("\n")
-      rows.each do |row| 
-         scratch_gc = Draw.new
-         scratch_gc.pointsize(10)
-         scratch_gc.font("assets/fonts/HelveticaNeue.ttf")
-         metrics = scratch_gc.get_type_metrics(row)
-         width = metrics.width 
-         height = (metrics.bounds.y2 - metrics.bounds.y1).round
-         indent = (inner_radius - hub_size - hub_margin - width ) / 2
-         puts "#{row} #{indent}"
-         Draw.new.annotate(gc, 0, 0,centre + (hub_margin + hub_size + indent) * Math::cos(degrees_to_radians(text_number * text_gap)), centre + (hub_margin + hub_size + indent) * Math::sin(degrees_to_radians(text_number * text_gap)), "#{row}") {
-          self.pointsize = 10
-          self.font("assets/fonts/HelveticaNeue.ttf")
-          self.rotation = text_gap * text_number
-          line += 1
-        }
-      end    
-      text_number += 1
+      if rows.count == 1
+        line = 0
+        rows.each do |row| 
+          scratch_gc = Draw.new
+          scratch_gc.pointsize(10)
+          scratch_gc.font("assets/fonts/HelveticaNeue.ttf")
+          metrics = scratch_gc.get_type_metrics(row)
+          width = metrics.width 
+          height = (metrics.bounds.y2 - metrics.bounds.y1).round
+          indent = (inner_radius - hub_size - hub_margin - width ) / 2
+          puts "#{row} #{indent}"
+          x = centre + (hub_margin + hub_size + indent) * Math::cos(degrees_to_radians(text_number * text_gap))
+          y = centre + (hub_margin + hub_size + indent) * Math::sin(degrees_to_radians(text_number * text_gap))
+          Draw.new.annotate(gc, 0, 0,x, y, "#{row}") {
+            self.pointsize = 10
+            self.font("assets/fonts/HelveticaNeue.ttf")
+            self.rotation = text_gap * text_number
+            line += 1
+          }
+        end    
+        text_number += 1
+      else
+        line = 0
+        rows.each do |row| 
+          scratch_gc = Draw.new
+          scratch_gc.pointsize(10)
+          scratch_gc.font("assets/fonts/HelveticaNeue.ttf")
+          metrics = scratch_gc.get_type_metrics(row)
+          width = metrics.width 
+          height = (metrics.bounds.y2 - metrics.bounds.y1).round
+          indent = (inner_radius - hub_size - hub_margin - width ) / 2
+          puts "#{row} #{indent}"
+          x = centre + (hub_margin + hub_size + indent) * Math::cos(degrees_to_radians(text_number * text_gap))
+          y = centre + (hub_margin + hub_size + indent) * Math::sin(degrees_to_radians(text_number * text_gap))
+          if line == 0
+            if text_gap * text_number == 0
+              angle = 90 - (text_gap * text_number)
+              if line == 0
+                x += height * Math::cos(degrees_to_radians(angle))
+                y += height * Math::sin(degrees_to_radians(angle))
+              elsif line == 1         
+                x -= height * Math::cos(degrees_to_radians(angle))
+                y -= height * Math::sin(degrees_to_radians(angle))
+              end
+            elsif text_gap * text_number == 90
+              angle = 90 - (text_gap * text_number)
+              if line == 0
+                x += height * Math::cos(degrees_to_radians(angle))
+                y += height * Math::sin(degrees_to_radians(angle))
+              elsif line == 1         
+                x -= height * Math::cos(degrees_to_radians(angle))
+                y -= height * Math::sin(degrees_to_radians(angle))
+              end
+            elsif text_gap * text_number <= 90
+              angle = 90 - (text_gap * text_number - 90)
+              if line == 0
+                x += height * Math::cos(degrees_to_radians(angle))
+                y += height * Math::sin(degrees_to_radians(angle))
+              elsif line == 1         
+                x -= height * Math::cos(degrees_to_radians(angle))
+                y -= height * Math::sin(degrees_to_radians(angle))
+              end
+            elsif text_gap * text_number == 180
+              angle = 90 - (text_gap * text_number)
+               if line == 0
+                 x += height * Math::cos(degrees_to_radians(angle))
+                 y -= height * Math::sin(degrees_to_radians(angle))
+               elsif line == 1         
+                 x -= height * Math::cos(degrees_to_radians(angle))
+                 y += height * Math::sin(degrees_to_radians(angle))
+               end
+            elsif text_gap * text_number <= 180 && text_gap * text_number < 90
+              angle = 90 - (270 - text_gap * text_number)
+              if line == 0
+                x += height * Math::cos(degrees_to_radians(angle))
+                y -= height * Math::sin(degrees_to_radians(angle))
+              elsif line == 1         
+                x -= height * Math::cos(degrees_to_radians(angle))
+                y += height * Math::sin(degrees_to_radians(angle))
+              end
+            elsif text_gap * text_number == 270  
+              angle = 90 - (text_gap * text_number)
+              if line == 0
+                x -= height * Math::cos(degrees_to_radians(angle))
+                y -= height * Math::sin(degrees_to_radians(angle))
+              elsif line == 1         
+                x += height * Math::cos(degrees_to_radians(angle))
+                y += height * Math::sin(degrees_to_radians(angle))
+              end
+            elsif text_gap * text_number <= 270 && text_gap * text_number > 180
+              angle = 90 - (text_gap * text_number - 270)
+              if line == 0
+                x -= height * Math::cos(degrees_to_radians(angle))
+                y -= height * Math::sin(degrees_to_radians(angle))
+              elsif line == 1         
+                x += height * Math::cos(degrees_to_radians(angle))
+                y += height * Math::sin(degrees_to_radians(angle))
+              end
+            else
+              angle = 90 - (360 - text_gap * text_number)
+              if line == 0
+                x -= height * Math::cos(degrees_to_radians(angle))
+                y += height * Math::sin(degrees_to_radians(angle))
+              elsif line == 1
+                x += height * Math::cos(degrees_to_radians(angle))
+                y -= height * Math::sin(degrees_to_radians(angle))
+              end
+            end  
+          end
+          Draw.new.annotate(gc, 0, 0, x, y, "#{row}") {
+            self.pointsize = 10
+            self.font("assets/fonts/HelveticaNeue.ttf")
+            self.rotation = text_gap * text_number
+            line += 1
+          }
+        end    
+        text_number += 1
+      end
     end
     
     
