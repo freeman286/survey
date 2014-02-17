@@ -127,76 +127,36 @@ class Diagnostic < ActiveRecord::Base
           y = centre + (hub_margin + hub_size + indent) * Math::sin(degrees_to_radians(text_number * text_gap))
             if text_gap * text_number == 0
               angle = 90 - (text_gap * text_number)
-              if line == 0
-                x -= (height / 2) * Math::cos(degrees_to_radians(angle))
-                y -= (height / 2) * Math::sin(degrees_to_radians(angle))
-              elsif line == 1         
-                x += height * Math::cos(degrees_to_radians(angle))
-                y += height * Math::sin(degrees_to_radians(angle))
-              end
+              x += x_adjust(angle, line, height, 1)
+              y += y_adjust(angle, line, height, 1)
             elsif text_gap * text_number == 90
               angle = 90 - (text_gap * text_number)
-              if line == 0
-                x += (height / 2) * Math::cos(degrees_to_radians(angle))
-                y += (height / 2) * Math::sin(degrees_to_radians(angle))
-              elsif line == 1         
-                x -= height * Math::cos(degrees_to_radians(angle))
-                y -= height * Math::sin(degrees_to_radians(angle))
-              end
+              x += x_adjust(angle, line, height, 2)
+              y += y_adjust(angle, line, height, 2)
             elsif text_gap * text_number <= 90
               angle = 90 - (text_gap * text_number)
-              if line == 0
-                x += (height / 2) * Math::cos(degrees_to_radians(angle))
-                y -= (height / 2) * Math::sin(degrees_to_radians(angle))
-              elsif line == 1         
-                x -= height * Math::cos(degrees_to_radians(angle))
-                y += height * Math::sin(degrees_to_radians(angle))
-              end
+              x += x_adjust(angle, line, height, 2)
+              y += y_adjust(angle, line, height, 1)
             elsif text_gap * text_number == 180
               angle = 90 - (text_gap * text_number)
-               if line == 0
-                 x += (height / 2) * Math::cos(degrees_to_radians(angle))
-                 y -= (height / 2) * Math::sin(degrees_to_radians(angle))
-               elsif line == 1         
-                 x -= height * Math::cos(degrees_to_radians(angle))
-                 y += height * Math::sin(degrees_to_radians(angle))
-               end
+               x += x_adjust(angle, line, height, 1)
+               y += y_adjust(angle, line, height, 1)
             elsif text_gap * text_number <= 180 && text_gap * text_number > 90
               angle = 90 - (270 - text_gap * text_number)
-              if line == 0
-                x += (height / 2) * Math::cos(degrees_to_radians(angle))
-                y -= (height / 2) * Math::sin(degrees_to_radians(angle))
-              elsif line == 1         
-                x -= height * Math::cos(degrees_to_radians(angle))
-                y += height * Math::sin(degrees_to_radians(angle))
-              end
+              x += x_adjust(angle, line, height, 2)
+              y += y_adjust(angle, line, height, 1)
             elsif text_gap * text_number == 270
               angle = 90 - (text_gap * text_number)
-              if line == 0
-                x += (height / 2) * Math::cos(degrees_to_radians(angle))
-                y += (height / 2) * Math::sin(degrees_to_radians(angle))
-              elsif line == 1         
-                x -= height * Math::cos(degrees_to_radians(angle))
-                y -= height * Math::sin(degrees_to_radians(angle))
-              end
+              x += x_adjust(angle, line, height, 2)
+              y += y_adjust(angle, line, height, 2)
             elsif text_gap * text_number <= 270 && text_gap * text_number > 180
               angle = 90 - (text_gap * text_number - 270)
-              if line == 0
-                x += (height / 2) * Math::cos(degrees_to_radians(angle))
-                y += (height / 2) * Math::sin(degrees_to_radians(angle))
-              elsif line == 1         
-                x -= height * Math::cos(degrees_to_radians(angle))
-                y -= height * Math::sin(degrees_to_radians(angle))
-              end
+              x += x_adjust(angle, line, height, 2)
+              y += y_adjust(angle, line, height, 2)
             elsif text_gap * text_number <= 360 && text_gap * text_number > 270
               angle = 90 - (360 - text_gap * text_number)
-              if line == 0
-                x -= (height / 2) * Math::cos(degrees_to_radians(angle))
-                y -= (height / 2) * Math::sin(degrees_to_radians(angle))
-              elsif line == 1
-                x += height * Math::cos(degrees_to_radians(angle))
-                y += height * Math::sin(degrees_to_radians(angle))
-              end
+              x += x_adjust(angle, line, height, 1)
+              y += y_adjust(angle, line, height, 1)
             end
             line += 1  
             Draw.new.annotate(gc, 0, 0, x, y, "#{row}") {
@@ -271,5 +231,39 @@ class Diagnostic < ActiveRecord::Base
     text.split("\n").collect do |line|
       line.length > columns ? line.gsub(/(.{1,#{columns}})(\s+|$)/, "\\1\n").strip : line
     end * "\n"
+  end
+  
+  def x_adjust(angle, line, height, method)
+    case method
+      when 1
+        if line == 0
+          0 - ((height / 2) * Math::cos(degrees_to_radians(angle)))
+        elsif line == 1         
+          height * Math::cos(degrees_to_radians(angle))
+        end
+      when 2
+        if line == 0
+          (height / 2) * Math::cos(degrees_to_radians(angle))
+        elsif line == 1         
+          0 - (height * Math::cos(degrees_to_radians(angle)))
+        end
+    end
+  end
+  
+  def y_adjust(angle, line, height, method)
+    case method
+      when 1
+        if line == 0
+          0 - ((height / 2) * Math::sin(degrees_to_radians(angle)))
+        elsif line == 1         
+          height * Math::sin(degrees_to_radians(angle))
+        end
+      when 2
+        if line == 0
+          (height / 2) * Math::sin(degrees_to_radians(angle))
+        elsif line == 1         
+          0 - (height * Math::sin(degrees_to_radians(angle)))
+        end 
+    end
   end
 end
