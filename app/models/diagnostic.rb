@@ -125,35 +125,36 @@ class Diagnostic < ActiveRecord::Base
           indent = (inner_radius - hub_size - hub_margin - width ) / 2
           x = centre + (hub_margin + hub_size + indent) * Math::cos(degrees_to_radians(text_number * text_gap))
           y = centre + (hub_margin + hub_size + indent) * Math::sin(degrees_to_radians(text_number * text_gap))
-            if text_gap * text_number == 0
+          case text_gap * text_number
+            when 0
               angle = 90 - (text_gap * text_number)
               x += x_adjust(angle, line, height, 1)
               y += y_adjust(angle, line, height, 1)
-            elsif text_gap * text_number == 90
+            when 90 
               angle = 90 - (text_gap * text_number)
               x += x_adjust(angle, line, height, 2)
               y += y_adjust(angle, line, height, 2)
-            elsif text_gap * text_number <= 90
+            when 0..90
               angle = 90 - (text_gap * text_number)
               x += x_adjust(angle, line, height, 2)
               y += y_adjust(angle, line, height, 1)
-            elsif text_gap * text_number == 180
+            when 180
               angle = 90 - (text_gap * text_number)
                x += x_adjust(angle, line, height, 1)
                y += y_adjust(angle, line, height, 1)
-            elsif text_gap * text_number <= 180 && text_gap * text_number > 90
+            when 90..180
               angle = 90 - (270 - text_gap * text_number)
               x += x_adjust(angle, line, height, 2)
               y += y_adjust(angle, line, height, 1)
-            elsif text_gap * text_number == 270
+            when 270
               angle = 90 - (text_gap * text_number)
               x += x_adjust(angle, line, height, 2)
               y += y_adjust(angle, line, height, 2)
-            elsif text_gap * text_number <= 270 && text_gap * text_number > 180
+            when 180..270
               angle = 90 - (text_gap * text_number - 270)
               x += x_adjust(angle, line, height, 2)
               y += y_adjust(angle, line, height, 2)
-            elsif text_gap * text_number <= 360 && text_gap * text_number > 270
+            when 270..360
               angle = 90 - (360 - text_gap * text_number)
               x += x_adjust(angle, line, height, 1)
               y += y_adjust(angle, line, height, 1)
