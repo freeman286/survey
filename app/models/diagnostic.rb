@@ -128,36 +128,36 @@ class Diagnostic < ActiveRecord::Base
           case text_gap * text_number
             when 0
               angle = 90 - (text_gap * text_number)
-              x += x_adjust(angle, line, height, 1)
-              y += y_adjust(angle, line, height, 1)
+              x += x_adjust(angle, line, height, true)
+              y += y_adjust(angle, line, height, true)
             when 90 
               angle = 90 - (text_gap * text_number)
-              x += x_adjust(angle, line, height, 2)
-              y += y_adjust(angle, line, height, 2)
+              x += x_adjust(angle, line, height, false)
+              y += y_adjust(angle, line, height, false)
             when 0..90
               angle = 90 - (text_gap * text_number)
-              x += x_adjust(angle, line, height, 2)
-              y += y_adjust(angle, line, height, 1)
+              x += x_adjust(angle, line, height, false)
+              y += y_adjust(angle, line, height, true)
             when 180
               angle = 90 - (text_gap * text_number)
-               x += x_adjust(angle, line, height, 1)
-               y += y_adjust(angle, line, height, 1)
+               x += x_adjust(angle, line, height, true)
+               y += y_adjust(angle, line, height, true)
             when 90..180
               angle = 90 - (270 - text_gap * text_number)
-              x += x_adjust(angle, line, height, 2)
-              y += y_adjust(angle, line, height, 1)
+              x += x_adjust(angle, line, height, false)
+              y += y_adjust(angle, line, height, true)
             when 270
               angle = 90 - (text_gap * text_number)
-              x += x_adjust(angle, line, height, 2)
-              y += y_adjust(angle, line, height, 2)
+              x += x_adjust(angle, line, height, false)
+              y += y_adjust(angle, line, height, false)
             when 180..270
               angle = 90 - (text_gap * text_number - 270)
-              x += x_adjust(angle, line, height, 2)
-              y += y_adjust(angle, line, height, 2)
+              x += x_adjust(angle, line, height, false)
+              y += y_adjust(angle, line, height, false)
             when 270..360
               angle = 90 - (360 - text_gap * text_number)
-              x += x_adjust(angle, line, height, 1)
-              y += y_adjust(angle, line, height, 1)
+              x += x_adjust(angle, line, height, true)
+              y += y_adjust(angle, line, height, true)
             end
             line += 1  
             Draw.new.annotate(gc, 0, 0, x, y, "#{row}") {
@@ -234,37 +234,35 @@ class Diagnostic < ActiveRecord::Base
     end * "\n"
   end
   
-  def x_adjust(angle, line, height, method)
-    case method
-      when 1
-        if line == 0
-          0 - ((height / 2) * Math::cos(degrees_to_radians(angle)))
-        elsif line == 1         
-          height * Math::cos(degrees_to_radians(angle))
-        end
-      when 2
-        if line == 0
-          (height / 2) * Math::cos(degrees_to_radians(angle))
-        elsif line == 1         
-          0 - (height * Math::cos(degrees_to_radians(angle)))
-        end
+  def x_adjust(angle, line, height, positive)
+    if positive
+      if line == 0
+        0 - ((height / 2) * Math::cos(degrees_to_radians(angle)))
+      elsif line == 1         
+        height * Math::cos(degrees_to_radians(angle))
+      end
+    else
+      if line == 0
+        (height / 2) * Math::cos(degrees_to_radians(angle))
+      elsif line == 1         
+        0 - (height * Math::cos(degrees_to_radians(angle)))
+      end
     end
   end
   
-  def y_adjust(angle, line, height, method)
-    case method
-      when 1
-        if line == 0
-          0 - ((height / 2) * Math::sin(degrees_to_radians(angle)))
-        elsif line == 1         
-          height * Math::sin(degrees_to_radians(angle))
-        end
-      when 2
-        if line == 0
-          (height / 2) * Math::sin(degrees_to_radians(angle))
-        elsif line == 1         
-          0 - (height * Math::sin(degrees_to_radians(angle)))
-        end 
+  def y_adjust(angle, line, height, positive)
+    if positive
+      if line == 0
+        0 - ((height / 2) * Math::sin(degrees_to_radians(angle)))
+      elsif line == 1         
+        height * Math::sin(degrees_to_radians(angle))
+      end
+    else
+      if line == 0
+        (height / 2) * Math::sin(degrees_to_radians(angle))
+      elsif line == 1         
+        0 - (height * Math::sin(degrees_to_radians(angle)))
+      end 
     end
   end
 end
