@@ -1,10 +1,18 @@
 module ApplicationHelper
-	def flash_class(type)
+	def flash_class(type, action_name)
 		case type
 		when :alert
-			"alert-error span12"
+		  if action_name == "admin"
+		    "alert-error"
+		  else
+			  "alert-error span12"
+			end
 		when :notice
-			"alert-success span12"
+		  if action_name == "admin"
+		    "alert-success"
+		  else
+			  "alert-success span12"
+			end
 		else
 			""
 		end
