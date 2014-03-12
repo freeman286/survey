@@ -13,7 +13,7 @@
   - @diagnostics.each do |dia|
     .span12.well.section
       .span2
-        picture goes here
+        =image_tag "wheel_small.png"
       .span8
         %h4= link_to dia.name, diagnostic_path(dia)
         = dia.description
