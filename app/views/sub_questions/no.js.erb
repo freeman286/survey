@@ -1,3 +1,5 @@
 id = <%= @sub_question.id %>;
 $('.yes.'+id).removeClass("btn-success");
 $('.no.'+id).addClass("btn-danger");
+$(".bar").width("<%= @sub_question.question.segment.complete_for_user(current_user) %>%");
+$(".black").html("<%= @sub_question.question.segment.complete_for_user(current_user) %>%&nbsp;Complete");
