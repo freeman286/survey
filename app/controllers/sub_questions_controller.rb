@@ -43,7 +43,7 @@ class SubQuestionsController < ApplicationController
     @crud_state = "update"
     
     if @sub_question.update_attributes(params[:sub_question])
-      redirect_to @sub_question, notice: 'Sub-Question was successfully updated.'
+      redirect_to diagnostic_admin_path(@sub_question.question.segment.diagnostic), notice: 'Sub-Question was successfully updated.'
     else
       render action: "edit"
     end

@@ -23,7 +23,7 @@
     - if !(controller_name == "home" || (controller_name == "diagnostics" && controller.action_name == "admin"))
       .container
         - flash.each do |type, message|
-          %div{class: "alert alert-block #{flash_class type}"}
+          %div{class: "alert alert-block #{flash_class type} span12"}
             %button.close{"data-dismiss" => "alert"} x
             %h4= flash_header message
             %div= message
