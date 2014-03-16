@@ -20,7 +20,7 @@
             - else
               %li= link_to "Register", new_user_registration_path
               %li= link_to "Log In", new_user_session_path
-    - if !(controller_name == "home" || (controller_name == "diagnostics" && controller.action_name == "admin"))
+    - if !(controller_name == "home" || (controller_name == "diagnostics" && controller.action_name == "admin") || (controller_name == "registrations" && controller.action_name == "new"))
       .container
         - flash.each do |type, message|
           %div{class: "alert alert-block #{flash_class type} span12"}
