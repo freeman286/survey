@@ -1,5 +1,5 @@
 module ApplicationHelper
-	def flash_class(type, action_name)
+	def flash_class(type)
 		case type
 		when :alert
 			"alert-error"
