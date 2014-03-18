@@ -128,36 +128,36 @@ class Diagnostic < ActiveRecord::Base
           case text_gap * text_number
             when 0
               angle = 90 - (text_gap * text_number)
-              x += x_adjust(angle, line, height, true)
-              y += y_adjust(angle, line, height, true)
+              x += a_adjust(angle, line, height, true)
+              y += b_adjust(angle, line, height, true)
             when 90 
               angle = 90 - (text_gap * text_number)
-              x += x_adjust(angle, line, height, false)
-              y += y_adjust(angle, line, height, false)
+              x += a_adjust(angle, line, height, false)
+              y += b_adjust(angle, line, height, false)
             when 0..90
               angle = 90 - (text_gap * text_number)
-              x += x_adjust(angle, line, height, false)
-              y += y_adjust(angle, line, height, true)
+              x += a_adjust(angle, line, height, false)
+              y += b_adjust(angle, line, height, true)
             when 180
               angle = 90 - (text_gap * text_number)
-               x += x_adjust(angle, line, height, true)
-               y += y_adjust(angle, line, height, true)
+               x += a_adjust(angle, line, height, true)
+               y += b_adjust(angle, line, height, true)
             when 90..180
               angle = 90 - (270 - text_gap * text_number)
-              x += x_adjust(angle, line, height, false)
-              y += y_adjust(angle, line, height, true)
+              x += b_adjust(angle, line, height, true)
+              y += a_adjust(angle, line, height, false)
             when 270
               angle = 90 - (text_gap * text_number)
-              x += x_adjust(angle, line, height, false)
-              y += y_adjust(angle, line, height, false)
+              x += a_adjust(angle, line, height, false)
+              y += b_adjust(angle, line, height, false)
             when 180..270
               angle = 90 - (text_gap * text_number - 270)
-              x += x_adjust(angle, line, height, false)
-              y += y_adjust(angle, line, height, false)
+              x += b_adjust(angle, line, height, true)
+              y += a_adjust(angle, line, height, true)
             when 270..360
               angle = 90 - (360 - text_gap * text_number)
-              x += x_adjust(angle, line, height, true)
-              y += y_adjust(angle, line, height, true)
+              x += a_adjust(angle, line, height, true)
+              y += b_adjust(angle, line, height, true)
             end
             line += 1  
             Draw.new.annotate(gc, 0, 0, x, y, "#{row}") {
@@ -234,7 +234,7 @@ class Diagnostic < ActiveRecord::Base
     end * "\n"
   end
   
-  def x_adjust(angle, line, height, positive)
+  def a_adjust(angle, line, height, positive)
     if positive
       if line == 0
         0 - ((height / 2) * Math::cos(degrees_to_radians(angle)))
@@ -250,7 +250,7 @@ class Diagnostic < ActiveRecord::Base
     end
   end
   
-  def y_adjust(angle, line, height, positive)
+  def b_adjust(angle, line, height, positive)
     if positive
       if line == 0
         0 - ((height / 2) * Math::sin(degrees_to_radians(angle)))
