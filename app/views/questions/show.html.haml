@@ -32,7 +32,7 @@
 
 
 .gap
-  = link_to "Back to Diagnostic", request.referer
+  = link_to "Back to Diagnostic", diagnostic_path(@question.segment.diagnostic.id)
 
 - @question.sub_questions.each do |subquestion|
   :javascript

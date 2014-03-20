@@ -25,6 +25,9 @@ class DiagnosticsController < ApplicationController
   def show
     @diagnostic = Diagnostic.find(params[:id])
     @crud_state = "show"
+    if request.referer.include?("/diagnostics")
+      session[:segment_id] = ""
+    end
   end
 
   # GET /diagnostics/new
@@ -79,6 +82,7 @@ class DiagnosticsController < ApplicationController
   def click
     @diagnostic = Diagnostic.find(params[:diagnostic_id])
     @segment = @diagnostic.segment_from_x_y_rotation(params[:x],params[:y],params[:rotation])
+    session[:segment_id] = @segment.id
     render action: "show"
   end
   

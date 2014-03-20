@@ -1,12 +1,14 @@
-.well.pad2
-  %h5
-    =@segment.name
-  -@segment.questions.each do |question|
-    %p
-      =link_to question.name, question_path(question)
+- segment = Segment.find(session[:segment_id]) if session[:segment_id].present?
+-if segment
+  .well.pad2
+    %h5
+      =segment.name
+    -segment.questions.each do |question|
+      %p
+        =link_to question.name, question_path(question)
 
-  -if user_signed_in? && @segment.complete_for_user(current_user) > 0
-    .progress.progress-striped
-      .bar{:style => "width:"+"#{@segment.complete_for_user(current_user)}%"}
-        .black
-          ="#{@segment.complete_for_user(current_user)}% Complete"
+    -if user_signed_in? && segment.complete_for_user(current_user) > 0
+      .progress.progress-striped
+        .bar{:style => "width:"+"#{segment.complete_for_user(current_user)}%"}
+          .black
+            ="#{segment.complete_for_user(current_user)}% Complete"
