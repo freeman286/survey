@@ -5,8 +5,8 @@
     %p
       =link_to question.name, question_path(question)
 
-  -if user_signed_in? && @segment.complete_for_user(current_user) > 0
+  -if user_signed_in?
     .progress.progress-striped
       .bar{:style => "width:"+"#{@segment.complete_for_user(current_user)}%"}
         .black
-          ="#{@segment.complete_for_user(current_user)}% Complete"
+          ="#{@segment.complete_for_user(current_user)}%&nbsp;Complete".html_safe
