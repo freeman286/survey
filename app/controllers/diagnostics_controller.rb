@@ -24,12 +24,8 @@ class DiagnosticsController < ApplicationController
   # GET /diagnostics/1
   def show
     @diagnostic = Diagnostic.find(params[:id])
+    @segment = Segment.find(params[:segment_id])
     @crud_state = "show"
-    if session[:segment_id]
-      if !(Segment.find(session[:segment_id]).diagnostic == @diagnostic)
-        session[:segment_id] = ""
-      end
-    end
   end
 
   # GET /diagnostics/new
@@ -84,7 +80,6 @@ class DiagnosticsController < ApplicationController
   def click
     @diagnostic = Diagnostic.find(params[:diagnostic_id])
     @segment = @diagnostic.segment_from_x_y_rotation(params[:x],params[:y],params[:rotation])
-    session[:segment_id] = @segment.id
     render action: "show"
   end
   

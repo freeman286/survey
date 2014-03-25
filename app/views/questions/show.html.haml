@@ -18,21 +18,23 @@
           =link_to 'No', sub_question_no_path(subquestion), :remote => true, :class => "btn no #{subquestion.id} #{'btn-danger' if subquestion.no?(current_user)}"
    
 
-.span2
-  =link_to 'Previous question', question_path(previous_id_for_question(@question)), :class => "btn btn-primary pull-left"
+-if @question.segment.questions.count > 1
+  .span2
+    =link_to 'Previous question', question_path(previous_id_for_question(@question)), :class => "btn btn-primary pull-left"
  
-.pad1.span7
+.pad1{class: "#{@question.segment.questions.count > 1? 'span7' : 'span12'}"}
   .progress.progress-striped
     .bar{:style => "width:"+"#{@question.segment.complete_for_user(current_user)}%"}
       .black
         ="#{@question.segment.complete_for_user(current_user)}%&nbsp;Complete".html_safe
 
-.span2  
-  =link_to 'Next question', question_path(next_id_for_question(@question)), :class => "btn btn-primary pull-right"
+-if @question.segment.questions.count > 1
+  .span2  
+    =link_to 'Next question', question_path(next_id_for_question(@question)), :class => "btn btn-primary pull-right"
 
 
 .gap
-  = link_to "Back to Diagnostic", diagnostic_path(@question.segment.diagnostic.id)
+  = link_to "Back to Diagnostic", diagnostic_segment_path(@question.segment.diagnostic.id, @question.segment.id)
 
 - @question.sub_questions.each do |subquestion|
   -if subquestion.evidence.present?

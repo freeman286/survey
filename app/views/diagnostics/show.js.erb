@@ -1,4 +1,2 @@
-<% if session[:segment_id].present? %>
 $("#questions").html('<%= escape_javascript(render('segments/questions'))%>');
-$("#wheel").rotate({animateTo:<%= Segment.find(session[:segment_id].to_i).segment_roation %>});
-<% end %>
+$("#wheel").rotate({animateTo:<%= @segment.segment_roation %>});

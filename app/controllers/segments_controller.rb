@@ -45,7 +45,7 @@ class SegmentsController < ApplicationController
   end
 
   def questions
-    @segment = Segment.find(session[:segment_id])
+    @segment = Segment.find(params[:segment_id])
   end
 
   # PUT /segments/1

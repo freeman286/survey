@@ -23,8 +23,8 @@
 
 .fillright
   %div#questions
-    -if session[:segment_id].present?
-      =render('segments/questions')
+    -if @segment
+      =render 'segments/questions', :@segment => @segment
     -else
       .alert.small
         %h3
@@ -33,7 +33,8 @@
         Click on the spokes to navigate around the various questions
   
 .span12 
-  =link_to "Back to all diagnostics", diagnostics_path, :params => {params[:segment_id] => session[:segment_id]}
+  =link_to "Back to all diagnostics", diagnostics_path
+  
 
 :javascript
   $("#wheelcontainer").mousemove(function(e){
@@ -55,7 +56,7 @@
       });
     $(window).bind("popstate", function() {
       $.getScript(location.href);
-      $("#wheel").rotate(#{Segment.find(session[:segment_id].to_i).segment_roation if session[:segment_id].to_i != 0});
+      $("#wheel").rotate(#{@segment.segment_roation if @segment});
     });  
     });
   }
