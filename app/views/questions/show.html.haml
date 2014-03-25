@@ -35,13 +35,14 @@
   = link_to "Back to Diagnostic", diagnostic_path(@question.segment.diagnostic.id)
 
 - @question.sub_questions.each do |subquestion|
-  :javascript
-    $(function ()  
-    {
-      $("##{subquestion.id}").popover(
+  -if subquestion.evidence.present?
+    :javascript
+      $(function ()  
       {
-         trigger: 'hover',
-         html: true,
-         placement: 'right',
+        $("##{subquestion.id}").popover(
+        {
+           trigger: 'hover',
+           html: true,
+           placement: 'right',
+        });
       });
-    });

@@ -8,8 +8,6 @@ class SubQuestion < ActiveRecord::Base
   
   validates :name, presence: true, length: { minimum: 2}
   
-  validates :evidence, presence: true, length: { minimum: 2}
-  
   validates :question_id, presence: true
   
   def yes?(user)
