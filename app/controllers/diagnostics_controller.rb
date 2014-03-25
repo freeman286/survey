@@ -24,7 +24,7 @@ class DiagnosticsController < ApplicationController
   # GET /diagnostics/1
   def show
     @diagnostic = Diagnostic.find(params[:id])
-    @segment = Segment.find(params[:segment_id])
+    @segment = Segment.find(params[:segment_id]) if params[:segment_id]
     @crud_state = "show"
   end
 
