@@ -25,7 +25,7 @@ class DiagnosticsController < ApplicationController
   def show
     @diagnostic = Diagnostic.find(params[:id])
     @crud_state = "show"
-    if !request.referer.include?("/questions")
+    if !(Segment.find(session[:segment_id]).diagnostic == @diagnostic)
       session[:segment_id] = ""
     end
   end
