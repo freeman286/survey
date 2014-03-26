@@ -92,13 +92,14 @@ class Diagnostic < ActiveRecord::Base
     end
     
     self.segments.each do |seg|
+      font_size = 10
       line = 0
       text = word_wrap(seg.name, 20)
       rows = text.split("\n")
       if rows.count == 1
         rows.each do |row| 
           scratch_gc = Draw.new
-          scratch_gc.pointsize(10)
+          scratch_gc.pointsize(font_size)
           scratch_gc.font("assets/fonts/HelveticaNeue.ttf")
           metrics = scratch_gc.get_type_metrics(row)
           width = metrics.width 
@@ -107,7 +108,7 @@ class Diagnostic < ActiveRecord::Base
           x = centre + (hub_margin + hub_size + indent) * Math::cos(degrees_to_radians(text_number * text_gap))
           y = centre + (hub_margin + hub_size + indent) * Math::sin(degrees_to_radians(text_number * text_gap))
           Draw.new.annotate(gc, 0, 0,x, y, "#{row}") {
-            self.pointsize = 10
+            self.pointsize = font_size
             self.font("assets/fonts/HelveticaNeue.ttf")
             self.rotation = text_gap * text_number
             line += 1
@@ -117,7 +118,7 @@ class Diagnostic < ActiveRecord::Base
       else
         rows.each do |row| 
           scratch_gc = Draw.new
-          scratch_gc.pointsize(10)
+          scratch_gc.pointsize(font_size)
           scratch_gc.font("assets/fonts/HelveticaNeue.ttf")
           metrics = scratch_gc.get_type_metrics(row)
           width = metrics.width 
@@ -161,7 +162,7 @@ class Diagnostic < ActiveRecord::Base
             end
             line += 1  
             Draw.new.annotate(gc, 0, 0, x, y, "#{row}") {
-              self.pointsize = 10
+              self.pointsize = font_size
               self.font("assets/fonts/HelveticaNeue.ttf")
               self.rotation = text_gap * text_number
             }
