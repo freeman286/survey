@@ -15,7 +15,7 @@ class Diagnostic < ActiveRecord::Base
     g.hide_axes = false
     g.hide_text = false
     g.transparent_background = false
-    g.legend_font_size = 11
+    g.legend_font_size = 10
     g.bottom_margin = 40
     g.font = ("app/assets/fonts/HelveticaNeue.ttf")
     g.theme = {
@@ -117,7 +117,7 @@ class Diagnostic < ActiveRecord::Base
       else
         rows.each do |row| 
           scratch_gc = Draw.new
-          scratch_gc.pointsize(10)
+          scratch_gc.pointsize(11)
           scratch_gc.font("assets/fonts/HelveticaNeue.ttf")
           metrics = scratch_gc.get_type_metrics(row)
           width = metrics.width 
