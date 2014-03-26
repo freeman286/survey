@@ -34,6 +34,7 @@ class Diagnostic < ActiveRecord::Base
   end
   
   def make_wheel
+    font_size = 12
     inner_radius = 190
     inner_diameter = inner_radius * 2 
     border_width = 10
@@ -92,7 +93,6 @@ class Diagnostic < ActiveRecord::Base
     end
     
     self.segments.each do |seg|
-      font_size = 10
       line = 0
       text = word_wrap(seg.name, 20)
       rows = text.split("\n")
