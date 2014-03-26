@@ -161,7 +161,7 @@ class Diagnostic < ActiveRecord::Base
             end
             line += 1  
             Draw.new.annotate(gc, 0, 0, x, y, "#{row}") {
-              self.pointsize = 10
+              self.pointsize = 11
               self.font("assets/fonts/HelveticaNeue.ttf")
               self.rotation = text_gap * text_number
             }
