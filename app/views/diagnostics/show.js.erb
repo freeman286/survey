@@ -1,2 +1,4 @@
-$("#questions").html('<%= escape_javascript(render('segments/questions'))%>');
-$("#wheel").rotate({animateTo:<%= @segment.segment_roation %>});
+<% if @segment %>
+	$("#questions").html('<%= escape_javascript(render 'segments/questions', :@segment => @segment)%>');
+	$("#wheel").rotate({animateTo:<%= @segment.segment_roation %>});
+<% end %>
