@@ -13,7 +13,7 @@
         .container
           = link_to "Home", home_index_path, class: "brand"
           %ul.nav.navbar-nav
-            %li= link_to "All Diagnostics", diagnostics_path
+            %li= link_to "Results", diagnostics_path
           %ul.nav.navbar-nav.pull-right
             - if user_signed_in?
               %li= link_to current_user.full_name, edit_user_registration_path

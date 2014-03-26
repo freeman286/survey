@@ -22,7 +22,7 @@
   .span2
     =link_to 'Previous question', question_path(previous_id_for_question(@question)), :class => "btn btn-primary pull-left"
  
-.pad1{class: "#{@question.segment.questions.count > 1? 'span7' : 'span12'}"}
+.pad1{class: "#{@question.segment.questions.count > 1? 'span7' : ''}"}
   .progress.progress-striped
     .bar{:style => "width:"+"#{@question.segment.complete_for_user(current_user)}%"}
       .black
