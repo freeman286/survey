@@ -34,11 +34,6 @@
   
 .span12 
   =link_to "Back to all diagnostics", diagnostics_path
-  
-.span12
-  -link = "/diagnostics/#{@diagnostic.id}/click/"
-  -link = "/diagnostics/#{@diagnostic.id}/click/#{params[:x]}/#{params[:y]}/#{params[:rotation]}" if params[:rotation]
-  =link
 
 :javascript
   $("#wheelcontainer").on("click", function(e) {
