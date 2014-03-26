@@ -11,7 +11,7 @@ class DiagnosticsController < ApplicationController
   
   def all
     @diagnostics = Diagnostic.all
-    Diagnostic.all.each do |diagnostic|
+    @diagnostics.each do |diagnostic|
       diagnostic.make_wheel()
     end
   end
