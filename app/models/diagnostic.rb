@@ -176,10 +176,8 @@ class Diagnostic < ActiveRecord::Base
   end
   
   def segment_from_x_y_rotation(x,y,rotation)
-    #TODO implement logic
     x_from_centre = x.to_f - 200
     y_from_centre = 200 - y.to_f
-    
     
     if x_from_centre >= 0 && y_from_centre >= 0
       angle = 90 - radians_to_degrees(Math::atan(y_from_centre / x_from_centre)) - rotation.to_f
@@ -201,7 +199,11 @@ class Diagnostic < ActiveRecord::Base
     end
     segment_number =  ((angle - (segment_gap / 2)) / segment_gap).floor
     
-    self.segments[segment_number - 1]
+    if self.segments.count > 6
+      self.segments[segment_number - 1]
+    else
+      self.segments[segment_number]
+    end
   end
   
   def complete_for_user(user)
