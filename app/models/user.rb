@@ -20,4 +20,18 @@ class User < ActiveRecord::Base
   def is_admin?
     admin?
   end
+    
+  def self.search(words) 
+    users = Set.new
+    if !words.empty?
+      words.split(" ").each do |word|
+        users << where(['first_name LIKE ?', "%#{word}%"])
+        users << where(['last_name LIKE ?', "%#{word}%"])
+      end
+      users = users.first
+    else
+      users = User.all
+    end
+    users
+  end
 end
