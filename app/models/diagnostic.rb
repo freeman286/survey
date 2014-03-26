@@ -26,7 +26,7 @@ class Diagnostic < ActiveRecord::Base
     if self.segments.count > 3
       g.rotation = 180/self.segments.count 
       self.segments.each do |segment|
-        g.data word_wrap(segment.name), segment.score_for_user(user_id)
+        g.data word_wrap("#{segment.name} #{segment.score_for_user(user_id).round}%"), segment.score_for_user(user_id)
       end
     end
 
