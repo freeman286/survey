@@ -199,15 +199,7 @@ class Diagnostic < ActiveRecord::Base
     end
     segment_number =  ((angle - (segment_gap / 2)) / segment_gap).floor
     
-    if self.segments.count > 7
-      self.segments[segment_number - 1]
-    else
-      if rotation != 0
-        self.segments[segment_number - 0.5]
-      else
-        self.segments[segment_number]
-      end
-    end
+    self.segments[segment_number - 1]
   end
   
   def complete_for_user(user)
