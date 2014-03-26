@@ -17,7 +17,9 @@ Survey::Application.routes.draw do
   match "/sub_questions/new/:question_id" => "sub_questions#new", :as => 'new_sub_question'
   match "/sub_questions/:sub_question_id/yes" => "sub_questions#yes", :as => 'sub_question_yes'
   match "/sub_questions/:sub_question_id/no" => "sub_questions#no", :as => 'sub_question_no'
-
+  
+  resources :users, :only => [:index, :show]
+  
 
   devise_for :users
 
