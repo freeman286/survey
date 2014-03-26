@@ -9,6 +9,12 @@ class DiagnosticsController < ApplicationController
      @diagnostic.make_wheel()
   end
   
+  def all
+    @diagnostics = Diagnostic.all
+    Diagnostic.all.each do |diagnostic|
+      diagnostic.make_wheel()
+    end
+  end
   
   def chart
     @diagnostics = Diagnostic.all
