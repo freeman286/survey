@@ -15,7 +15,7 @@ class Diagnostic < ActiveRecord::Base
     g.hide_axes = false
     g.hide_text = false
     g.transparent_background = false
-    g.legend_font_size = 10
+    g.legend_font_size = 11
     g.bottom_margin = 40
     g.font = ("app/assets/fonts/HelveticaNeue.ttf")
     g.theme = {
