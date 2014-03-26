@@ -199,7 +199,7 @@ class Diagnostic < ActiveRecord::Base
     end
     segment_number =  ((angle - (segment_gap / 2)) / segment_gap).floor
     
-    if self.segments.count > 6
+    if self.segments.count > 7
       self.segments[segment_number - 1]
     else
       self.segments[segment_number]
