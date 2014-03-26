@@ -34,15 +34,15 @@
   
 .span12 
   =link_to "Back to all diagnostics", diagnostics_path
-  
 
 :javascript
-  $("#wheelcontainer").mousemove(function(e){
+  $("#wheelcontainer").on("click", function(e) {
     var offset = $(this).offset();
     var x = Math.floor(e.clientX - offset.left);
     var y = Math.floor(e.clientY - offset.top);
     $('#wheel-link').attr("href", "/diagnostics/#{@diagnostic.id}/click/" + x + "/" + y + "/" + getRotationDegrees($("#wheel")));
   });
+  
   
   if (history && history.pushState) {
     $(function() {
