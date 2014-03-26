@@ -202,7 +202,11 @@ class Diagnostic < ActiveRecord::Base
     if self.segments.count > 7
       self.segments[segment_number - 1]
     else
-      self.segments[segment_number]
+      if rotation != 0
+        self.segments[segment_number - 0.5]
+      else
+        self.segments[segment_number]
+      end
     end
   end
   
