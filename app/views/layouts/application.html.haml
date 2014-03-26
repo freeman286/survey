@@ -13,7 +13,10 @@
         .container
           = link_to "Home", home_index_path, class: "brand"
           %ul.nav.navbar-nav
-            %li= link_to "Results", diagnostics_path
+            -if user_signed_in?
+              %li= link_to "Results", diagnostics_path
+            -else
+              %li= link_to "Diagnostics", diagnostics_path
             -if user_signed_in? && current_user.admin?
               %li= link_to "Edit Diagnostics", diagnostics_edit_path
           %ul.nav.navbar-nav.pull-right
