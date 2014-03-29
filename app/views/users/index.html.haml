@@ -1,2 +1,8 @@
+= semantic_form_for search_path, :method => 'get' do |f|
+  %p
+    = f.input :words, :class => "search-input mb-2", :placeholder => "Keywords"
+    
+    = f.action :submit, :label => "Update search", :"data-loading-text" => "Searching...", :button_html => { :class => 'btn btn-primary btn-block mb-4'}, :icon => 'chevron-right', :icon_last => true
+
 -@users.each do |user|
   =user.full_name

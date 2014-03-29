@@ -45,6 +45,8 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.0.1)
+    formtastic (2.2.1)
+      actionpack (>= 3.0)
     gruff (0.4.0)
       rmagick
     haml (4.0.3)
@@ -128,6 +130,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
   devise
+  formtastic
   gruff
   haml
   jquery-rails
