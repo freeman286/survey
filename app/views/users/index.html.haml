@@ -8,6 +8,10 @@
       .span6
         = f.action :submit, :label => "Update search", :"data-loading-text" => "Searching...", :button_html => { :class => 'btn btn-primary btn-block negative-margin-left'}
 
-  -@users.each do |user|
-    .span12
-      =link_to user.full_name, user_path(user.id)
+-@users.each do |user|
+  .span12.well
+    %h4= link_to user.full_name, user_path(user.id)
+    -Diagnostic.all.each do |dia|
+      -if FileTest.exists?("#{Rails.root}/public/results/#{dia.id}-#{user.id}.png") 
+        .span2
+          =image_tag "/results/#{dia.id}-#{user.id}.png"
