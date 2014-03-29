@@ -19,6 +19,7 @@ Survey::Application.routes.draw do
   match "/sub_questions/:sub_question_id/no" => "sub_questions#no", :as => 'sub_question_no'
   
   resources :users, :only => [:index, :show]
+  match '/search' => 'users#index'
   
   as :user do
     get '/register', to: 'devise/registrations#new', :as => :register
