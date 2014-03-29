@@ -25,11 +25,10 @@ class User < ActiveRecord::Base
     users = Set.new
     if !words.empty?
       words.split(" ").each do |word|
-        users << where(['first_name LIKE ?', "%#{word}%"])
-        users << where(['last_name LIKE ?', "%#{word}%"])
+        users = User.select {|user| user.first_name == word.capitalize || user.last_name == word.capitalize}
       end
-      users = users.first
-    else
+    end
+    if users.nil?
       users = User.all
     end
     users
