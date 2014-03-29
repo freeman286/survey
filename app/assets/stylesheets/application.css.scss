@@ -45,6 +45,17 @@ body {
 	margin-top: 40px;
 }
 
+li {
+	list-style-type: none;
+	list-style-position:inside;
+	margin:0;
+	padding:0;
+}
+
+li .label {
+	display:none;
+}
+
 th.keep-left:first-child {
 	width:750px;
 }
@@ -107,6 +118,11 @@ th.keep-left3:first-child {
 
 .row.header {
 	padding:18px;
+}
+
+.row.top {
+	margin-top:25px;
+	width:450px;
 }
 
 .form-inputs input, .form-inputs textarea {
@@ -284,4 +300,16 @@ th.keep-left3:first-child {
 
 .margin-top {
 	margin-top:10px;
+}
+
+.negative-margin-left {
+	margin-left:-20px;
+}
+
+.negative-margin-top {
+	margin-top:-20px;
+} 
+
+input[id="_search_words"] {
+	width:445px;
 }
