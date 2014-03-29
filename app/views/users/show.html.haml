@@ -1,1 +1,21 @@
-=@user.full_name
+.row.span12.pad1
+  %h3
+    =@user.full_name
+  .negative-margin-top  
+    =link_to @user.email, "mailto:#{@user.email}"
+  
+.row.span12.pad1
+  %h5  
+    ="#{@user.full_name}'s results:"
+    
+-Diagnostic.all.each do |dia|
+  -if FileTest.exists?("#{Rails.root}/public/results/#{dia.id}-#{@user.id}.png") 
+    .row.span12.well.section.chart
+      .row
+        .span12
+          %h3.no-top-margin
+            =dia.name
+      .row.head2
+        = dia.description
+      - if user_signed_in?
+        %img{src: "/results/#{dia.id}-#{@user.id}.png"}/
