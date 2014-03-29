@@ -12,11 +12,10 @@ Survey::Application.routes.draw do
   
   resources :questions, :except => :index
   match "/questions/new/:segment_id" => "questions#new", :as => 'new_question'
+  match "/questions/:segment_id" => "questions#show"
   
   resources :sub_questions, :except => :index
   match "/sub_questions/new/:question_id" => "sub_questions#new", :as => 'new_sub_question'
-  match "/sub_questions/:sub_question_id/yes" => "sub_questions#yes", :as => 'sub_question_yes'
-  match "/sub_questions/:sub_question_id/no" => "sub_questions#no", :as => 'sub_question_no'
   
   resources :users, :only => [:index, :show]
   match '/search' => 'users#index'

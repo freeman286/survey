@@ -6,16 +6,16 @@
 %table.table
   %thead
     %th
-
-  %tbody
-    - @question.sub_questions.each do |subquestion|
-      %tr.section{:id => "#{subquestion.id}", :'data-animation' => :true, :'data-html' => :true, :'data-title' => "Evidence", :'data-content' => "#{subquestion.evidence}"}
-        %td
-          = subquestion.name
-        %td
-          =link_to 'Yes', sub_question_yes_path(subquestion), :remote => true, :class => "btn yes #{subquestion.id} #{'btn-success' if subquestion.yes?(current_user)}"
-        %td      
-          =link_to 'No', sub_question_no_path(subquestion), :remote => true, :class => "btn no #{subquestion.id} #{'btn-danger' if subquestion.no?(current_user)}"
+    
+  =form_tag question_path(@question) do  
+    %tbody
+      - @question.sub_questions.each do |subquestion|
+        %tr.section{:id => "#{subquestion.id}", :'data-animation' => :true, :'data-html' => :true, :'data-title' => "Evidence", :'data-content' => "#{subquestion.evidence}"}
+          %td
+            = subquestion.name
+          %td
+            %input{:name => "sub_question_id", :value => "#{subquestion.id}", :type => "radio"}
+      =submit_tag 'select'
    
 
 -if @question.segment.questions.count > 1

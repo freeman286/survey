@@ -10,7 +10,8 @@ class QuestionsController < ApplicationController
 
   # GET /questions/1
   def show
-    @question = Question.find(params[:id])
+    @question = Question.find(params[:id]) if params[:id]
+    @question = SubQuestion.find(params[:sub_question_id]).question if params[:sub_question_id]
     @crud_state = "show"
   end
 
