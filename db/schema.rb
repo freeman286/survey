@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20143010194240) do
+ActiveRecord::Schema.define(:version => 20143013194323) do
 
   create_table "answers", :force => true do |t|
     t.integer  "sub_question_id"
@@ -30,10 +30,11 @@ ActiveRecord::Schema.define(:version => 20143010194240) do
   end
 
   create_table "questions", :force => true do |t|
-    t.text     "name",       :limit => 255
+    t.text     "name",        :limit => 255
     t.integer  "segment_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.text     "description"
   end
 
   create_table "segments", :force => true do |t|

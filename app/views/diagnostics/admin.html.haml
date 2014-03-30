@@ -30,8 +30,10 @@
                 
       - segment.questions.each do |question|
         .row.well.section
-          .span8
+          .span4
             = question.name
+          .span4
+            = question.description
           .span3.admin
             - if check_admin(current_user)
               = link_to 'Edit', edit_question_path(question)
