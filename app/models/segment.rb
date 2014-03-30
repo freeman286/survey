@@ -35,15 +35,19 @@ class Segment < ActiveRecord::Base
 
 
   def score_for_user(user_id)
-    total = total(User.where(id: user_id))
-    complete = yes(User.where(id: user_id))
-    
-    
-    
-    if complete == 0 || total == 0
-      0
+    percent = 0
+    self.questions.each do |que|
+      question = que.class.where(segment_id: self.id, id: que.id).first
+      question.sub_questions.each do |sub|
+        if sub.yes?(user_id)
+          percent += sub.value.to_f
+        end
+      end
+    end
+    if self.questions.count > 0
+      (percent / self.questions.count).round
     else
-      (complete + 0.0) / (total + 0.0) * 100
+      0
     end
   end
   
