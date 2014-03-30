@@ -41,13 +41,15 @@
             - if check_admin(current_user)
               = link_to 'New Sub question', new_sub_question_path(question)   
   
-        - question.sub_questions.each do |sub_question|
+        - question.sub_questions.sort_by { |k, v| k[:value] }.reverse.each do |sub_question|
           .row.well.section
             .span1
             .span3
               = sub_question.name
-            .span4
+            .span3
               = sub_question.evidence
+            .span1
+              = "#{sub_question.value}%"
             .span3.admin
               - if check_admin(current_user)
                 = link_to 'Edit', edit_sub_question_path(sub_question)
