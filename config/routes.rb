@@ -16,6 +16,7 @@ Survey::Application.routes.draw do
   
   resources :sub_questions, :except => :index
   match "/sub_questions/new/:question_id" => "sub_questions#new", :as => 'new_sub_question'
+  match "/sub_questions/select/:sub_question_id" => "sub_questions#select", :as => 'select_sub_question'
   
   resources :users, :only => [:index, :show]
   match '/search' => 'users#index'

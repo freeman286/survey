@@ -59,6 +59,16 @@ class SubQuestionsController < ApplicationController
     end
   end
   
+  def select
+    @sub_question = SubQuestion.find(params[:sub_question_id])
+    @sub_question.question.sub_questions.each do |sub_question|
+      answer = Answer.find_or_create_by_user_id_and_sub_question_id(current_user.id, sub_question.id)
+      answer.set_no!(current_user)
+    end
+    @answer = Answer.find_or_create_by_user_id_and_sub_question_id(current_user.id, @sub_question.id)
+    @answer.set_yes!(current_user)
+  end
+  
   private
   def can_edit
 	  if user_signed_in?

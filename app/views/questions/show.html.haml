@@ -7,15 +7,13 @@
   %thead
     %th
     
-  =form_tag question_path(@question) do  
-    %tbody
-      - @question.sub_questions.each do |subquestion|
-        %tr.section{:id => "#{subquestion.id}", :'data-animation' => :true, :'data-html' => :true, :'data-title' => "Evidence", :'data-content' => "#{subquestion.evidence}"}
-          %td
-            = subquestion.name
-          %td
-            %input{:name => "sub_question_id", :value => "#{subquestion.id}", :type => "radio"}
-      =submit_tag 'select'
+  %tbody
+    - @question.sub_questions.each do |subquestion|
+      %tr.section{:id => "#{subquestion.id}", :'data-animation' => :true, :'data-html' => :true, :'data-title' => "Evidence", :'data-content' => "#{subquestion.evidence}"}
+        %td
+          = subquestion.name
+        %td
+          =link_to "&times".html_safe,  select_sub_question_path(subquestion.id), class: "btn select #{subquestion.yes?(current_user) ? 'btn-success' : ''}", id: "select-sub-question-#{subquestion.id}", :remote => true
    
 
 -if @question.segment.questions.count > 1
