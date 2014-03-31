@@ -8,7 +8,7 @@
     %th
     
   %tbody
-    - @question.sub_questions.sort_by { |k, v| k[:value] }.reverse.each do |subquestion|
+    - @question.sub_questions.sort_by { |k, v| k[:value] }.each do |subquestion|
       %tr.section{:id => "#{subquestion.id}", :'data-animation' => :true, :'data-html' => :true, :'data-title' => "Evidence", :'data-content' => "#{subquestion.evidence}"}
         %td
           = subquestion.name
