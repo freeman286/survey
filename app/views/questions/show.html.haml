@@ -16,19 +16,20 @@
           =link_to "&times".html_safe,  select_sub_question_path(subquestion.id), class: "btn select #{subquestion.yes?(current_user) ? 'btn-success' : ''}", id: "select-sub-question-#{subquestion.id}", :remote => true
    
 
-
-.span2
-  =link_to 'Previous question', question_path(@question.previous_question), :class => "btn btn-primary pull-left"
+-if @question.next_question.nil? || @question.previous_question.nil?
+  .span2
+    =link_to 'Previous question', question_path(@question.previous_question), :class => "btn btn-primary pull-left"
  
-.pad1.span7
+.pad1{class: "#{@question.next_question.nil? || @question.previous_question.nil? ? 'span7' : ''}"}
   .progress.progress-striped
     .bar{:style => "width:"+"#{@question.segment.complete_for_user(current_user)}%"}
       .black
         ="#{@question.segment.complete_for_user(current_user)}%&nbsp;Complete".html_safe
 
 
-.span2  
-  =link_to 'Next question', question_path(@question.next_question), :class => "btn btn-primary pull-right"
+-if @question.next_question.nil? || @question.previous_question.nil?
+  .span2  
+    =link_to 'Next question', question_path(@question.next_question), :class => "btn btn-primary pull-right"
 
 
 .gap
