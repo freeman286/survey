@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   
+  before_filter :authenticate_user!
+  before_filter :can_view
+  
   def index
     if params[:'/search'].try(:[],:words)
       @users = User.search(params[:'/search'][:words])
@@ -25,4 +28,13 @@ class UsersController < ApplicationController
       render action: "new"
     end
   end
+  
+  private
+  def can_view
+	  if user_signed_in?
+	    if !current_user.is_admin?
+  	    redirect_to home_index_path(), alert: "You must be admin to do that"
+  	  end
+    end
+	end
 end

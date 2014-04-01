@@ -1,3 +1,14 @@
+-if @user.errors.any?
+  .alert.alert-danger
+    %button.close{"data-dismiss" => "alert"} x
+    %h3
+      =pluralize(@user.errors.count, "error")
+      prevented this diagnostic from being saved:
+    %ul
+    -@user.errors.each do |error|
+      %li.head
+        = "#{error} #{@user.errors[error].first}"
+  
 .row
   .span6
     %h2 Create user
