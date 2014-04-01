@@ -27,4 +27,49 @@ class Question < ActiveRecord::Base
       ((complete + 0.0) / (total + 0.0) * 100).floor
     end
   end
+  
+  def position
+    pos = 0
+    loop_pos = 0
+    self.segment.questions.each do |que|
+      if que.id == self.id
+        pos = loop_pos
+      end
+      loop_pos += 1
+    end
+    pos
+  end
+  
+  def next_segment
+    if self.segment.last_segment?
+      self.segment.diagnostic.segments.first
+    else
+      self.segment.diagnostic.segments[self.segment.number + 1]
+    end
+  end
+  
+  def previous_segment
+    if self.segment.number == 0
+      self.segment.diagnostic.segments.last
+    else
+      self.segment.diagnostic.segments[self.segment.number - 1]
+    end
+  end
+  
+  def last_question?
+    self.position == self.segment.questions.count - 1
+  end
+  
+  def next_question
+    if self.last_question?
+      self.next_segment.first_question
+    else
+      self.segment.questions[self.position + 1]
+    end
+  end
+  
+  def previous_question
+    #TODO
+  end
+  
 end

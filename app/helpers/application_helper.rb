@@ -59,22 +59,6 @@ module ApplicationHelper
       end
   end
   
-  def next_id_for_question(question)
-    pos = 0
-    loop_pos = 0
-    question.segment.questions.each do |que|
-      if que.id == question.id
-        pos = loop_pos
-      end
-      loop_pos += 1
-    end
-    if question.segment.questions[pos + 1].nil?
-      question.segment.questions.first.id
-    else
-      question.segment.questions[pos + 1].id
-    end
-  end
-  
   def previous_id_for_question(question)
     pos = 0
     loop_pos = 0
@@ -84,8 +68,20 @@ module ApplicationHelper
       end
       loop_pos += 1
     end
-    if question.segment.questions[pos - 1].nil?
-      question.segment.questions.last.id
+    if pos == 0
+      pos_s = 0
+      loop_pos_s = 0
+      question.segment.diagnostic.segments.each do |seg|
+        if seg.id == question.segment.id
+          pos_s = loop_pos_s
+        end
+        loop_pos += 1
+      end
+      if pos_s == 0
+        question.segment.diagnostic.segments.last.questions.last.id
+      else
+        question.segment.diagnostic.segments[pos_s - 1].questions.last.id
+      end
     else
       question.segment.questions[pos - 1].id
     end

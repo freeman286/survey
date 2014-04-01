@@ -98,5 +98,8 @@ class Segment < ActiveRecord::Base
     end
   segment_number
   end
-
+  
+  def last_segment?
+    self.number == self.diagnostic.segments.count - 1
+  end
 end
