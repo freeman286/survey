@@ -1,0 +1,18 @@
+- if @diagnostic.errors.any?
+  .alert.alert-danger
+    %button.close{"data-dismiss" => "alert"} x
+    %h3
+      = pluralize(@diagnostic.errors.count, "error")
+      prevented this diagnostic from being saved:
+    %ul
+      - @diagnostic.errors.full_messages.each do |msg|
+        %li= msg
+%h2
+  = crud_state_to_name(@crud_state)
+  diagnostic
+= simple_form_for(@diagnostic, :html => { class: "well" }) do |f|
+  .form-inputs
+    = f.input :name
+    = f.input :description, :input_html => {:rows => 5}
+  .form-actions
+    = f.submit "Save", class: "btn"
