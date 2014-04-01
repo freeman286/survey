@@ -102,4 +102,14 @@ class Segment < ActiveRecord::Base
   def last_segment?
     self.number == self.diagnostic.segments.count - 1
   end
+  
+  def last_question
+    question = nil
+    self.questions.each do |que|
+      if que.position == self.questions.count - 1
+        question = que
+      end
+    end
+    question
+  end
 end

@@ -18,7 +18,7 @@
 
 
 .span2
-  =link_to 'Previous question', question_path(previous_id_for_question(@question)), :class => "btn btn-primary pull-left"
+  =link_to 'Previous question', question_path(@question.previous_question), :class => "btn btn-primary pull-left"
  
 .pad1.span7
   .progress.progress-striped
@@ -28,7 +28,7 @@
 
 
 .span2  
-  =link_to 'Next question', question_path(next_id_for_question(@question)), :class => "btn btn-primary pull-right"
+  =link_to 'Next question', question_path(@question.next_question), :class => "btn btn-primary pull-right"
 
 
 .gap

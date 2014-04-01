@@ -62,14 +62,18 @@ class Question < ActiveRecord::Base
   
   def next_question
     if self.last_question?
-      self.next_segment.first_question
+      self.next_segment.questions.first
     else
       self.segment.questions[self.position + 1]
     end
   end
   
   def previous_question
-    #TODO
+    if self.position == 0
+      self.previous_segment.last_question
+    else
+      self.segment.questions[self.position - 1]
+    end
   end
   
 end
