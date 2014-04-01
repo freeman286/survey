@@ -18,15 +18,15 @@ Survey::Application.routes.draw do
   match "/sub_questions/new/:question_id" => "sub_questions#new", :as => 'new_sub_question'
   match "/sub_questions/select/:sub_question_id" => "sub_questions#select", :as => 'select_sub_question'
   
-  resources :users, :only => [:index, :show]
+  resources :users, :only => [:index, :show, :new, :create]
   match '/search' => 'users#index'
   
   as :user do
-    get '/register', to: 'devise/registrations#new', :as => :register
     get '/login', to: 'devise/sessions#new', :as => :login
     get '/logout', to: 'devise/sessions#destroy', :as => :logout
     get '/edit', to: 'devise/registrations#edit', :as => :edit
   end
+  match "/new" => "users#new", :as => 'new_user'
   
 
   devise_for :users
