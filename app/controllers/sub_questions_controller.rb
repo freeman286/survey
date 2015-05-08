@@ -29,7 +29,7 @@ class SubQuestionsController < ApplicationController
   def create
     @sub_question = SubQuestion.new(params[:sub_question])
     @crud_state = "create"
-    
+
     if @sub_question.save
       redirect_to diagnostic_admin_path(@sub_question.question.segment.diagnostic.id), notice: 'Sub-Question was successfully created.'
     else
@@ -41,7 +41,7 @@ class SubQuestionsController < ApplicationController
   def update
     @sub_question = SubQuestion.find(params[:id])
     @crud_state = "update"
-    
+
     if @sub_question.update_attributes(params[:sub_question])
       redirect_to diagnostic_admin_path(@sub_question.question.segment.diagnostic), notice: 'Sub-Question was successfully updated.'
     else
@@ -58,17 +58,13 @@ class SubQuestionsController < ApplicationController
       redirect_to diagnostic_admin_path(@sub_question.question.segment.diagnostic.id), alert: 'Question was not deleted.'
     end
   end
-  
+
   def select
     @sub_question = SubQuestion.find(params[:sub_question_id])
-    @sub_question.question.sub_questions.each do |sub_question|
-      answer = Answer.find_or_create_by_user_id_and_sub_question_id(current_user.id, sub_question.id)
-      answer.set_no!(current_user)
-    end
     @answer = Answer.find_or_create_by_user_id_and_sub_question_id(current_user.id, @sub_question.id)
-    @answer.set_yes!(current_user)
+    @answer.toggle!(current_user)
   end
-  
+
   private
   def can_edit
 	  if user_signed_in?

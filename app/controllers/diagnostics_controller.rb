@@ -3,23 +3,19 @@ class DiagnosticsController < ApplicationController
   # GET /diagnostics.json
   before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_filter :can_edit, only: [:new, :create, :edit, :update, :destroy]
-  
+
   def admin
      @diagnostic = Diagnostic.find(params[:diagnostic_id])
-     @diagnostic.make_wheel()
   end
-  
+
   def all
     @diagnostics = Diagnostic.all
-    @diagnostics.each do |diagnostic|
-      diagnostic.make_wheel()
-    end
   end
-  
+
   def chart
     @diagnostics = Diagnostic.all
   end
-  
+
   def index
     @diagnostics = Diagnostic.all
     @diagnostics.each do |dia|
@@ -52,7 +48,6 @@ class DiagnosticsController < ApplicationController
     @crud_state = "create"
 
     if @diagnostic.save
-      @diagnostic.make_wheel()
       redirect_to @diagnostic, notice: 'Diagnostic was successfully created.'
     else
       render action: "new"
@@ -64,7 +59,7 @@ class DiagnosticsController < ApplicationController
     @diagnostic = Diagnostic.find(params[:id])
     @crud_state = "update"
     @diagnostic.make_wheel()
-    
+
     if @diagnostic.update_attributes(params[:diagnostic])
       @diagnostic.make_wheel()
       redirect_to diagnostics_url, notice: 'Diagnostic was successfully updated.'
@@ -78,17 +73,17 @@ class DiagnosticsController < ApplicationController
     @diagnostic = Diagnostic.find(params[:id])
     if @diagnostic.destroy
       redirect_to diagnostics_url, notice: 'Diagnostic was successfully deleted.'
-    else                         
+    else
       redirect_to diagnostics_url, alert: 'Diagnostic was not deleted.'
     end
   end
-  
+
   def click
     @diagnostic = Diagnostic.find(params[:diagnostic_id])
     @segment = @diagnostic.segment_from_x_y_rotation(params[:x],params[:y],params[:rotation])
     render action: "show"
   end
-  
+
   private
   def can_edit
 	  if user_signed_in?

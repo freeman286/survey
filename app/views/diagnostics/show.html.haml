@@ -1,13 +1,10 @@
--content_for :head do
-  =javascript_include_tag "http://jqueryrotate.googlecode.com/svn/trunk/jQueryRotate.js"
-
 %p
   %h2.head
     =@diagnostic.name
 %p
   %h5.head
     =@diagnostic.description
-      
+
 .span12.large.pad1
   -if user_signed_in? && @diagnostic.complete_for_user(current_user) > 0
     .progress.progress-striped
@@ -31,8 +28,8 @@
           What Next?
         %h4
         Click on the spokes to navigate around the various questions
-  
-.span12 
+
+.span12
   =link_to "Back to all diagnostics", diagnostics_path
 
 :javascript
@@ -42,8 +39,8 @@
     var y = Math.floor(e.clientY - offset.top);
     $('#wheel-link').attr("href", "/diagnostics/#{@diagnostic.id}/click/" + x + "/" + y + "/" + getRotationDegrees($("#wheel")));
   });
-  
-  
+
+
   if (history && history.pushState) {
     $(function() {
       $("#wheelcontainer").on("click", function(e) {
@@ -57,10 +54,10 @@
     $(window).bind("popstate", function() {
       $.getScript(location.href);
       $("#wheel").rotate(#{@segment.segment_roation if @segment});
-    });  
+    });
     });
   }
-  
+
 
   function getRotationDegrees(obj) {
       var matrix = obj.css("-webkit-transform") ||

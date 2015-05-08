@@ -1,5 +1,4 @@
 id = <%= @sub_question.id %>;
-$('.select').removeClass("btn-success");
-$('#select-sub-question-'+id).addClass("btn-success");
+$('#select-sub-question-'+id).toggleClass("btn-success");
 $(".bar").width("<%= @sub_question.question.segment.complete_for_user(current_user) %>%");
 $(".black").html("<%= @sub_question.question.segment.complete_for_user(current_user) %>%&nbsp;Complete");

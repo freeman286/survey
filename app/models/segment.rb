@@ -1,14 +1,16 @@
 class Segment < ActiveRecord::Base
   attr_accessible :diagnostic_id, :name
-  
+
   belongs_to :diagnostic
-  
+
   validates :name, presence: true, length: {minimum: 2, maximum: 30}
-  
+
   validates :diagnostic_id, presence: true
-  
+
   has_many :questions
-  
+
+  after_save :diagnostic_make_wheel
+
   def yes(user)
     yes = 0
     self.questions.each do |que|
@@ -21,7 +23,7 @@ class Segment < ActiveRecord::Base
     end
     yes
   end
-  
+
   def total(user)
     total = 0
     self.questions.each do |que|
@@ -50,7 +52,7 @@ class Segment < ActiveRecord::Base
       0
     end
   end
-  
+
   def complete_for_user(user)
     total = 0
     self.questions.each do |que|
@@ -58,20 +60,20 @@ class Segment < ActiveRecord::Base
       que.sub_questions.each do |sub|
         if sub.yes?(user)
           complete = true
-        end 
+        end
       end
       if complete == true
         total += 1
       end
     end
-    
+
     if total == 0 || self.questions.count == 0
       0
     else
       ((total + 0.0) / (self.questions.count + 0.0) * 100).floor
     end
   end
-  
+
   def segment_roation()
     segment_number = self.number
     diagnostic = self.diagnostic
@@ -80,13 +82,13 @@ class Segment < ActiveRecord::Base
     else
       segment_gap = 360
     end
-    if 360 - (segment_number * segment_gap) == 360 
+    if 360 - (segment_number * segment_gap) == 360
       0
     else
       360 - (segment_number * segment_gap)
     end
   end
-  
+
   def number
     count = 0
     segment_number = 0
@@ -98,11 +100,11 @@ class Segment < ActiveRecord::Base
     end
   segment_number
   end
-  
+
   def last_segment?
     self.number == self.diagnostic.segments.count - 1
   end
-  
+
   def last_question
     question = nil
     self.questions.each do |que|
@@ -111,5 +113,9 @@ class Segment < ActiveRecord::Base
       end
     end
     question
+  end
+
+  def diagnostic_make_wheel
+    self.diagnostic.make_wheel
   end
 end
