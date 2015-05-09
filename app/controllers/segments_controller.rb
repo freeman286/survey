@@ -2,7 +2,7 @@ class SegmentsController < ApplicationController
   # GET /segments
   before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_filter :can_edit, only: [:new, :create, :edit, :update, :destroy]
-  
+
   def index
     @segments = Segment.all
   end
@@ -40,7 +40,7 @@ class SegmentsController < ApplicationController
       redirect_to diagnostic_admin_path(@segment.diagnostic), notice: 'Segment was successfully created.' 
     else
       render action: "new"
-      
+
     end
   end
 
@@ -69,7 +69,7 @@ class SegmentsController < ApplicationController
       redirect_to diagnostic_admin_path(@segment.diagnostic), alert: 'There was a problem deleting the Segment.'
     end
   end
-  
+
   private
   def can_edit
 	  if user_signed_in?

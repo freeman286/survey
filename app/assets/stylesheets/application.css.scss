@@ -12,7 +12,7 @@
  *= require_tree .
  */
 
-/* 
+/*
 prevents parsererrors rendering
 
 parsererror > h3,
@@ -78,7 +78,7 @@ th.keep-left3:first-child {
 	  padding-left:50px;
 	  width: 80px;
   }
-  
+
   &.hover {
   	background: #F5F5F5;
   }
@@ -111,6 +111,9 @@ th.keep-left3:first-child {
 
   &.info {
   	background-color: #c4e3f3;
+  }
+  &.response {
+    background-color: #96c5de;
   }
 }
 
@@ -160,7 +163,7 @@ th.keep-left3:first-child {
 }
 
 .pad2 {
-  
+
 }
 
 .fillright {
@@ -308,7 +311,7 @@ th.keep-left3:first-child {
 
 .negative-margin-top {
 	margin-top:-20px;
-} 
+}
 
 input[id="_search_words"] {
 	width:445px;

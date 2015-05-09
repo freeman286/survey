@@ -1,0 +1,22 @@
+- if @response.errors.any?
+  .alert.alert-danger
+    %button.close{"data-dismiss" => "alert"} x
+    %h3
+      = pluralize(@response.errors.count, "error")
+      prevented this response from being saved:
+    %ul
+      - @response.errors.full_messages.each do |msg|
+        %li= msg
+%h2
+  = crud_state_to_name(@crud_state)
+  response
+%h4
+  = crud_state_to_name(@crud_state)
+  response for #{@segment.name}
+= simple_form_for(@response, :html => { class: "well" }) do |f|
+  .form-inputs
+    = f.input :description, :input_html => {:rows => 5}
+    = f.input :value, :input_html => {:rows => 5}, hint: " The user will get this response if they score this percent or less"
+    %input{name: "response[segment_id]", type: "hidden", value: @segment.id}/
+  .form-actions
+    = f.submit "Save", class: "btn"

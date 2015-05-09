@@ -9,6 +9,8 @@ class Segment < ActiveRecord::Base
 
   has_many :questions
 
+  has_many :responses
+
   after_save :diagnostic_make_wheel
 
   def yes(user)

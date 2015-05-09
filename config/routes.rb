@@ -1,33 +1,36 @@
 Survey::Application.routes.draw do
-  
+
   resources :diagnostics
   match "/diagnostics/:diagnostic_id/admin" => "diagnostics#admin", :as => 'diagnostic_admin'
   match "/diagnostics/:diagnostic_id/click/:x/:y/:rotation" => "diagnostics#click", :as => 'diagnostic_click'
   match "/diagnostics/:id/segment/:segment_id" => "diagnostics#show", :as => 'diagnostic_segment'
   match "/diagnostics_edit" => "diagnostics#all"
-  
+
   resources :segments, :except => :index
   match "/segments/new/:diagnostic_id" => "segments#new", :as => 'new_segment'
   match "/segments/:segment_id/questions" => "segments#questions", :as => 'segment_questions'
-  
+
   resources :questions, :except => :index
   match "/questions/new/:segment_id" => "questions#new", :as => 'new_question'
   match "/questions/:segment_id" => "questions#show"
-  
+
   resources :sub_questions, :except => :index
   match "/sub_questions/new/:question_id" => "sub_questions#new", :as => 'new_sub_question'
   match "/sub_questions/select/:sub_question_id" => "sub_questions#select", :as => 'select_sub_question'
-  
+
+  resources :responses, :except => [:index, :show]
+  match "/responses/new/:segment_id" => "responses#new", :as => 'new_response'
+
   resources :users, :only => [:index, :show, :new, :create]
   match '/search' => 'users#index'
-  
+
   as :user do
     get '/login', to: 'devise/sessions#new', :as => :login
     get '/logout', to: 'devise/sessions#destroy', :as => :logout
     get '/edit', to: 'devise/registrations#edit', :as => :edit
   end
   match "/new" => "users#new", :as => 'new_user'
-  
+
 
   devise_for :users
 
