@@ -61,6 +61,8 @@ class SubQuestionsController < ApplicationController
 
   def select
     @sub_question = SubQuestion.find(params[:sub_question_id])
+    diagnostic = @sub_question.question.segment.diagnostic
+    diagnostic.pdf_for_user(current_user.id) if diagnostic.complete_for_user(current_user) == 100
     @answer = Answer.find_or_create_by_user_id_and_sub_question_id(current_user.id, @sub_question.id)
     @answer.toggle!(current_user)
   end

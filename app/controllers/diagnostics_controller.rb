@@ -18,8 +18,8 @@ class DiagnosticsController < ApplicationController
 
   def index
     @diagnostics = Diagnostic.all
-    @diagnostics.each do |dia|
-      dia.make_chart_for_user(current_user.id) if user_signed_in?
+    @diagnostics.each do |diagnostic|
+      diagnostics.make_chart_for_user(current_user.id) if user_signed_in?
     end
   end
 

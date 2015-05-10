@@ -121,7 +121,7 @@ class Segment < ActiveRecord::Base
     self.diagnostic.make_wheel
   end
 
-  def user_response(user)
-    self.responses.select{|x| x.value <= score_for_user(user)}.max_by(&:value)
+  def user_response(user_id)
+    self.responses.select{|x| x.value <= score_for_user(User.find(user_id))}.max_by(&:value)
   end
 end

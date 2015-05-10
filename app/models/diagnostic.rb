@@ -219,14 +219,15 @@ class Diagnostic < ActiveRecord::Base
     end
   end
 
-  def user_response(user)
-    self.segments.map{|x| x.user_response(user).try(:description)}.join(' ')
+  def user_response(user_id)
+    self.segments.map{|x| x.user_response(user_id).try(:description)}.join(' ')
   end
 
-  def pdf_for_user(user)
+  def pdf_for_user(user_id)
     diagnostic = self
-    Prawn::Document.generate("public/pdfs/pdf#{user.id}.pdf") do
-      text(diagnostic.user_response(user))
+    Prawn::Document.generate("public/pdfs/pdf#{self.id}-#{user_id}.pdf") do
+      text("#{diagnostic.user_response(user_id)} Here is the radar graph for your the diagnostic:")
+      image("#{Rails.root}/public/results/#{diagnostic.id}-#{user_id}.png", :width => 550.29, :height => 412.75)
     end
   end
 
