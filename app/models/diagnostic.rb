@@ -219,6 +219,17 @@ class Diagnostic < ActiveRecord::Base
     end
   end
 
+  def user_response(user)
+    self.segments.map{|x| x.user_response(user).try(:description)}.join(' ')
+  end
+
+  def pdf_for_user(user)
+    diagnostic = self
+    Prawn::Document.generate("public/pdfs/pdf#{user.id}.pdf") do
+      text(diagnostic.user_response(user))
+    end
+  end
+
   private
 
   def degrees_to_radians(deg)

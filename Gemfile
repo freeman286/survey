@@ -14,6 +14,7 @@ gem "gruff"
 gem "sass"
 gem "rmagick"
 gem 'formtastic'
+gem 'prawn',   '~> 0.13.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -55,4 +56,3 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
-
