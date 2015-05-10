@@ -18,3 +18,4 @@ app/.DS_Store
 
 /public/results/*.png
 /public/wheels/*.png
+/public/pdfs/*.pdf
