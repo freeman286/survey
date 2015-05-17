@@ -13,6 +13,8 @@ class Segment < ActiveRecord::Base
 
   after_save :diagnostic_make_wheel
 
+  after_create :diagnostic_make_wheel
+
   def yes(user)
     yes = 0
     self.questions.each do |que|
