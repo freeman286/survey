@@ -1,16 +1,14 @@
 class Question < ActiveRecord::Base
   attr_accessible :name, :description, :segment_id
-  
+
   belongs_to :segment
-  
+
   validates :name, presence: true, length: { minimum: 2}
-  
-  validates :description, presence: true, length: { minimum: 2}
-  
-  validates :segment_id, presence: true
     
+  validates :segment_id, presence: true
+
   has_many :sub_questions, dependent: :destroy
-  
+
   def complete_for_user(user)
     complete = 0
     total = 0
@@ -27,7 +25,7 @@ class Question < ActiveRecord::Base
       ((complete + 0.0) / (total + 0.0) * 100).floor
     end
   end
-  
+
   def position
     pos = 0
     loop_pos = 0
@@ -39,7 +37,7 @@ class Question < ActiveRecord::Base
     end
     pos
   end
-  
+
   def next_segment
     if self.segment.last_segment?
       self.segment.diagnostic.segments.first
@@ -47,7 +45,7 @@ class Question < ActiveRecord::Base
       self.segment.diagnostic.segments[self.segment.number + 1]
     end
   end
-  
+
   def previous_segment
     if self.segment.number == 0
       self.segment.diagnostic.segments.last
@@ -55,11 +53,11 @@ class Question < ActiveRecord::Base
       self.segment.diagnostic.segments[self.segment.number - 1]
     end
   end
-  
+
   def last_question?
     self.position == self.segment.questions.count - 1
   end
-  
+
   def next_question
     if self.last_question?
       self.next_segment.questions.first
@@ -67,7 +65,7 @@ class Question < ActiveRecord::Base
       self.segment.questions[self.position + 1]
     end
   end
-  
+
   def previous_question
     if self.position == 0
       self.previous_segment.last_question
@@ -75,5 +73,5 @@ class Question < ActiveRecord::Base
       self.segment.questions[self.position - 1]
     end
   end
-  
+
 end
