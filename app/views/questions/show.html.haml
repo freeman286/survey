@@ -1,12 +1,12 @@
 %p
 %p
   %h3
-    = @question.description
+    = @question.name
 
 %table.table
   %thead
     %th
-    
+
   %tbody
     - @question.sub_questions.sort_by { |k, v| k[:value] }.each do |subquestion|
       %tr.section{:id => "#{subquestion.id}", :'data-animation' => :true, :'data-html' => :true, :'data-title' => "Evidence", :'data-content' => "#{subquestion.evidence}"}
@@ -14,12 +14,12 @@
           = subquestion.name
         %td
           =link_to "&times".html_safe,  select_sub_question_path(subquestion.id), class: "btn select #{subquestion.yes?(current_user) ? 'btn-success' : ''}", id: "select-sub-question-#{subquestion.id}", :remote => true
-   
+
 
 -if !@question.next_question.nil? && !@question.previous_question.nil?
   .span2
     =link_to 'Previous question', question_path(@question.previous_question), :class => "btn btn-primary pull-left"
- 
+
 .pad1{class: "#{!@question.next_question.nil? && !@question.previous_question.nil? ? 'span7' : ''}"}
   .progress.progress-striped
     .bar{:style => "width:"+"#{@question.segment.complete_for_user(current_user)}%"}
@@ -28,7 +28,7 @@
 
 
 -if !@question.next_question.nil? && !@question.previous_question.nil?
-  .span2  
+  .span2
     =link_to 'Next question', question_path(@question.next_question), :class => "btn btn-primary pull-right"
 
 
@@ -38,7 +38,7 @@
 - @question.sub_questions.each do |subquestion|
   -if subquestion.evidence.present?
     :javascript
-      $(function ()  
+      $(function ()
       {
         $("##{subquestion.id}").popover(
         {
