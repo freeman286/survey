@@ -16,13 +16,12 @@
           =link_to "&times".html_safe,  select_sub_question_path(subquestion.id), class: "btn select #{subquestion.yes?(current_user) ? 'btn-success' : ''}", id: "select-sub-question-#{subquestion.id}", :remote => true
 
 
--if !@question.next_question.nil? && !@question.previous_question.nil?
+-if !@question.next_question.nil? && !@question.previous_question.nil? || true
   .span2
     =link_to 'Previous question', question_path(@question.previous_question), :class => "btn btn-primary pull-left"
 
-
--if !@question.next_question.nil? && !@question.previous_question.nil?
-  .span2
+-if !@question.next_question.nil? && !@question.previous_question.nil? || true
+  .span2.offset7
     =link_to 'Next question', question_path(@question.next_question), :class => "btn btn-primary pull-right"
 
 
