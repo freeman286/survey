@@ -51,6 +51,7 @@ class ResponsesController < ApplicationController
   def destroy
     @response = Response.find(params[:id])
     @response.destroy
+    @segment = @response.segment
 
     if @response.destroy
       redirect_to diagnostic_admin_path(@segment.diagnostic), notice: 'Response was successfully deleted.'
