@@ -16,7 +16,7 @@
       = link_to "Download PDF", diagnostic_show_pdf_path(diagnostic.id)
     - if user_signed_in?
       %img{src: "/results/#{diagnostic.id}-#{current_user.id}.png"}/
-    - if user_signed_in? && diagnostic.complete_for_user(current_user) > 0
+    -#
       .progress.progress-striped
         .bar{style: "width:#{diagnostic.complete_for_user(current_user)}%"}
           .black
