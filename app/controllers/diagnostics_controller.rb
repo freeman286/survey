@@ -84,6 +84,14 @@ class DiagnosticsController < ApplicationController
     render action: "show"
   end
 
+  def buy_now
+    @diagnostic = Diagnostic.find(params[:diagnostic_id])
+  end
+  
+  def results
+    @diagnostic = Diagnostic.find(params[:diagnostic_id])
+  end
+  
   def show_pdf
     @diagnostic = Diagnostic.find(params[:diagnostic_id])
     @diagnostic.pdf_for_user(current_user.id)
