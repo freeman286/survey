@@ -225,7 +225,7 @@ class Diagnostic < ActiveRecord::Base
 
   def pdf_for_user(user_id)
     diagnostic = self
-    Prawn::Document.generate("public/pdfs/pdf#{self.id}-#{user_id}.pdf") do
+    Prawn::Document.generate("pdfs/#{self.id}-#{user_id}.pdf") do
       text("#{diagnostic.user_response(user_id)} Here is the radar graph for your the diagnostic:")
       image("#{Rails.root}/public/results/#{diagnostic.id}-#{user_id}.png", :width => 550.29, :height => 412.75)
     end

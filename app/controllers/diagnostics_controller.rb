@@ -84,6 +84,12 @@ class DiagnosticsController < ApplicationController
     render action: "show"
   end
 
+  def show_pdf
+    @diagnostic = Diagnostic.find(params[:diagnostic_id])
+    @diagnostic.pdf_for_user(current_user.id)
+    send_file "#{Rails.root}/pdfs/#{@diagnostic.id}-#{current_user.id}.pdf", :type=>"application/pdf", :x_sendfile=>true
+  end
+
   private
   def can_edit
 	  if user_signed_in?
