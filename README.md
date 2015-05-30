@@ -32,3 +32,10 @@ curl -o database.dump `heroku pg:backups public-url`
 pg_restore --verbose --clean --no-acl --no-owner -h localhost -U $USER -d survey_development database.dump
 rm database.dump
 ```
+
+### Paypal
+
+# How to find your merchant id
+
+Go to https://www.paypal.com/webapps/customerprofile/summary.view
+
