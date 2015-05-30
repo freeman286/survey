@@ -19,7 +19,7 @@ gem 'prawn',   '~> 0.13.0'
 # Gems used only for assets and not required
 # in production environments by default.
 group :development, :test do
-  gem 'sqlite3'
+  gem 'pg'
 end
 
 group :test do
