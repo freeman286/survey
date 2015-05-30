@@ -15,7 +15,6 @@
 /tmp
 app/.DS_Store
 .DS_Store
-
 /public/results/*.png
 /public/wheels/*.png
 /pdfs/*.pdf
