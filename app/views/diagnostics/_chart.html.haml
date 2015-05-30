@@ -13,8 +13,7 @@
           \#{link_to "Delete", "#delete#{diagnostic.id}",  :'data-toggle' => "modal"}
     .row.head2
       = diagnostic.description
-      -if diagnostic.complete_for_user(current_user) == 100
-        = link_to "Download PDF", diagnostic_show_pdf_path(diagnostic.id)
+      = link_to "Download PDF", diagnostic_show_pdf_path(diagnostic.id)
     - if user_signed_in?
       %img{src: "/results/#{diagnostic.id}-#{current_user.id}.png"}/
     - if user_signed_in? && diagnostic.complete_for_user(current_user) > 0

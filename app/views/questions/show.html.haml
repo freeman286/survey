@@ -20,12 +20,6 @@
   .span2
     =link_to 'Previous question', question_path(@question.previous_question), :class => "btn btn-primary pull-left"
 
-.pad1{class: "#{!@question.next_question.nil? && !@question.previous_question.nil? ? 'span7' : ''}"}
-  .progress.progress-striped
-    .bar{:style => "width:"+"#{@question.segment.complete_for_user(current_user)}%"}
-      .black
-        ="#{@question.segment.complete_for_user(current_user)}%&nbsp;Complete".html_safe
-
 
 -if !@question.next_question.nil? && !@question.previous_question.nil?
   .span2
