@@ -3,6 +3,7 @@ class DiagnosticsController < ApplicationController
   # GET /diagnostics.json
   before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_filter :can_edit, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :check_paid , only: [:show_pdf]
 
   def admin
      @diagnostic = Diagnostic.find(params[:diagnostic_id])
@@ -111,4 +112,10 @@ class DiagnosticsController < ApplicationController
   	  end
     end
 	end
+
+  def check_paid
+    if current_user.transactions.where(:completed => true).where(:diagnostic_id => params[:diagnostic_id]).empty?
+      redirect_to :root, alert: "You have not paid for that"
+    end
+  end
 end
