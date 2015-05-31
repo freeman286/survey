@@ -6,7 +6,6 @@ Survey::Application.routes.draw do
   match "/diagnostics/:id/segment/:segment_id" => "diagnostics#show", :as => 'diagnostic_segment'
   match "/diagnostics_edit" => "diagnostics#all"
   match "/diagnostics/:diagnostic_id/buy_now" =>"diagnostics#buy_now", :as => 'diagnostic_buy_now'
-  match "/diagnostics/:diagnostic_id/results" =>"diagnostics#results", :as => 'diagnostic_results'
 
   match "/transactions/:transaction_hash/paid" =>"transactions#paid", :as => 'transaction_paid'
 
@@ -38,7 +37,7 @@ Survey::Application.routes.draw do
   match "/new" => "users#new", :as => 'new_user'
 
 
-  devise_for :users
+  devise_for :users, controllers: { confirmations: 'confirmations' }
 
   get "home/index"
   root :to => "home#index"

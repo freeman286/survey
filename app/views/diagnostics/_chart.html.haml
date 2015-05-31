@@ -13,10 +13,11 @@
           \#{link_to "Delete", "#delete#{diagnostic.id}",  :'data-toggle' => "modal"}
     .row.head2
       = diagnostic.description
-      -if current_user.transactions.where(:completed => true).where(:diagnostic_id => diagnostic.id).present?
-        = link_to "Downlaod PDF", diagnostic_show_pdf_path(diagnostic.id)
-      -else
-        = link_to "Buy PDF", diagnostic_buy_now_path(diagnostic.id)
+      -if user_signed_in?
+        -if current_user.transactions.where(:completed => true).where(:diagnostic_id => diagnostic.id).present?
+          = link_to "Downlaod PDF", diagnostic_show_pdf_path(diagnostic.id)
+        -else
+          = link_to "Buy PDF", diagnostic_buy_now_path(diagnostic.id)
     - if user_signed_in?
       %img{src: "/results/#{diagnostic.id}-#{current_user.id}.png"}/
     -#

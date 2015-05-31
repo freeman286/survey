@@ -94,10 +94,6 @@ class DiagnosticsController < ApplicationController
     end
   end
 
-  def results
-    @diagnostic = Diagnostic.find(params[:diagnostic_id])
-  end
-
   def show_pdf
     @diagnostic = Diagnostic.find(params[:diagnostic_id])
     @diagnostic.pdf_for_user(current_user.id)
