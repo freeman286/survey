@@ -1,4 +1,10 @@
 id = <%= @sub_question.id %>;
 $('#select-sub-question-'+id).toggleClass("btn-success");
+if ($('#select-sub-question-'+id+' i').attr('class') == "fa fa-check") {
+  icon = "times"
+} else {
+  icon = "check"
+}
+$('#select-sub-question-'+id).html("<i class='fa fa-" + icon + "'></i>");
 $(".bar").width("<%= @sub_question.question.segment.complete_for_user(current_user) %>%");
 $(".black").html("<%= @sub_question.question.segment.complete_for_user(current_user) %>%&nbsp;Complete");
