@@ -7,7 +7,8 @@ Survey::Application.routes.draw do
   match "/diagnostics_edit" => "diagnostics#all"
   match "/diagnostics/:diagnostic_id/buy_now" =>"diagnostics#buy_now", :as => 'diagnostic_buy_now'
   match "/diagnostics/:diagnostic_id/results" =>"diagnostics#results", :as => 'diagnostic_results'
-  match "/diagnostics/:diagnostic_id/paid" =>"diagnostics#paid", :as => 'diagnostic_paid'
+
+  match "/transaction/:transaction_id/paid" =>"transactions#paid", :as => 'transaction_paid'
 
   match "/diagnostics/:diagnostic_id/show_pdf" =>"diagnostics#show_pdf", :as => 'diagnostic_show_pdf'
 
