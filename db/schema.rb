@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150509142524) do
+ActiveRecord::Schema.define(:version => 20150531081645) do
 
   create_table "answers", :force => true do |t|
     t.integer  "sub_question_id"
@@ -30,10 +30,10 @@ ActiveRecord::Schema.define(:version => 20150509142524) do
   end
 
   create_table "questions", :force => true do |t|
-    t.text     "name",        :limit => 255
+    t.text     "name"
     t.integer  "segment_id"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.text     "description"
   end
 
@@ -53,12 +53,21 @@ ActiveRecord::Schema.define(:version => 20150509142524) do
   end
 
   create_table "sub_questions", :force => true do |t|
-    t.text     "name",        :limit => 255
+    t.text     "name"
     t.integer  "question_id"
-    t.text     "evidence",    :limit => 255
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.text     "evidence"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "value"
+  end
+
+  create_table "transactions", :force => true do |t|
+    t.string   "security_hash"
+    t.integer  "user_id"
+    t.integer  "diagnostic_id"
+    t.boolean  "completed",     :default => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   create_table "users", :force => true do |t|

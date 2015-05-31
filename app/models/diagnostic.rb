@@ -10,6 +10,8 @@ class Diagnostic < ActiveRecord::Base
 
   has_many :segments, dependent: :destroy
 
+  has_many :transactions
+
   after_save :make_wheel
 
   def make_chart_for_user(user_id)
