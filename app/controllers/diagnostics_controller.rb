@@ -90,7 +90,7 @@ class DiagnosticsController < ApplicationController
     begin
       @transaction = Transaction.create!(:user_id => current_user, :diagnostic_id => @diagnostic.id)
     rescue
-      @transaction = current_user.transactions.where(:diagnostic_id => diagnostic.id).first
+      @transaction = current_user.transactions.where(:diagnostic_id => @diagnostic.id).first
     end
   end
 
