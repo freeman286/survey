@@ -87,11 +87,15 @@ class DiagnosticsController < ApplicationController
   def buy_now
     @diagnostic = Diagnostic.find(params[:diagnostic_id])
   end
-  
+
   def results
     @diagnostic = Diagnostic.find(params[:diagnostic_id])
   end
-  
+
+  def paid
+    puts ">>>>>>>>>>>>>>>>>>>>>#{request.inspect}"
+  end
+
   def show_pdf
     @diagnostic = Diagnostic.find(params[:diagnostic_id])
     @diagnostic.pdf_for_user(current_user.id)

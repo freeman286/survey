@@ -1,5 +1,3 @@
 BUY NOW!
 
-%script{:async => "async", "data-amount" => "10", "data-button" => "buynow", "data-return" => "http://localhost:3000/diagnostics/#{@diagnostic.id}/results", "data-callback" => "http://http://spider-diagnostic.herokuapp.com/diagnostics/#{@diagnostic.id}/paid", "data-currency" => "GBP", "data-env" => "sandbox", "data-name" => "Diagnostic Results", "data-shipping" => "0", "data-tax" => "0", :src => "https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant=molemayer@gmail.com"}
-  
-  
+%script{:async => "async", "data-amount" => "10", "data-button" => "buynow", "data-return" => "http://spider-diagnostic.herokuapp.com/diagnostics/#{@diagnostic.id}/results", "data-callback" => "http://spider-diagnostic.herokuapp.com/diagnostics/#{@diagnostic.id}/paid", "data-currency" => "GBP", "data-env" => "sandbox", "data-name" => "Diagnostic Results", "data-shipping" => "0", "data-tax" => "0", :src => "https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant=molemayer@gmail.com"}
