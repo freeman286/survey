@@ -1,7 +1,7 @@
 class TransactionsController < ApplicationController
 
   def paid
-    puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#{request.env}"
+    puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#{request.env["mc_gross"]}"
     if request.user_agent == "PayPal IPN ( https://www.paypal.com/ipn )"
       Transaction.find_by_security_hash(params[:transaction_hash]).update_attributes(:completed => true)
     end
