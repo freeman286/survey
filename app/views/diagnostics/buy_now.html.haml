@@ -1,9 +1,13 @@
-BUY NOW!
+%h2
+  Buy PDF
 
-%script{:async => "async", "data-amount" => "10", "data-button" => "buynow", "data-callback" => "#{@host}/transactions/#{@transaction.security_hash}/paid", "data-currency" => "GBP", "data-env" => "sandbox", "data-name" => "Diagnostic Results", "data-shipping" => "0", "data-tax" => "0", :src => "https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant=molemayer@gmail.com"}
+.well
+  Clicking on this link will take you  to Paypal where you can pay for a PDF containing a summary of how you can improve at all segments of the wheel.
+
+  %script{:async => "async", "data-amount" => "10", "data-button" => "buynow", "data-callback" => "#{@host}/transactions/#{@transaction.security_hash}/paid", "data-currency" => "GBP", "data-env" => "sandbox", "data-name" => "Diagnostic Results", "data-shipping" => "0", "data-tax" => "0", :src => "https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant=molemayer@gmail.com"}
 
 %script
   $(window).bind("load", function() {
   $('#paypal-button').remove();
-  $('.paypal-button:last').removeClass("paypal-button").removeClass("large").addClass("btn")
+  $('.paypal-button:last').removeClass("paypal-button").removeClass("large").addClass("btn paypal")
   });
