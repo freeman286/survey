@@ -3,16 +3,21 @@ class QuestionsController < ApplicationController
   before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_filter :can_edit, only: [:new, :create, :edit, :update, :destroy]
   before_filter :can_take, only: [:show]
-  
+
   def index
     @questions = Question.all
   end
 
   # GET /questions/1
   def show
-    @question = Question.find(params[:id]) if params[:id]
-    @question = SubQuestion.find(params[:sub_question_id]).question if params[:sub_question_id]
+    @question = Question.find(params[:id]) || SubQuestion.find(params[:sub_question_id]).question
+    @segment = @question.segment
     @crud_state = "show"
+    begin
+      View.create!(:user_id => current_user.id, :question_id => @question.id)
+    rescue
+      #do nothing
+    end
   end
 
   # GET /questions/new
@@ -31,7 +36,7 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(params[:question])
     @crud_state = "create"
-    
+
     if @question.save
       redirect_to diagnostic_admin_path(@question.segment.diagnostic.id), notice: 'Question was successfully created.'
     else
@@ -60,7 +65,7 @@ class QuestionsController < ApplicationController
       redirect_to diagnostic_admin_path(@question.segment.diagnostic.id), alert: 'Question was not deleted.'
     end
   end
-  
+
   private
   def can_edit
 	  if user_signed_in?
@@ -69,8 +74,8 @@ class QuestionsController < ApplicationController
   	  end
     end
 	end
-	
-	
+
+
 	def can_take
 	  if !user_signed_in?
 	    redirect_to login_path

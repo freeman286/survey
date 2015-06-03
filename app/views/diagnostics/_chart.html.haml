@@ -20,11 +20,11 @@
           = link_to "Buy PDF", diagnostic_buy_now_path(diagnostic.id)
     - if user_signed_in?
       %img{src: "/results/#{diagnostic.id}-#{current_user.id}.png"}/
-    -#
-      .progress.progress-striped
-        .bar{style: "width:#{diagnostic.complete_for_user(current_user)}%"}
-          .black
-            = "#{diagnostic.complete_for_user(current_user)}% Complete"
+
+    .progress.progress-striped
+      .bar{style: "width:#{diagnostic.complete_for_user(current_user)}%"}
+        .black
+          = "#{diagnostic.complete_for_user(current_user)}% Complete"
   .modal.fade{id: "delete#{diagnostic.id}"}
     .modal-header
       %a.close{"data-dismiss" => "modal"} x

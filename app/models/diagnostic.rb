@@ -208,17 +208,7 @@ class Diagnostic < ActiveRecord::Base
   end
 
   def complete_for_user(user)
-    completed = 0
-    total = 0
-    self.segments.each do |seg|
-      completed += seg.complete_for_user(user)
-      total += 1
-    end
-    if completed == 0 || total == 0
-      0
-    else
-      ((completed + 0.0) / (total + 0.0)).floor
-    end
+    self.segments.map{|x| x.complete_for_user(user)}.sum / self.segments.count
   end
 
   def user_response(user_id)

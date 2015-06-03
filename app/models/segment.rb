@@ -58,24 +58,7 @@ class Segment < ActiveRecord::Base
   end
 
   def complete_for_user(user)
-    total = 0
-    self.questions.each do |que|
-      complete = false
-      que.sub_questions.each do |sub|
-        if sub.yes?(user)
-          complete = true
-        end
-      end
-      if complete == true
-        total += 1
-      end
-    end
-
-    if total == 0 || self.questions.count == 0
-      0
-    else
-      ((total + 0.0) / (self.questions.count + 0.0) * 100).floor
-    end
+    self.questions.map{|q| q.complete_for_user(user)}.sum / self.questions.count
   end
 
   def segment_roation()
