@@ -212,7 +212,7 @@ class Diagnostic < ActiveRecord::Base
   end
 
   def user_response(user_id)
-    self.segments.map{|x| x.user_response(user_id).try(:description)}.join(' ')
+    self.segments.map{|x| x.user_response(user_id).try(:description)}.select{|x| x.present?}.join(' ')
   end
 
   def pdf_for_user(user_id)
