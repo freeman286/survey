@@ -51,10 +51,8 @@
         history.replaceState(null, document.title, "/diagnostics/#{@diagnostic.id}/click/" + x + "/" + y + "/" + getRotationDegrees($("#wheel")) + ".html");
         e.preventDefault();
       });
-    $(window).bind("popstate", function() {
       $.getScript(location.href);
-      $("#wheel").rotate(#{@segment.segment_roation if @segment});
-    });
+      $("#wheel").transition({ rotate: '#{@segment.segment_roation if @segment}deg' });
     });
   }
 
