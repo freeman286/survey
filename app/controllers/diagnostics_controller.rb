@@ -88,7 +88,7 @@ class DiagnosticsController < ApplicationController
   def buy_now
     @diagnostic = Diagnostic.find(params[:diagnostic_id])
     begin
-      @transaction = Transaction.create!(:user_id => current_user, :diagnostic_id => @diagnostic.id)
+      @transaction = Transaction.create!(:user_id => current_user.id, :diagnostic_id => @diagnostic.id)
     rescue
       @transaction = current_user.transactions.where(:diagnostic_id => @diagnostic.id).first
     end
