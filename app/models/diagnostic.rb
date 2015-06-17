@@ -215,14 +215,6 @@ class Diagnostic < ActiveRecord::Base
     self.segments.map{|x| x.user_response(user_id).try(:description)}.select{|x| x.present?}.join(' ')
   end
 
-  def pdf_for_user(user_id)
-    diagnostic = self
-    Prawn::Document.generate("pdfs/#{self.id}-#{user_id}.pdf") do
-      text("#{diagnostic.user_response(user_id)} Here is the radar graph for your the diagnostic:")
-      image("#{Rails.root}/public/results/#{diagnostic.id}-#{user_id}.png", :width => 550.29, :height => 412.75)
-    end
-  end
-
   private
 
   def degrees_to_radians(deg)

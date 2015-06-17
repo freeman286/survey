@@ -96,8 +96,11 @@ class DiagnosticsController < ApplicationController
 
   def show_pdf
     @diagnostic = Diagnostic.find(params[:diagnostic_id])
-    @diagnostic.pdf_for_user(current_user.id)
-    send_file "#{Rails.root}/pdfs/#{@diagnostic.id}-#{current_user.id}.pdf", :type=>"application/pdf", :x_sendfile=>true
+    respond_to do |format|
+      format.pdf do
+        render pdf: "file_name"   # Excluding ".pdf" extension.
+      end
+    end
   end
 
   private

@@ -15,6 +15,9 @@ gem "sass"
 gem "rmagick"
 gem 'formtastic'
 gem 'prawn',   '~> 0.13.0'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-heroku'
 
 # Gems used only for assets and not required
 # in production environments by default.
