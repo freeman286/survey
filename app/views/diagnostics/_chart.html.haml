@@ -15,9 +15,9 @@
       = diagnostic.description
       -if user_signed_in?
         -if current_user.transactions.where(:completed => true).where(:diagnostic_id => diagnostic.id).present?
-          = link_to "Download PDF", diagnostic_show_pdf_path(diagnostic.id) + ".pdf"
+          = link_to "Download your personalised diagnostic report", diagnostic_show_pdf_path(diagnostic.id) + ".pdf"
         -else
-          = link_to "Buy PDF", diagnostic_buy_now_path(diagnostic.id)
+          = link_to "Buy your personalised diagnostic report", diagnostic_buy_now_path(diagnostic.id)
     - if user_signed_in?
       %img{src: "/results/#{diagnostic.id}-#{current_user.id}.png"}/
 
