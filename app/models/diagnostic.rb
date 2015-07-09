@@ -14,6 +14,10 @@ class Diagnostic < ActiveRecord::Base
 
   after_save :make_wheel
 
+  def has_wheel?
+    File.exist?("#{Rails.root}public/wheels/wheel_#{self.id}.png")
+  end
+
   def make_chart_for_user(user_id)
     g = Gruff::Spider.new(100,1200)
     g.hide_axes = false

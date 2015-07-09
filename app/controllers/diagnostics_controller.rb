@@ -28,6 +28,7 @@ class DiagnosticsController < ApplicationController
   def show
     @diagnostic = Diagnostic.find(params[:id])
     @segment = Segment.find(params[:segment_id]) if params[:segment_id]
+    @diagnostic.make_wheel() if !@diagnostic.has_wheel?
     @crud_state = "show"
   end
 
@@ -81,6 +82,7 @@ class DiagnosticsController < ApplicationController
 
   def click
     @diagnostic = Diagnostic.find(params[:diagnostic_id])
+    @diagnostic.make_wheel() if !@diagnostic.has_wheel?
     @segment = @diagnostic.segment_from_x_y_rotation(params[:x],params[:y],params[:rotation])
     render action: "show"
   end
