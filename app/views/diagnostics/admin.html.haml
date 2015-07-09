@@ -30,7 +30,7 @@
             %br
             = link_to 'New Response', new_response_path(segment)
 
-      - segment.responses.each do |response|
+      - segment.responses.sort_by { |k, v| k[:value] }.each do |response|
         .row.well.section.response
           .span4
             ="#{response.value}%"
