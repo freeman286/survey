@@ -98,6 +98,7 @@ class DiagnosticsController < ApplicationController
 
   def show_pdf
     @diagnostic = Diagnostic.find(params[:diagnostic_id])
+    @user = User.find(params[:user_id])
     respond_to do |format|
       format.pdf do
         render pdf: "file_name"   # Excluding ".pdf" extension.
@@ -115,7 +116,8 @@ class DiagnosticsController < ApplicationController
 	end
 
   def check_paid
-    if current_user.transactions.where(:completed => true).where(:diagnostic_id => params[:diagnostic_id]).empty?
+    @user = User.find(params[:user_id])
+    if @user.transactions.where(:completed => true).where(:diagnostic_id => params[:diagnostic_id]).empty? && !@user.admin?
       redirect_to :root, alert: "You have not paid for that"
     end
   end

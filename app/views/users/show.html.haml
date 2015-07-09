@@ -1,15 +1,18 @@
 .row.span12.pad1
   %h3
     =@user.full_name
-  .negative-margin-top  
+  .negative-margin-top
     =link_to @user.email, "mailto:#{@user.email}"
-  
+
 .row.span12.pad1
-  %h5  
+  %h5
     ="#{@user.full_name}'s results:"
-    
+
+-results = false
+
 -Diagnostic.all.each do |dia|
-  -if FileTest.exists?("#{Rails.root}/public/results/#{dia.id}-#{@user.id}.png") 
+  -if FileTest.exists?("#{Rails.root}/public/results/#{dia.id}-#{@user.id}.png")
+    -results = true
     .row.span12.well.section.chart
       .row
         .span12
@@ -17,5 +20,9 @@
             =dia.name
       .row.head2
         = dia.description
-      - if user_signed_in?
+        = link_to "Download their personalised diagnostic report", diagnostic_show_pdf_path(dia.id, @user.id) + ".pdf"
         %img{src: "/results/#{dia.id}-#{@user.id}.png"}/
+
+  -if !results
+    .row.span12.pad1
+      This user has no results

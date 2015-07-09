@@ -20,5 +20,5 @@
   }
 
 %h2 Results
-%p="#{@diagnostic.user_response(current_user.id)} Here is the radar graph for your the diagnostic:"
-= image_tag "#{Rails.root}/public/results/#{@diagnostic.id}-#{current_user.id}.png"
+%p="#{@diagnostic.user_response(@user.id)} Here is the radar graph for your the diagnostic:"
+= image_tag "#{Rails.root}/public/results/#{@diagnostic.id}-#{@user.id}.png"
