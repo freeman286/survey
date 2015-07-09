@@ -1,44 +1,44 @@
-%p
-%p
-  %h1.pt-2
-    =@segment.name
-  %h4
-    =@question.name
+.span10
+  %p
+    %h1.pt-2
+      =@segment.name
+    %h4
+      =@question.name
 
-%table.table
-  %thead
-    %th
+  %table.table
+    %thead
+      %th
 
-  %tbody
-    - @question.sub_questions.sort_by { |k, v| k[:value] }.each do |subquestion|
-      %tr.section{:id => "#{subquestion.id}", :'data-animation' => :true, :'data-html' => :true, :'data-title' => "Evidence", :'data-content' => "#{subquestion.evidence}"}
-        %td
-          = subquestion.name
-        %td
-          =link_to "#{subquestion.yes?(current_user) ? '<i class="fa fa-check"></i>' : '&nbsp;'}".html_safe,  select_sub_question_path(subquestion.id), class: "btn select #{subquestion.yes?(current_user) ? 'btn-success' : ''}", id: "select-sub-question-#{subquestion.id}", :remote => true
-
-
--if !@question.next_question.nil? && !@question.previous_question.nil? || true
-  .span2
-    =link_to 'Previous question', question_path(@question.previous_question), :class => "btn btn-primary pull-left"
-
--if !@question.next_question.nil? && !@question.previous_question.nil? || true
-  .span2.offset7
-    =link_to 'Next question', question_path(@question.next_question), :class => "btn btn-primary pull-right"
+    %tbody
+      - @question.sub_questions.sort_by { |k, v| k[:value] }.each do |subquestion|
+        %tr.section{:id => "#{subquestion.id}", :'data-animation' => :true, :'data-html' => :true, :'data-title' => "Evidence", :'data-content' => "#{subquestion.evidence}"}
+          %td
+            = subquestion.name
+          %td
+            =link_to "#{subquestion.yes?(current_user) ? '<i class="fa fa-check"></i>' : '&nbsp;'}".html_safe,  select_sub_question_path(subquestion.id), class: "btn select #{subquestion.yes?(current_user) ? 'btn-success' : ''}", id: "select-sub-question-#{subquestion.id}", :remote => true
 
 
-.gap
-  = link_to "Back to Diagnostic", diagnostic_segment_path(@question.segment.diagnostic.id, @question.segment.id)
+  -if !@question.next_question.nil? && !@question.previous_question.nil? || true
+    .span2
+      =link_to 'Previous question', question_path(@question.previous_question), :class => "btn btn-primary pull-left"
 
-- @question.sub_questions.each do |subquestion|
-  -if subquestion.evidence.present?
-    :javascript
-      $(function ()
-      {
-        $("##{subquestion.id}").popover(
+  -if !@question.next_question.nil? && !@question.previous_question.nil? || true
+    .span2.offset5
+      =link_to 'Next question', question_path(@question.next_question), :class => "btn btn-primary pull-right"
+
+
+  .gap
+    = link_to "Back to Diagnostic", diagnostic_segment_path(@question.segment.diagnostic.id, @question.segment.id)
+
+  - @question.sub_questions.each do |subquestion|
+    -if subquestion.evidence.present?
+      :javascript
+        $(function ()
         {
-           trigger: 'hover',
-           html: true,
-           placement: 'right',
+          $("##{subquestion.id}").popover(
+          {
+             trigger: 'hover',
+             html: true,
+             placement: 'right',
+          });
         });
-      });
