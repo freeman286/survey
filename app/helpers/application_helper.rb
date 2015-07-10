@@ -9,22 +9,22 @@ module ApplicationHelper
 			""
 		end
 	end
-	
+
 	def flash_header(message)
 	  if message == "You need to be registered to build your own diagnostic results. It won't take long and is free!"
 	    "What Next?"
 	  else
 	    nil
-	  end 
+	  end
   end
-	
+
 	def check_admin(user)
 	  if !user.nil?
       user.is_admin?
     end
 	end
-	
-	
+
+
   def segment_rows(diagnostic)
     html = ""
     diagnostic.segments.each do |segment|
@@ -32,7 +32,7 @@ module ApplicationHelper
     end
     html.html_safe
   end
-  
+
   def crud_state_to_name(state)
     case state
     when "show"
@@ -49,8 +49,8 @@ module ApplicationHelper
       ""
     end
   end
-  
-  
+
+
   def percent_completed(x, y)
       if x == 0 && y == 0
         0
@@ -58,7 +58,7 @@ module ApplicationHelper
         ((x + 0.0) / (y + 0.0) * 100).floor
       end
   end
-  
+
   def previous_id_for_question(question)
     pos = 0
     loop_pos = 0

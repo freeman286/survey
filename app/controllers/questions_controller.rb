@@ -78,7 +78,7 @@ class QuestionsController < ApplicationController
 
 	def can_take
 	  if !user_signed_in?
-	    redirect_to login_path
+	    redirect_to register_path
 	    flash[:message] = "You need to be registered to build your own diagnostic results. It won't take long and is free!"
 	  end
 	end

@@ -9,7 +9,7 @@ Survey::Application.routes.draw do
 
   match "/transactions/:transaction_hash/paid" =>"transactions#paid", :as => 'transaction_paid'
 
-  match "/diagnostics/:diagnostic_id/show_pdf" =>"diagnostics#show_pdf", :as => 'diagnostic_show_pdf'
+  match "/diagnostics/:diagnostic_id/:user_id/show_pdf" =>"diagnostics#show_pdf", :as => 'diagnostic_show_pdf'
 
   resources :segments, :except => :index
   match "/segments/new/:diagnostic_id" => "segments#new", :as => 'new_segment'
@@ -26,16 +26,15 @@ Survey::Application.routes.draw do
   resources :responses, :except => [:index, :show]
   match "/responses/new/:segment_id" => "responses#new", :as => 'new_response'
 
-  resources :users, :only => [:index, :show, :new, :create]
+  resources :users, :only => [:index, :show]
   match '/search' => 'users#index'
 
   as :user do
+    get '/register', to: 'devise/registrations#new', :as => :register
     get '/login', to: 'devise/sessions#new', :as => :login
     get '/logout', to: 'devise/sessions#destroy', :as => :logout
     get '/edit', to: 'devise/registrations#edit', :as => :edit
   end
-  match "/new" => "users#new", :as => 'new_user'
-
 
   devise_for :users, controllers: { confirmations: 'confirmations' }
 
