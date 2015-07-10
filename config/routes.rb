@@ -28,6 +28,7 @@ Survey::Application.routes.draw do
 
   resources :users, :only => [:index, :show]
   match '/search' => 'users#index'
+  match '/reset_password/:id' => 'users#reset_password', :as => 'reset_password'
 
   as :user do
     get '/register', to: 'devise/registrations#new', :as => :register

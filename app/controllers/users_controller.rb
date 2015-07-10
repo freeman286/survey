@@ -14,12 +14,23 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def reset_password
+    @user = User.find(params[:id])
+    o = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten
+    password = (0...50).map { o[rand(o.length)] }.join[0..10]
+    if @user.update_attributes(:password => password, :password_confirmation => password)
+      redirect_to user_path(@user), notice: "The user's new password is #{password}."
+    else
+      redirect_to user_path(@user), alert: "The user's password could not be reset."
+    end
+  end
+
+
+
   private
   def can_view
-	  if user_signed_in?
-	    if !current_user.is_admin?
-  	    redirect_to home_index_path(), alert: "You must be admin to do that"
-  	  end
-    end
+    if !current_user.is_admin?
+	    redirect_to home_index_path(), alert: "You must be admin to do that!"
+	  end
 	end
 end

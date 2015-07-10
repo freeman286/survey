@@ -1,6 +1,7 @@
 .row.span12.pad1
   %h3
-    =@user.full_name
+    ="#{@user.full_name} - #{@user.organisation}"
+    =link_to("Reset password", reset_password_path(@user.id), :class => "btn")
   .negative-margin-top
     =link_to @user.email, "mailto:#{@user.email}"
 

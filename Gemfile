@@ -23,6 +23,7 @@ gem 'wkhtmltopdf-heroku'
 # in production environments by default.
 group :development, :test do
   gem 'pg'
+  gem 'debugger'
 end
 
 group :test do
