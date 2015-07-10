@@ -32,6 +32,10 @@ class ApplicationController < ActionController::Base
     home_index_path
   end
 
+  def after_update_path_for(resource)
+    home_index_path
+  end
+
   private
   def get_host
     @host = "http://" + (request.host || "spider-diagnostic.herokuapp.com/") + ":" + (request.port.to_s)
