@@ -30,7 +30,11 @@ class User < ActiveRecord::Base
     users = Set.new
     if !words.empty?
       words.split(" ").each do |word|
-        users = User.select {|user| user.first_name == word.capitalize || user.last_name == word.capitalize}
+        users = User.select {|user|
+          user.first_name == word.capitalize ||
+          user.last_name == word.capitalize ||
+          user.organisation == word.capitalize
+        }
       end
     end
     if users.nil?
