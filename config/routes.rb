@@ -1,5 +1,7 @@
 Survey::Application.routes.draw do
 
+  resources :infos
+
   resources :diagnostics
   match "/diagnostics/:diagnostic_id/admin" => "diagnostics#admin", :as => 'diagnostic_admin'
   match "/diagnostics/:diagnostic_id/click/:x/:y/:rotation" => "diagnostics#click", :as => 'diagnostic_click'

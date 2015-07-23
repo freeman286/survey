@@ -99,6 +99,11 @@ class DiagnosticsController < ApplicationController
   def show_pdf
     @diagnostic = Diagnostic.find(params[:diagnostic_id])
     @user = User.find(params[:user_id])
+    @introduction = Info.where(:name => "introduction").first.content
+    @help = Info.where(:name =>  "how we can help you").first.content
+    @organisation = Info.where(:name =>  "organisation").first.content
+    @email = Info.where(:name =>  "email").first.content
+    @phone = Info.where(:name =>  "phone").first.content
     respond_to do |format|
       format.pdf do
         render pdf: "file_name"   # Excluding ".pdf" extension.
