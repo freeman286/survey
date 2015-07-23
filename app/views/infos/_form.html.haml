@@ -7,7 +7,7 @@
     %ul
       - @info.errors.full_messages.each do |msg|
         %li= msg
-%h2="Editing #{@info.name}"
+%h2="Edit #{@info.name}"
 = simple_form_for(@info, :html => { class: "well" }) do |f|
   .form-inputs
     = f.input :content, :input_html => {:rows => 5}
