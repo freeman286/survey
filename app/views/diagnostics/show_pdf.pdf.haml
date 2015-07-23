@@ -1,11 +1,17 @@
 :css
   body{
     font-size: 20pt;
+    padding: 0;
+    margin: 0;
   }
 
 
   h1{
-    font-size: 22pt;
+    font-size: 44pt;
+  }
+
+  h2 {
+    font-size: 38pt;
   }
 
 
@@ -14,11 +20,59 @@
     margin: 9px 0px 5px 0px;
   }
 
-  h4 {
-    font-size: 10pt;
-    margin: 5px 0px 5px 0px;
+  h3 {
+    font-size: 20pt;
   }
 
-%h2 Results
-%p="#{@diagnostic.user_response(@user.id)} Here is the radar graph for your the diagnostic:"
-= image_tag "#{Rails.root}/public/results/#{@diagnostic.id}-#{@user.id}.png"
+  h4 {
+    font-size: 20pt;
+    padding-bottom: 50pt;
+  }
+
+  h5 {
+    font-size: 20pt;
+  }
+
+  .center {
+    text-align: center;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+  }
+
+  .content {
+    padding-top:1700px;
+    width: 200%;
+  }
+.center
+  %h1 Archimedes Earth
+  %h3 Forest Schools
+
+  %h1 Framework of Excellence
+
+  %h4 Quality Mark Award
+
+  %h5 Diagnostic Report
+
+  %h5 For
+
+  %h5=@user.full_name
+  %h5="(#{@user.organisation})"
+
+.content
+  %h5 Introduction
+  %p=@introduction
+
+  %h5 Results
+  %p="#{@diagnostic.user_response(@user.id)} Here is the radar graph for your the diagnostic:"
+  = image_tag "#{Rails.root}/public/results/#{@diagnostic.id}-#{@user.id}.png"
+
+  %h5 How We Can Help You
+  %p=@help
+
+  %h5 Contact Us
+  %p=@organisation
+  %p=@email
+  %p=@phone
