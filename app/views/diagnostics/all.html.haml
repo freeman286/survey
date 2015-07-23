@@ -1,7 +1,6 @@
 %h1.head Listing diagnostics
 .row.span12
-  - if check_admin(current_user)
-    = link_to 'New Diagnostic', new_diagnostic_path, class: 'btn btn-top'
+  = link_to 'New Diagnostic', new_diagnostic_path, class: 'btn btn-top'
 
 - @diagnostics.each do |diagnostic|
   .row.span12.well.section.chart
@@ -13,7 +12,8 @@
         \#{link_to 'Edit Name and Description', edit_diagnostic_path(diagnostic)}
         |
         \#{link_to "Delete", "#delete#{diagnostic.id}",  :'data-toggle' => "modal"}
-        
+
+
   .modal.fade{id: "delete#{diagnostic.id}"}
     .modal-header
       %a.close{"data-dismiss" => "modal"} x
@@ -23,3 +23,8 @@
     .modal-footer
       %a.btn{"data-dismiss" => "modal", href: "#"} Close
       = link_to 'Delete', diagnostic, method: :delete, class: 'btn btn-primary'
+
+
+.span12
+  -@infos.each do |info|
+    =render 'infos/form', :@info => info

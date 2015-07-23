@@ -2,7 +2,7 @@ class DiagnosticsController < ApplicationController
   # GET /diagnostics
   # GET /diagnostics.json
   before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_filter :can_edit, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :can_edit, only: [:new, :create, :edit, :update, :destroy, :all]
   before_filter :check_paid , only: [:show_pdf]
 
   def admin
@@ -11,6 +11,7 @@ class DiagnosticsController < ApplicationController
 
   def all
     @diagnostics = Diagnostic.all
+    @infos = Info.order("id ASC")
   end
 
   def chart
@@ -113,10 +114,8 @@ class DiagnosticsController < ApplicationController
 
   private
   def can_edit
-	  if user_signed_in?
-	    if !current_user.is_admin?
-  	    redirect_to :back, alert: "You must be admin to do that"
-  	  end
+	  if !(user_signed_in? && current_user.is_admin?)
+  	  redirect_to :root, alert: "You must be admin to do that"
     end
 	end
 
