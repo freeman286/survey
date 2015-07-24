@@ -38,6 +38,6 @@ class ApplicationController < ActionController::Base
 
   private
   def get_host
-    @host = "http://" + (request.host || "spider-diagnostic.herokuapp.com/") + ":" + (request.port.to_s)
+    @host = "http://" + (request.host || "spider-diagnostic.herokuapp.com")
   end
 end
