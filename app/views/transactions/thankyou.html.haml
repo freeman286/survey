@@ -1,0 +1,7 @@
+%h3 Thank you for buying you personalised diagnostic report
+
+%p Follow the link to access your report:
+
+%p= link_to "Download your personalised diagnostic report", diagnostic_show_pdf_path(@diagnostic.id, current_user) + ".pdf"
+
+%p You can also download your report from the diagnostics page.

@@ -6,4 +6,8 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def thankyou
+    @diagnostic = current_user.transactions.order("created_at").select{|t| t.completed}.last.diagnostic
+  end
+
 end

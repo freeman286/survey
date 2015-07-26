@@ -10,6 +10,7 @@ Survey::Application.routes.draw do
   match "/diagnostics/:diagnostic_id/buy_now" =>"diagnostics#buy_now", :as => 'diagnostic_buy_now'
 
   match "/transactions/:transaction_hash/paid" =>"transactions#paid", :as => 'transaction_paid'
+  match "/transactions/thankyou" =>"transactions#thankyou", :as => 'thank_you'
 
   match "/diagnostics/:diagnostic_id/:user_id/show_pdf" =>"diagnostics#show_pdf", :as => 'diagnostic_show_pdf'
 
