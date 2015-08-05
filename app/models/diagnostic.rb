@@ -212,7 +212,11 @@ class Diagnostic < ActiveRecord::Base
   end
 
   def complete_for_user(user)
-    self.segments.map{|x| x.complete_for_user(user)}.sum / self.segments.count
+    if self.segments.count > 0
+      self.segments.map{|x| x.complete_for_user(user)}.sum / self.segments.count
+    else
+      0
+    end
   end
 
   def user_response(user_id)
