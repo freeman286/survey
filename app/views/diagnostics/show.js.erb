@@ -1,4 +1,5 @@
 <% if @segment %>
 	$("#questions").html('<%= escape_javascript(render 'segments/questions', :@segment => @segment)%>');
 	$("#wheel").transition({ rotate: '<%= @segment.segment_roation %>deg' });
+	window.spinning = false;
 <% end %>
