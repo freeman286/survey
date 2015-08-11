@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
   private
   def can_view
-    if !current_user.is_admin?
+    if user_signed_in? && !current_user.is_admin?
 	    redirect_to home_index_path(), alert: "You must be admin to do that!"
 	  end
 	end
