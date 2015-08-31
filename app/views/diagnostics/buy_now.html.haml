@@ -4,7 +4,7 @@
 .well
   Clicking on this link will take you  to Paypal where you can pay for a PDF containing a summary of how you can improve at all segments of the wheel.
 
-  %script{:async => "async", "data-amount" => "10", "data-button" => "buynow", "data-return" => "#{@host}/diagnostics", "data-callback" => "#{@host}/transactions/#{@transaction.security_hash}/paid", "data-env" => "sandbox", "data-currency" => "GBP", "data-name" => "Diagnostic Results", "data-shipping" => "0", "data-tax" => "0", :src => "https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant=info@archimedes-training.co.uk"}
+  %script{:async => "async", "data-amount" => "10", "data-button" => "buynow", "data-return" => "#{@host}/diagnostics?auth_token=#{current_user.authentication_token}", "data-callback" => "#{@host}/transactions/#{@transaction.security_hash}/paid", "data-env" => "sandbox", "data-currency" => "GBP", "data-name" => "Diagnostic Results", "data-shipping" => "0", "data-tax" => "0", :src => "https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant=info@archimedes-training.co.uk"}
 
 %script
   $(window).bind("load", function() {
