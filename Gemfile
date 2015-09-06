@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '1.9.3'
+ruby '2.1.2'
 
 gem 'rails', '3.2.6'
 
@@ -23,7 +23,7 @@ gem 'wkhtmltopdf-heroku'
 # in production environments by default.
 group :development, :test do
   gem 'pg'
-  gem 'debugger'
+  gem 'byebug'
 end
 
 group :test do
