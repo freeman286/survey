@@ -27,8 +27,8 @@ bundle exec rake db:create
 #### 2. Download database
 
 ```
-heroku pgbackups:capture 
-curl -o database.dump `heroku pg:backups public-url`
+heroku pg:backups capture --app spider-diagnostic
+curl -o database.dump `heroku pg:backups public-url --app spider-diagnostic`
 pg_restore --verbose --clean --no-acl --no-owner -h localhost -U $USER -d survey_development database.dump
 rm database.dump
 ```
