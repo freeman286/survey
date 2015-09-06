@@ -1,7 +1,12 @@
 %h3 Thank you for buying you personalised diagnostic report
 
-%p Follow the link to access your report:
-
-%p= link_to "Download your personalised diagnostic report", diagnostic_show_pdf_path(@diagnostic.id, current_user) + ".pdf"
-
-%p You can also download your report from the diagnostics page.
+-# Removed because this will be done manually
+-if false
+  %p Follow the link to access your report:
+  %p= link_to "Download your personalised diagnostic report", diagnostic_show_pdf_path(@diagnostic.id, current_user) + ".pdf"
+  %p You can also download your report from the diagnostics page.
+  
+-else
+  %p Your report will be emailed to you once your results have been reviewed.
+  If you have any questions please email 
+  =link_to "info@archimedes-training.co.uk", "mailto: info@archimedes-training.co.uk"
