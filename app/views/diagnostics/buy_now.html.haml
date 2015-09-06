@@ -11,3 +11,8 @@
   $('#paypal-button').remove();
   $('.paypal-button:last').removeClass("paypal-button").removeClass("large").addClass("btn paypal")
   });
+  
+%p
+  ="data-return => #{@host}/diagnostics?auth_token=#{current_user.authentication_token}"
+%p
+  ="data-callback => #{@host}/transactions/#{@transaction.security_hash}/paid"  
