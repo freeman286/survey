@@ -13,11 +13,13 @@
           \#{link_to "Delete", "#delete#{diagnostic.id}",  :'data-toggle' => "modal"}
     .row.head2
       = diagnostic.description
+    .row.head2.mt-2  
       -if user_signed_in?
         -if current_user.transactions.where(:completed => true).where(:diagnostic_id => diagnostic.id).present?
-          = link_to "Download your personalised diagnostic report", diagnostic_show_pdf_path(diagnostic.id, current_user) + ".pdf"
+          =# Commented out as the report will be sent manually
+          =# link_to "Download your personalised diagnostic report", diagnostic_show_pdf_path(diagnostic.id, current_user) + ".pdf", class: "btn btn-primary"
         -else
-          = link_to "Buy your personalised diagnostic report", diagnostic_buy_now_path(diagnostic.id)
+          = link_to "Buy your personalised diagnostic report", diagnostic_buy_now_path(diagnostic.id), class: "btn btn-primary"
     - if user_signed_in?
       %img{src: "/results/#{diagnostic.id}-#{current_user.id}.png"}/
 
