@@ -1,5 +1,5 @@
 .row.span12.pad1
   - if check_admin(current_user)
     = link_to 'New Diagnostic', new_diagnostic_path, class: 'btn btn-top'
-    
-=render "chart"
+
+=render "chart", :@diagnostics => @diagnostics
