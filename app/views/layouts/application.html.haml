@@ -28,13 +28,15 @@
             - else
               %li= link_to "Log In", login_path
               %li= link_to "Register", register_path
-    - if !(controller_name == "home" || (controller_name == "diagnostics" && controller.action_name == "admin") || (controller_name == "registrations" && controller.action_name == "new"))
+    -if flash
       .container
         - flash.each do |type, message|
           %div{class: "alert alert-block #{flash_class(type)} span12"}
             %button.close{"data-dismiss" => "alert"} x
             %h4= flash_header message
             %div= message
+    -if !(controller_name == "home" || (controller_name == "diagnostics" && controller.action_name == "admin") || (controller_name == "registrations" && controller.action_name == "new"))
+      .container
         = yield
     - else
       = yield
