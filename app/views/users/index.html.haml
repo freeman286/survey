@@ -12,6 +12,10 @@
   .span12.well.user-info
     %h4= link_to("#{user.full_name} - #{user.organisation}", user_path(user.id))
     -Diagnostic.all.each do |dia|
-      -if FileTest.exists?("#{Rails.root}/public/results/#{dia.id}-#{user.id}.png")
-        .span3
-          =image_tag "/results/#{dia.id}-#{user.id}.png"
+      .row
+        -if tx=user.transactions.where(:completed => true).where(:diagnostic_id => dia.id).first
+          .row.span12
+            ="Paid for a customised report on #{tx.updated_at.strftime("%e %B %Y")}"
+        -if FileTest.exists?("#{Rails.root}/public/results/#{dia.id}-#{user.id}.png")
+          .span3
+            =image_tag "/results/#{dia.id}-#{user.id}.png"

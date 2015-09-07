@@ -8,10 +8,16 @@
 .row.span12.pad1
   %h5
     ="#{@user.full_name}'s results:"
+    
 
 -results = false
 
 -Diagnostic.all.each do |dia|
+  
+  .row.span12.mb-1
+    -if tx=@user.transactions.where(:completed => true).where(:diagnostic_id => dia.id).first
+      ="Paid for a customised report on #{tx.updated_at.strftime("%e %B %Y")}"
+
   -if FileTest.exists?("#{Rails.root}/public/results/#{dia.id}-#{@user.id}.png")
     -results = true
     .row.span12.well.section.chart
