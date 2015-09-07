@@ -1,24 +1,19 @@
 %h2
-  Buy PDF
+  Buy peronalised report
 
 .well
-  Clicking on the button below will take you to Paypal where you can pay for a PDF containing a summary of how you can improve at all segments of the wheel.
+  Clicking on the button below will take you to Paypal where you can pay for a personalised report of how you can improve at all segments of the wheel. Your report will be emailed to you once your results have been reviewed.
 
-%p
+  %p.mt-1
 
-  %script{:async => "async", "data-amount" => "10", "data-button" => "buynow", "data-return" => "#{@host}/transactions/thankyou?auth_token=#{current_user.authentication_token}", "data-callback" => "#{@host}/transactions/#{@transaction.security_hash}/paid", "data-env" => "sandbox", "data-currency" => "GBP", "data-name" => "Diagnostic Results", "data-shipping" => "0", "data-tax" => "0", :src => "https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant=info@archimedes-training.co.uk"}
+    %script{:async => "async", "data-amount" => "10", "data-button" => "buynow", "data-return" => "#{@host}/transactions/thankyou?auth_token=#{current_user.authentication_token}", "data-callback" => "#{@host}/transactions/#{@transaction.security_hash}/paid", "data-env" => "sandbox", "data-currency" => "GBP", "data-name" => "Diagnostic Results", "data-shipping" => "0", "data-tax" => "0", :src => "https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant=info@archimedes-training.co.uk"}
 
-%script
-  $(window).bind("load", function() {
-  $('#paypal-button').remove();
-  $('.paypal-button:last').removeClass("paypal-button").removeClass("large").addClass("btn paypal")
-  });
+  %script
+    $(window).bind("load", function() {
+    $('#paypal-button').remove();
+    $('.paypal-button:last').removeClass("paypal-button").removeClass("large").addClass("btn paypal")
+    });
 
-%p
+%p.mt-1
   If you have any questions please email
   =link_to "info@archimedes-training.co.uk", "mailto: info@archimedes-training.co.uk"
-
-%p
-  ="data-return => #{@host}/transactions/thankyou?auth_token=#{current_user.authentication_token}"
-%p
-  ="data-callback => #{@host}/transactions/#{@transaction.security_hash}/paid"
