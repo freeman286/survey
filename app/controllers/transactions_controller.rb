@@ -1,4 +1,6 @@
 class TransactionsController < ApplicationController
+  
+  skip_before_filter :verify_authenticity_token, :except => [:paid]
 
   def paid
     @status = false
