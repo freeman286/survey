@@ -9,7 +9,7 @@ class TransactionsController < ApplicationController
     if @status
       puts "HASH: #{@hash} COMPLETED"
     else
-      puts "HASH: #{@hash} NOT COMPLETED"      
+      puts "HASH: #{@hash} NOT COMPLETED"
     end
     render :layout => false
   end
