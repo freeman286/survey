@@ -3,7 +3,7 @@
     .row
       .span7
         %h3.no-top-margin
-          =link_to diagnostic.name, diagnostic_path(diagnostic.id)
+          =link_to (diagnostic.name+" Results").capitalize, diagnostic_path(diagnostic.id)
       .span5.admin.pull-right.margin-top
         - if check_admin(current_user)
           = link_to 'Edit Content', diagnostic_admin_path(diagnostic), id: 'show-content', data: { diagnostic_id: diagnostic.id }
@@ -18,6 +18,7 @@
         -if current_user.transactions.where(:completed => true).where(:diagnostic_id => diagnostic.id).present?
           =# Commented out as the report will be sent manually
           =# link_to "Download your personalised diagnostic report", diagnostic_show_pdf_path(diagnostic.id, current_user) + ".pdf", class: "btn btn-primary"
+          Thank you for purchasing your personalised report. It will be emailed to you once your results have been reviewed.
         -else
           = link_to "Buy your personalised diagnostic report", diagnostic_buy_now_path(diagnostic.id), class: "btn btn-primary"
     - if user_signed_in?
