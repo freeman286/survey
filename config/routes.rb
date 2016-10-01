@@ -40,7 +40,7 @@ Survey::Application.routes.draw do
     get '/edit', to: 'devise/registrations#edit', :as => :edit
   end
 
-  devise_for :users, controllers: { confirmations: 'confirmations' }
+  devise_for :users, controllers: { confirmations: 'confirmations', :passwords => "passwords" }
 
   get "home/index"
   root :to => "home#index"

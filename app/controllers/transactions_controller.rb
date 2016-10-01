@@ -19,7 +19,7 @@ class TransactionsController < ApplicationController
   end
 
   def thankyou
-    @diagnostic = current_user.transactions.order("created_at").select{|t| t.completed}.last.diagnostic
+    @diagnostic = current_user.transactions.order("created_at").last.diagnostic
   end
 
 end
