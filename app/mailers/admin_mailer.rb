@@ -6,6 +6,6 @@ class AdminMailer < ActionMailer::Base
     @user = @transaction.user
     @diagnostic = @transaction.diagnostic.name
     @host = host
-    mail(to: "molemayer@gmail.com", subject: "Diagnostic report purchased")
+    mail(to: "andrew@archimedes-earth.com", subject: "Diagnostic report purchased")
   end
 end
