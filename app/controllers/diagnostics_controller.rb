@@ -89,6 +89,7 @@ class DiagnosticsController < ApplicationController
   end
 
   def buy_now
+    AdminMailer.notify_admin_completed(Transaction.last, @host).deliver
     @diagnostic = Diagnostic.find(params[:diagnostic_id])
     begin
       @transaction = Transaction.create!(:user_id => current_user.id, :diagnostic_id => @diagnostic.id)
