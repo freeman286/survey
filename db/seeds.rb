@@ -14,7 +14,7 @@ help = Info.create(:name => "how we can help you", :content => "Lorem ipsum dolo
 
 organisation = Info.create(:name => "organisation", :content => "Archimedes Earth")
 
-email = Info.create(:name => "email", :content => "andrew@archimedes-earth.com")
+email = Info.create(:name => "email", :content => "fsqualitymark@gmail.com")
 
 phone = Info.create(:name => "phone", :content => "0114 283 4062")
 
